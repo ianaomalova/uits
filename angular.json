@@ -1,0 +1,168 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "espire": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/espire",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "rgbcolor",
+              "xlsx",
+              "polylabel",
+              "core-js",
+              "raf",
+              "pdfmake/build/pdfmake.js",
+              "lodash.assign",
+              "lodash.clonedeep",
+              "lodash.compact",
+              "lodash.find",
+              "lodash.flatten",
+              "lodash.forin",
+              "lodash.get",
+              "lodash.has",
+              "lodash.invokemap",
+              "lodash.isempty",
+              "lodash.isequal",
+              "lodash.isfunction",
+              "lodash.isinteger",
+              "lodash.isplainobject",
+              "lodash.lowerfirst",
+              "lodash.map",
+              "lodash.mapvalues",
+              "lodash.pick",
+              "lodash.uniq",
+              "lodash.uniqby",
+              "lodash.values",
+              "apexcharts",
+              "quill"
+            ],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+              ],
+              "styles": [
+                "src/styles.scss" 
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "./node_modules"
+                ]
+              },
+              "scripts": [
+                "src/assets/js/prettify.min.js",
+                "node_modules/apexcharts/dist/apexcharts.min.js"
+              ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "espire:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "espire:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "espire:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "espire:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "espire:serve:production"
+            }
+          }
+        }
+      }
+    }
+  }
+}

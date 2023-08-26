@@ -1,0 +1,24 @@
+<dropdown dropdownClass="header-nav-item-select nav-profile" (click)="navProfile.toggle($event)">
+    <div class="toggle-wrapper d-flex align-items-center">
+        <avatar [size]="35" src="/assets/images/avatars/thumb-1.jpg"></avatar>
+        <span class="fw-bold mx-1">Julio Baker</span>
+        <i class="feather icon-chevron-down"></i>
+    </div>
+    <dropdown-menu #navProfile alignment="right">
+        <div class="nav-profile-header">
+            <div class="d-flex align-items-center">
+                <avatar src="/assets/images/avatars/thumb-1.jpg"></avatar>
+                <div class="d-flex flex-column ms-1">
+                    <span class="fw-bold text-dark">Julio Baker</span>
+                    <span class="font-size-sm">Julio@themenate.com</span>
+                </div>
+            </div>
+        </div>
+        <a href="javascript:void(0)" dropdownItem *ngFor="let menuItem of profileMenuList">
+            <div class="d-flex align-items-center gap-2">
+                <i class="font-size-lg" [ngClass]="menuItem.icon"></i>
+                <span>{{menuItem.item}}</span>
+            </div>
+        </a>
+    </dropdown-menu>
+</dropdown>

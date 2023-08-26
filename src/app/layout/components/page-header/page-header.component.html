@@ -1,0 +1,11 @@
+<h4 class="page-title" *ngIf="showTitle && breadcrumbs$ | async; let breadcrumbs">{{(breadcrumbs[breadcrumbs.length - 1].label)}}</h4>
+<div class="breadcrumb">
+    <span class="me-1 text-gray">
+        <i class="feather icon-home"></i>
+    </span>
+    <div class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs$ | async">
+        <a [routerLink]="breadcrumb.url">
+            {{ breadcrumb.label }}
+        </a>
+    </div>
+</div>

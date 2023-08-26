@@ -1,0 +1,11 @@
+<div class="nav-logo">
+    <logo 
+        [logoType]="!collapse || quickExpand ? 'logo' : 'fold' "
+        [height]="!collapse || quickExpand ? 70 : 40"
+        [white]= "color === 'dark'"
+        class="w-100"
+    ></logo>
+</div>
+<perfect-scrollbar class="side-nav-content">
+    <vertical-menu-content></vertical-menu-content>
+</perfect-scrollbar>

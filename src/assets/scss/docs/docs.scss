@@ -1,0 +1,46 @@
+.demo-section {
+    background-color: $white;
+    border-radius: $border-radius;
+    padding: 1.5rem;
+    
+    @include screen-tablet-above {
+        display: flex;
+        flex: 1 0 100%;
+        flex-wrap: wrap;
+    }
+
+    .demo-content {
+        flex: 0 0 auto;
+        
+        @include screen-tablet-above {
+            width: 83.3333333333%;
+        }
+    }
+
+    .add-nav {
+        flex: 0 0 auto;
+        max-width: 16.666667%;
+        padding-right: 5px;
+        overflow: auto;
+
+        @include screen-tablet {
+            display: none;
+        }
+    }
+
+    ng-sample-box .section {
+        margin-bottom: 4rem;
+
+        &.bd-example {
+            margin-bottom: 1rem;
+
+            pre {
+                &.card {
+                    &.card-header {
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

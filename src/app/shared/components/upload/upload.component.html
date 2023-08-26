@@ -1,0 +1,65 @@
+<ng-template #uploadList>
+    <upload-list 
+        [files]="files" 
+        *ngIf="showFileList"
+        [list-type]="listType" 
+        [disabled]="disabled"
+        (remove)="removeHandle($event)" 
+        (preview)="lifecycle.preview($event)"
+    >
+    </upload-list>
+</ng-template>
+
+<ng-template #avatarFrame>
+    <div class="upload-avatar" [class.is-disabled]="disabled">
+        <img *ngIf="imageUrl" [src]="imageUrl">
+        <i *ngIf="!imageUrl" class="feather icon-plus avatar-uploader-icon"></i>
+    </div>
+</ng-template>
+
+<ng-template #triggerBlock>
+    <div 
+        [class]="'upload upload-' + listType" 
+        (click)="clickHandle()" 
+        [class.is-disabled]="disabled"
+    >
+        <div 
+            class="btn btn-primary"
+            [class.disabled]="disabled"
+            *ngIf="!trigger.innerHTML.trim() && !avatar"
+        >
+            Click to upload
+        </div>
+        <div #trigger>
+            <ng-content></ng-content>
+        </div>
+        <ng-container *ngIf="!trigger.innerHTML.trim() && avatar">
+            <ng-template [ngTemplateOutlet]="avatarFrame"></ng-template>
+        </ng-container>
+        <input 
+            [accept]="accept" 
+            class="upload-input" 
+            type="file" 
+            name="file" 
+            #input
+            [name]="name" 
+            [disabled]="disabled"
+            [multiple]="multiple"
+            (change)="changeHandle($event)"
+        >
+    </div>
+</ng-template>
+
+<upload-dragger *ngIf="drag" [disabled]="disabled" (change)="changeHandle($event)">
+    <ng-template [ngTemplateOutlet]="triggerBlock"></ng-template>
+</upload-dragger>
+
+<ng-container *ngIf="listType === 'picture-card'">
+    <ng-template [ngTemplateOutlet]="uploadList"></ng-template>
+</ng-container>
+<ng-container *ngIf="!drag">
+    <ng-template [ngTemplateOutlet]="triggerBlock"></ng-template>
+</ng-container>
+<ng-container *ngIf="listType !== 'picture-card'">
+    <ng-template [ngTemplateOutlet]="uploadList"></ng-template>
+</ng-container>

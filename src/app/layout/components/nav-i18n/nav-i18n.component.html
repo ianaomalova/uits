@@ -1,0 +1,13 @@
+<dropdown dropdownClass="header-nav-item-select" (click)="navI18n.toggle($event)">
+    <div class="toggle-wrapper">
+        <avatar [size]="22" [src]="'/assets/images/thumbs/' + currentLang + '.png'"></avatar>
+    </div>
+    <dropdown-menu #navI18n alignment="right">
+        <a href="javascript:void(0)" dropdownItem *ngFor="let language of languageList" (click)="setLanguage(language.key)">
+            <div class="d-flex align-items-center">
+                <avatar [size]="18" [src]="'/assets/images/thumbs/' + language.key + '.png'"></avatar>
+                <span class="ms-2">{{language.lang}}</span>
+            </div>
+        </a>
+    </dropdown-menu>
+</dropdown>

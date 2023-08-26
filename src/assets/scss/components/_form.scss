@@ -1,0 +1,22 @@
+.has-error {
+
+    .form-check-input {
+        border-color: $danger;
+    }
+
+    .form-check {
+        .form-check-label {
+            color: $danger;
+        }
+    }
+
+    .suffix-icon {
+        display: none;
+    }
+}
+
+.form-control.is-valid {
+    ~ .suffix-icon {
+        display: none;
+    }
+}

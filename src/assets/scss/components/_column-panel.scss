@@ -1,0 +1,35 @@
+.column-panel {
+    width: 100%;
+    
+    .columns-panel-item-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .columns-panel-item {
+        padding: 0.85rem 1rem;
+    }
+
+    .columns-panel-item-link {
+        transition: color 0.15s ease;
+        font-weight: 500;
+
+        &:hover,
+        &.active {
+            color: $primary
+        }
+    }
+
+    @include screen-tablet {
+        position: fixed;
+        background-color: $white;
+        height: 100%;
+        top: 0;
+        transition: all 0.3s ease;
+        z-index: $zindex-tooltip;
+
+        &.is-mobile-active{
+            left: 0 !important;
+        }
+    }
+}

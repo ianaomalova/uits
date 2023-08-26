@@ -1,0 +1,73 @@
+.vertical-layout,
+.horizontal-layout {
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+
+    .content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+.vertical-layout {
+
+    .content {
+        margin-top: $header-nav-height;
+
+        &.is-collapse {
+            @include screen-tablet-above {
+                margin-left: $side-nav-collapse-width;
+            }
+        }
+
+        @include screen-laptop-only {
+            margin-left: $side-nav-width-laptop;
+        }
+
+        @include screen-laptop-above {
+            margin-left: $side-nav-width;
+        }
+
+        .main {
+            padding: $layout-content-gutter;
+        }
+
+        .content-min-height {
+            min-height: calc(100vh - #{$header-nav-height} - #{$layout-content-gutter} - #{$layout-content-gutter} - #{$footer-height} - 2px);
+        }
+        
+        .content-max-height {
+            max-height: calc(100vh - #{$header-nav-height} - #{$layout-content-gutter} - #{$layout-content-gutter} - #{$footer-height} - 2px);
+        }
+    }
+}
+
+.horizontal-layout {
+    .content {
+        margin-top: $header-nav-height;
+        
+        @include screen-laptop-above {
+            margin-top: $header-nav-height + $header-navbar-height;
+        }
+
+        .main {
+            padding: $layout-content-gutter 0;
+        }
+
+        .content-min-height {
+            min-height: calc(100vh - #{$header-nav-height} - #{$header-navbar-height} - #{$layout-content-gutter} - #{$layout-content-gutter} - #{$footer-height} - 2px);
+        }
+        
+        .content-max-height {
+            max-height: calc(100vh - #{$header-nav-height} - #{$header-navbar-height} - #{$layout-content-gutter} - #{$layout-content-gutter} - #{$footer-height} - 2px);
+        }
+    }
+}
+
+.auth-full-height {
+    height: 100vh;
+}

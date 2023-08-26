@@ -1,0 +1,59 @@
+.header-navbar {
+    position: fixed;
+    top: $header-nav-height;
+    right: 0;
+    width: 100%;
+    z-index: 998;
+    display: flex;
+    height: $header-navbar-height;
+    background-color: $white;
+
+    &.nav-menu-dark {
+        background-color: $side-nav-dark;
+
+        .nav-menu {
+            &.nav-menu-horizontal {
+
+                >.nav-menu-item {
+                    color: rgba($white, 0.65);
+
+                    i {
+                        color: rgba($white, 0.65);
+                    }
+
+                    &:hover {
+                        color: $white;
+
+                        i {
+                            color: $white;
+                        }
+                    }
+                }
+
+                > nav-submenu {
+                    > .nav-submenu {
+                        > .nav-submenu-title {
+                            color: rgba($white, 0.65);
+
+                            i {
+                                color: rgba($white, 0.65);
+                            }
+
+                            &:hover {
+                                color: $white;
+        
+                                i {
+                                    color: $white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.nav-menu-light {
+        background-color: $white;
+    }
+}

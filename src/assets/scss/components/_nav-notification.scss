@@ -1,0 +1,46 @@
+.nav-notification {
+
+    .dropdown-menu {
+        @include screen-mobile-above {
+            min-width: 21.25rem;
+            padding: 0;
+        }
+
+        @include screen-mobile {
+            min-width: 320px;
+            right: -130px;
+        }
+    }
+
+    .nav-notification-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9375rem;
+        border-bottom: 1px solid $border-color;
+    }
+
+    .nav-notification-body {
+        height: 16.875rem;
+        overflow-y: auto;
+
+        .nav-notification-item {
+            display: flex;
+            padding: 1.25rem 1rem;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $dropdown-link-hover-bg;
+            }
+        }
+    }
+
+    .nav-notification-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.9375rem;
+        border-top: 1px solid $border-color;
+    }
+}

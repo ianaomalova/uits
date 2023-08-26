@@ -1,0 +1,145 @@
+$chat-panel-header-height: 3.5rem;
+$conversation-header-height: $chat-panel-header-height;
+$conversation-footer-height: 3.5rem;
+
+.chat {
+    .chat-panel {
+        height: 100%;
+    }
+
+    .chat-panel-header {
+        height: $chat-panel-header-height;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+
+        .form-control {
+            background-color: $table-hover-bg;
+            border-color: $table-hover-bg;
+        }
+    }
+
+    .chat-panel-body {
+        padding: 0 1rem;
+        height: calc(100% - #{$chat-panel-header-height});
+        overflow-y: auto;
+    }
+
+    .chat-list-row {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-top: 0.75rem;
+        border-radius: $border-radius;
+        padding: 1rem 0.75rem;
+
+        .chat-list-row-msg {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .chat-list-row-detail {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: right;
+        }
+
+        &:hover {
+            background-color: $table-hover-bg;
+        }
+
+        &.active {
+            background-color: darken($table-hover-bg, 10%)
+        }
+    }
+
+    .conversation {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .conversation-header {
+            height: $conversation-header-height;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            border-bottom: $border-width solid $border-color
+        }
+
+        .conversation-body {
+            height: calc(100% - #{$conversation-header-height} - #{$conversation-footer-height});
+            overflow-y: auto;
+
+            .msg {
+                display: flex;
+                margin-bottom: 1rem;
+
+                .bubble {
+                    max-width: 75%;
+                    position: relative;
+
+                    .bubble-wrapper {
+                        padding: 0.5rem 0.75rem;
+                        border-radius: $border-radius;
+                        overflow: hidden;
+                        margin-bottom: 0.75rem;
+                    }
+
+                    &.no-avatar {
+                        margin-left: 2.4rem;
+                    }
+                }
+
+                &.datetime {
+                    padding: 1rem 0;
+                    margin-bottom: 0px;
+                    font-size: 11px;
+                    font-weight: 500;
+                    justify-content: center
+                }
+
+                &.msg-recipient {
+
+                    .bubble {
+
+                        .bubble-wrapper {
+                            background: #f6f7fb;
+                            color: $gray-800;
+
+                            img {
+                                max-width: 250px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+                
+                &.msg-sent {
+                    justify-content: flex-end;
+
+                    .bubble {
+
+                        .bubble-wrapper {
+                            background: $primary;
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+
+        .conversation-footer {
+            height: $conversation-footer-height;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+
+            .conversation-footer-icon {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

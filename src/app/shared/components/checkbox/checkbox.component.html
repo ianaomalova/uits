@@ -1,0 +1,22 @@
+<input 
+    class="form-check-input"
+    #checkbox 
+    type="checkbox" 
+    [attr.id]="inputId" 
+    [attr.name]="name" 
+    [readonly]="readonly" 
+    [value]="value" 
+    [checked]="checked" 
+    (focus)="onFocus()" 
+    (blur)="onBlur()"
+    (change)="handleChange($event)" 
+    [disabled]="disabled"
+>
+<label 
+    class="form-check-label ms-1"
+    (click)="onClick($event,checkbox,true)"
+    [ngClass]="{'checkbox-checked':checked, 'checkbox-disabled':disabled, 'checkbox-focus':focused}"
+    [attr.for]="inputId"
+>
+    <ng-content></ng-content>
+</label>

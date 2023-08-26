@@ -1,0 +1,50 @@
+<dropdown dropdownClass="header-nav-item-select nav-notification" (click)="navNotification.toggle($event)">
+    <div class="toggle-wrapper">
+        <i class="header-nav-item-select nav-icon feather icon-bell"></i>
+    </div>
+    <dropdown-menu #navNotification alignment="right">
+        <div class="nav-notification-header">
+            <h5 class="mb-0">Notifications</h5>
+            <a href="#" class="font-size-sm">Mark All as Read</a>
+        </div>
+        <perfect-scrollbar class="nav-notification-body">
+            <div class="nav-notification-item" *ngFor="let item of notificationList">
+                <div>
+                    <ng-container 
+                        [ngTemplateOutlet]="item.notificationType === 0 ? avatarTpl : iconTpl"
+                        [ngTemplateOutletContext]="{img: item.avatar, icon: item.notificationType}">
+                    </ng-container>
+                </div>
+                <div class="ms-2">
+                    <span>
+                        <span class="fw-bolder text-dark">{{item.target}} </span>
+                        <span>{{item.description}}</span>
+                    </span>
+                    <div class="font-size-sm fw-bold mt-1">
+                        <i class="feather icon-clock"></i>
+                        <span class="ms-1">{{getTimeDistance(item.date)}}</span>
+                    </div>
+                </div>
+            </div>
+        </perfect-scrollbar>
+        <div class="nav-notification-footer">
+            <a href="#" class="font-size-sm">View All</a>
+        </div>
+    </dropdown-menu>
+</dropdown>
+
+<ng-template #avatarTpl let-avatar="img">
+    <avatar [size]="40" [src]="'/assets/images/avatars/' + avatar + '.jpg'"></avatar>
+</ng-template>
+  
+<ng-template #iconTpl let-icon="icon">
+    <avatar [size]="40" [class]="'font-size-lg'+ ' ' + notificationIconMap[icon] + ' ' + notificationColorMap[icon] "></avatar>
+</ng-template>
+
+<!-- <ng-template #odd_tpl let-number='number'>
+    <li>Odd: {{number}}</li>  
+  </ng-template>
+  
+  <ng-template #even_tpl let-number='number'>
+    <li>Even: {{number}}</li>  
+  </ng-template> -->

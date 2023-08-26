@@ -1,0 +1,83 @@
+@use "sass:math";
+.form-control {
+	font-weight: 500;
+	
+	&.no-validation-icon {
+		&.is-invalid,
+		&.is-valid {
+			background-image: none;
+		}
+	}
+
+	&.no-success-validation {
+		&.is-valid {
+			border-color: $input-border-color;
+
+			&:focus {
+				box-shadow: $input-focus-box-shadow;
+			}
+		}
+	}
+}
+
+.form-label,
+.col-form-label {
+    color: $gray-600;
+    font-weight: 500;
+}
+
+.input-group {
+
+    > .dropdown {
+        &:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu), 
+        &.dropdown-toggle:nth-last-child(n+3) {
+                
+            >.btn {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    } 
+}
+
+.input-affix {
+	position: relative;
+	display: flex;
+	align-items: stretch;
+	width: 100%;
+
+	.prefix-icon,
+	.suffix-icon {
+		position: absolute;
+		top: 50%;
+		z-index: 1;
+		line-height: $line-height-base;
+		color: $input-placeholder-color;
+		
+		@include transform(translateY(-50%));
+	}
+
+	.prefix-icon {
+		left: math.div($input-btn-padding-x, 2);
+
+		~.form-control {
+			padding-left: $input-btn-padding-x + math.div($input-btn-padding-x, 2);
+		}
+	}
+
+	.suffix-icon {
+		right: math.div($input-btn-padding-x, 2) ;
+
+		~.form-control {
+			padding-left: $input-btn-padding-x + math.div($input-btn-padding-x, 2);
+		}
+	}
+
+	.prefix-icon-lg {
+		font-size: $input-font-size-lg;
+	}
+
+	.prefix-icon-sn {
+		font-size: $input-font-size-lg;
+	}
+}

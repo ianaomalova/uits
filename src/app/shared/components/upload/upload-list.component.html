@@ -1,0 +1,51 @@
+<ul [class]="'upload-list upload-list-' + listType"
+    [class.is-disabled]="disabled">
+    <li *ngFor="let file of files; let i = index" [class]="'upload-list-item is-' + file.status">
+        <ng-container *ngIf="isImageUrl(file); else displayFile">
+            <img class="upload-list-item-thumbnail"
+                *ngIf="file.status !== 'uploading' && ['picture-card', 'picture'].indexOf(listType) > -1"
+                [src]="file.url"
+            >
+        </ng-container>
+        <ng-template #displayFile>
+            <div class=" display-file" *ngIf="listType !== 'text'">
+                <i class="feather icon-file"></i>
+                <span *ngIf="listType === 'picture-card'">{{file.name}}</span>
+            </div>
+        </ng-template>
+        <a class="upload-list-item-name" (click)="clickHandle(file)">
+            <i 
+                class="feather"
+                [class.icon-paperclip]="listType === 'text'"
+            ></i>
+            {{file.name}}
+        </a>
+        <label class="upload-list-item-status-label">
+            <i 
+                class="feather"
+                [class.icon-check-circle]="listType === 'text'"
+            >
+        </i>
+        </label>
+        <i class="feather close icon-x" *ngIf="!elDisabled" (click)="removeHandle(file)"></i>
+        <div class="progress progress-sm mt-2" *ngIf="file.status === 'uploading'">
+            <div 
+                class="progress-bar" 
+                [style.width.%] ="file.percentage"
+            >
+            </div>
+        </div>
+        <span class="upload-list-item-actions" *ngIf="listType === 'picture-card'">
+            <span class="upload-list-item-preview"
+                *ngIf="listType === 'picture-card'"
+                (click)="previewHandle(file)">
+                <i class="feather icon-eye"></i>
+            </span>
+            <span class="upload-list-item-delete"
+                *ngIf="!elDisabled"
+                (click)="removeHandle(file)">
+                <i class="feather icon-trash"></i>
+            </span>
+        </span>
+    </li>
+</ul>

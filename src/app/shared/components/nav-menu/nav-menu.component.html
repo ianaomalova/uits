@@ -1,0 +1,7 @@
+<ul 
+    [class]="'nav-menu ' + (nativeClass ? nativeClass : '')"
+    [class.nav-menu-horizontal]="mode === 'horizontal'"
+    [class.with-border]="border"
+>
+    <ng-content></ng-content>
+</ul>

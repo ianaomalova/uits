@@ -1,0 +1,31 @@
+<li 
+    [class.nav-submenu]="true"
+    [class.is-active]="active"
+    [class.is-opened]="opened"
+    (mouseenter)="mouseenterHandle()"
+    (mouseleave)="mouseleaveHandle()"
+>
+    <div 
+        class="nav-submenu-title" 
+        (click)="clickHandle()"
+        [ngStyle]="{ paddingLeft: '20px;'}"
+        #subTitle
+    >
+        <ng-container *ngIf="!titleTmp">
+            {{title}}
+        </ng-container>
+        <ng-container *ngIf="titleTmp">
+            <ng-template [ngTemplateOutlet]="titleTmp"></ng-template>
+        </ng-container>
+        <i class="nav-submenu-arrow"
+            [class.el-icon-caret-bottom]="rootMenu.mode === 'horizontal'"
+            [class.el-icon-arrow-down]="rootMenu.mode === 'vertical'">
+        </i>
+    </div>
+    <ul 
+        class="nav-menu" 
+        [@dropAnimation]="opened"
+    >
+        <ng-content></ng-content>
+    </ul>
+</li>

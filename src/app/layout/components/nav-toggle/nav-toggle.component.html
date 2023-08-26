@@ -1,0 +1,4 @@
+<div class="header-nav-item-select cursor-pointer" (click)="toggleNavCollapse()">
+    <i class="nav-icon feather" *ngIf="!isMobile" [ngClass]="isCollapse ? 'icon-arrow-right' : 'icon-menu'"></i>
+    <i class="nav-icon feather" *ngIf="isMobile" [ngClass]="isMobileCollapse ? 'icon-arrow-right' : 'icon-menu'"></i>
+</div>

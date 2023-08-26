@@ -1,0 +1,27 @@
+<div 
+    class="header-nav-wrap" 
+    [ngClass]="{'container': layoutType === 'horizontal'}"
+>
+    <ng-container *ngTemplateOutlet="layoutType === 'vertical' ? vertical : horizontal"></ng-container>
+</div>
+
+<ng-template #vertical>
+    <div class="header-nav-left">
+        <nav-toggle [isMobile]="isMobile"></nav-toggle>
+    </div>
+    <ng-container *ngTemplateOutlet="headerNavRight"></ng-container>
+</ng-template>
+
+<ng-template #horizontal>
+    <div class="header-nav-left">
+        <nav-toggle *ngIf="isMobile" [isMobile]="isMobile"></nav-toggle>
+        <logo *ngIf="!isMobile" [white]= "logoColor !== 'dark'"></logo>
+    </div>
+    <ng-container *ngTemplateOutlet="headerNavRight"></ng-container>
+</ng-template>
+
+<ng-template #headerNavRight>
+    <div class="header-nav-right">
+        <nav-config></nav-config>
+    </div>
+</ng-template>

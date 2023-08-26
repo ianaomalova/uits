@@ -1,0 +1,16 @@
+<header-nav 
+    layoutType="vertical" 
+    [collapse]="isCollapse"
+    [color]="headerNavColor"
+    [isMobile]="isMobile"
+></header-nav>
+<side-nav
+    *ngIf="!isMobile"
+    [color]="navMenuColor"
+    [quickExpand]="quickExpand"
+    [collapse]="isCollapse" 
+    (mouseenter)="mouseEnterExpand()"
+    (mouseleave)="mouseLeaveCollapse()"
+></side-nav>
+<mobile-nav *ngIf="isMobile" [isOpen]="isMobileNavOpen" [color]="navMenuColor"></mobile-nav>
+<content [collapse]="isCollapse"></content>

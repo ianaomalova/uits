@@ -1,0 +1,14 @@
+.progress-sm {
+    height: $progress-sm-height;
+}
+
+.progress {
+
+    .progress-bar {
+
+        &:last-child {
+            border-top-right-radius: $progress-border-radius;
+            border-bottom-right-radius: $progress-border-radius;
+        }
+    }
+}

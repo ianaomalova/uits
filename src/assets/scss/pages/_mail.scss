@@ -1,0 +1,192 @@
+$mail-list-header-height: 2.5rem;
+$mail-panel-footer-height: 3.5rem;
+
+.mail {
+    .mail-panel {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .mail-panel-menu {
+            height: calc(100% - #{$mail-panel-footer-height});
+        }
+    
+        .mail-panel-footer {
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            padding: 0 0.75rem;
+        }
+    }
+
+    .mail-list {
+        min-width: 23rem;
+        max-width: 100%;
+        border-right: 1px solid $border-color;
+        width: 100%;
+
+        @include screen-tablet-above {
+            max-width: 23rem;
+        }
+
+        @include screen-tablet {
+            &.mobile-hide-list {
+                display: none;
+            }
+        }
+
+        .mail-list-header {
+            height: 2.5rem;
+            border-bottom: 1px solid $border-color;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+
+            .mail-list-icon-folder,
+            .mail-list-icon-delete {
+                cursor: pointer;
+
+                i {
+                    font-size: 16px;
+                }
+            }
+
+            .mail-list-icon-delete {
+              
+                &:hover {
+                    color: $danger
+                }
+            }
+
+            .mail-list-icon-folder {
+                &:hover {
+                    color: $primary
+                }
+            }
+        }
+
+        .mail-list-body {
+            height: calc(100% - #{$mail-list-header-height});
+            overflow-y: auto;
+        }
+    } 
+
+    .mail-list-row {
+        cursor: pointer;
+        padding: 1rem;
+        border-bottom: 1px solid $border-color;
+
+        .datatable-body-cell-label {
+            height: 100%;
+
+            > div {
+                height: 100%;
+            }
+        }
+
+        &:hover {
+            background-color: $table-hover-bg;
+        }
+
+        &.active {
+            background-color: darken($table-hover-bg, 10%)
+        }
+
+        @include screen-tablet {
+            .mail-list-row-detail {
+                width: 100%;
+            }
+        }
+    }
+
+    .mail-list-star {
+        display: inline-block;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .mail-list-clip {
+        font-size: 1.2rem;
+    }
+
+    .mail-list-row-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .mail-content {
+
+        @include screen-tablet {
+            display: none;
+
+            &.mobile-show-content {
+                display: block;
+            }
+        }
+        
+        .mail-content-wrapper {
+            overflow-y: auto;
+        }
+    }
+
+    .mail-compose {
+        width: 100%;
+    }
+
+    .mail-content-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem;
+        padding-bottom: 0;
+    }
+
+    .mail-content-body {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+    
+    .mail-content-action {
+        font-size: 20px;
+    }
+
+    .mail-content-file {
+        display: flex;
+        cursor: pointer;
+        @include transition(all 0.3s ease);
+        border: 1px solid $border-color;
+        padding: 0.75rem;
+        border-radius: $border-radius;
+        margin-right: 0.75rem;
+        margin-bottom:  0.75rem;
+
+        i {
+            font-size: 2.2rem;
+            color: $primary
+        }
+
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            border-color: transparent;
+            box-shadow: 0px 7px 25px rgba(18,38,63,.1)
+        }
+
+        &.active {
+            background-color: #f9fbfd; 
+        }    
+    }
+
+    .mail-content-reply {
+        border: $input-border-width solid $border-color;
+        border-radius: $border-radius;
+        height: 7rem;
+        color: $input-placeholder-color;
+        cursor: pointer;
+        padding: 1rem;
+    }
+}

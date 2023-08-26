@@ -1,0 +1,14 @@
+.nav-profile {
+    .dropdown-menu {
+        min-width: 220px;
+        padding-top: 0;
+    }
+    
+    .nav-profile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9375rem;
+        border-bottom: 1px solid $border-color;
+    }
+}

@@ -1,0 +1,38 @@
+.divider {
+    clear: both;
+    width: 100%;
+    min-width: 100%;
+    display: flex;
+    margin: 1rem 0;
+    text-align: center;
+    white-space: nowrap;
+    border-top: 0;
+    border-top-color: $border-color;
+
+    .divider-text {
+        display: inline-block;
+        padding: 0 1em;
+    }
+
+    &:before {
+        position: relative;
+        top: 50%;
+        width: 50%;
+        border-top: 1px solid transparent;
+        border-top-color: inherit;
+        border-bottom: 0;
+        transform: translateY(50%);
+        content: "";
+    } 
+
+    &:after {
+        position: relative;
+        top: 50%;
+        width: 50%;
+        border-top: 1px solid transparent;
+        border-top-color: inherit;
+        border-bottom: 0;
+        transform: translateY(50%);
+        content: "";
+    }
+}

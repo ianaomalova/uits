@@ -1,0 +1,18 @@
+.card {
+    box-shadow: 0 1px 8px rgba(121, 149, 167, 0.1);
+    transition: all 0.2s ease;
+    margin-bottom: 1.5rem;
+
+    &.card-clickable {
+        cursor: pointer;
+        
+        &:hover,
+        &.active {
+            border-color: $primary;
+        }
+    }
+}
+
+.card-header {
+    border-bottom: 1px solid $border-color;
+}

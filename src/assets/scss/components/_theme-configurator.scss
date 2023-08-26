@@ -1,0 +1,115 @@
+.theme-configurator {
+
+    .radio {
+        padding: 0px;
+
+    }
+
+    .radio input[type=radio] {
+
+        margin: 0;
+        display: none;
+        width: 1.25rem;
+        
+        +label {
+            position: relative;
+
+            &:before {
+                border-radius: 4px;
+                background-color: transparent;
+                content: "";
+                width: 1.25rem;
+                height: 1.25rem;
+                display: inline-block;
+                margin-right: 10px;
+                border: 2px solid $border-color;
+                font-weight: 400;
+                line-height: 1.25rem;
+                vertical-align: bottom;
+                text-align: center;
+                background-color: $white;
+                color: transparent;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                -webkit-transition: all 0.2s;
+            }
+
+            &:after {
+                content: "";
+                background-color: transparent;
+                width: .625rem;
+                height: .625rem;
+                position: absolute;
+                left: 5px;
+                top: 6px;
+            }
+        }
+        
+        &:checked+label:after {
+            content: "\e83f";
+            font-family: "feather";
+            color: $white;
+            background-color: transparent;
+            left: 3px;
+            top: 1px;
+        }
+
+        &#header-default {
+            +label {
+                &:before {
+                    background-color: $white;
+                    border-color: $border-color;
+                }
+            }
+
+            &:checked+label:after {
+                color: $gray-800;
+            }    
+        }
+
+        &#header-primary {
+            +label {
+                &:before {
+                    background-color: $primary;
+                    border-color: $primary;
+                }
+            }
+        }
+
+        &#header-success {
+            +label {
+                &:before {
+                    background-color: $success;
+                    border-color: $success;
+                }
+            }
+        }
+
+        &#header-info {
+            +label {
+                &:before {
+                    background-color: $info;
+                    border-color: $info;
+                }
+            }
+        }
+
+        &#header-warning {
+            +label {
+                &:before {
+                    background-color: $yellow;
+                    border-color: $yellow;
+                }
+            }
+        }
+
+        &#header-danger {
+            +label {
+                &:before {
+                    background-color: $danger;
+                    border-color: $danger;
+                }
+            }
+        }
+    }
+}

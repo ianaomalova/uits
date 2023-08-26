@@ -1,0 +1,20 @@
+<section class="demo-section">
+  	<div class="demo-content">
+    	<div class="content-header">
+			<h2 *ngIf="name || src">{{name}}
+				<a [href]="src" target="_blank" rel="noopener">
+					<img src="assets/images/link-doc.png" alt="component on github"/>
+				</a>
+			</h2>
+		</div>
+
+		<div id="content" class="content-box">
+			<div id="example" class="section">
+				<div class="item">
+					<ng-content></ng-content>
+				</div>
+			</div>
+		</div>
+	</div>
+	<add-nav *ngIf="componentContent" class="add-nav" [componentContent]="componentContent"></add-nav>
+</section>

@@ -1,0 +1,64 @@
+<div class="container">
+    <nav-menu mode="horizontal" [border]="false">
+        <ng-container *ngFor="let item of menu">
+            <ng-container *ngIf="item.submenu.length > 0 && item.type === 'title'">
+                <nav-submenu index="item.key">
+                    <ng-container *ngFor="let firstLevel of item.submenu">
+                        <ng-template #title>
+                            <ng-container *ngTemplateOutlet="iconTemplate;context:{type: item.iconType, icon: item.icon}"></ng-container>
+                            <span>{{(item.translateKey | translate) || item.title}}</span>
+                        </ng-template>
+                        <nav-menu-item [index]="firstLevel.key" *ngIf="firstLevel.submenu.length === 0">
+                            <ng-container *ngTemplateOutlet="iconTemplate;context:{type: firstLevel.iconType, icon: firstLevel.icon}"></ng-container>
+                            <span 
+                                [routerLink]="[firstLevel.path]" 
+                                [routerLinkActive]="['is-active']"
+                            >
+                                {{(firstLevel.translateKey | translate) || item.title}}
+                            </span>
+                        </nav-menu-item>
+                        <nav-submenu 
+                            index="firstLevel.key"
+                            *ngIf="firstLevel.submenu.length > 0"
+                        >
+                            <ng-template #title>
+                                <div>
+                                    <ng-container *ngTemplateOutlet="iconTemplate;context:{type: firstLevel.iconType, icon: firstLevel.icon}"></ng-container>
+                                    <span>{{(firstLevel.translateKey | translate) || firstLevel.title}}</span>
+                                </div>
+                            </ng-template>
+                            <nav-menu-item [index]="secondLevel.key" *ngFor="let secondLevel of firstLevel.submenu">
+                                <ng-container *ngTemplateOutlet="iconTemplate;context:{type: secondLevel.iconType, icon: secondLevel.icon}"></ng-container>
+                                <span
+                                    [routerLink]="[secondLevel.path]" 
+                                    [routerLinkActive]="['is-active']"
+                                >
+                                    {{(secondLevel.translateKey | translate) || secondLevel.title}}
+                                </span>
+                            </nav-menu-item>
+                        </nav-submenu>
+                    </ng-container>
+                </nav-submenu>
+            </ng-container>
+            <ng-container *ngIf="item.submenu.length === 0 && item.type === 'item'">
+                <nav-menu-item [index]="item.key">
+                    <span [routerLink]="[item.path]">
+                        <ng-container *ngTemplateOutlet="iconTemplate;context:{type: item.iconType, icon: item.icon}"></ng-container>
+                        <span class="nav-menu-item-title">
+                            <span [routerLink]="item.path">
+                                {{(item.translateKey | translate) || item.title}}
+                            </span>
+                        </span>
+                    </span>
+                </nav-menu-item>
+            </ng-container>
+        </ng-container>
+    </nav-menu>
+</div>
+<ng-template #iconTemplate let-iconType="type" let-icon="icon">
+    <i [ngClass]="[
+        iconType === 'line-awesome' ? 'lar las lab' : '',
+        iconType === 'feather' ? 'feather' : '',
+        icon
+    ]"></i>
+</ng-template>

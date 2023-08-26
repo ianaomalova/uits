@@ -1,0 +1,3 @@
+<i *ngIf="icon && isIcon" [class]="icon"></i>
+<img *ngIf="src && isImg" [src]="src" [attr.alt]="alt" />
+<span class="avatar-text" #textEl *ngIf="text && isText">{{ text }}</span>

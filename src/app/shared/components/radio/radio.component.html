@@ -1,0 +1,20 @@
+<div class="form-check" [class.form-check-inline]="inline">
+    <label class="form-check-label" role="radio">
+        <input 
+            #radio 
+            type="radio"
+            class="form-check-input"  
+            [attr.id]="inputId" 
+            [attr.name]="name" 
+            [attr.value]="value"
+            [checked]="checked" 
+            (change)="onChange($event)" 
+            (focus)="onInputFocus($event)" 
+            (blur)="onInputBlur($event)" 
+            [disabled]="disabled"
+        >
+        <span class="ms-1">
+            <ng-content></ng-content>
+        </span>
+    </label>
+</div>

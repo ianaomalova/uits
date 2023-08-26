@@ -1,0 +1,20 @@
+<div class="form-check form-switch" [class.form-check-inline]="inline">
+    <label class="form-check-label" role="checkbox">
+        <input 
+            #switch
+            type="checkbox" 
+            class="form-check-input"  
+            [attr.id]="inputId" 
+            [attr.name]="name" 
+            [checked]="checked" 
+            (change)="onInputChange($event)"
+            (focus)="onFocus($event)" 
+            (blur)="onBlur($event)" 
+            [disabled]="disabled" 
+            role="switch"
+        >
+        <span class="ms-1">
+            <ng-content></ng-content>
+        </span>
+    </label>
+</div>

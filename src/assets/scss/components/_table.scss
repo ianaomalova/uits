@@ -1,0 +1,217 @@
+@import '@swimlane/ngx-datatable/index.scss';
+@import '@swimlane/ngx-datatable/assets/icons.css';
+
+.ngx-datatable {
+	color: $table-color;
+
+	.datatable-header {
+		height: unset !important;
+		min-width: 100%;
+
+		.datatable-header-cell {
+			vertical-align: bottom;
+			padding: $table-cell-padding-y $table-cell-padding-x;
+
+			.datatable-header-cell-label {
+				font-weight: $table-th-font-weight;
+			}
+		}
+	}
+
+	.datatable-body-cell, 
+	.datatable-header-cell {
+		overflow-y: hidden;
+	}
+
+    .datatable-body {
+		min-width: 100%;
+		
+		.datatable-body-row {
+			border-top: $table-border-width solid $table-border-color;
+
+			.datatable-body-cell { 
+				padding: $table-cell-padding-y $table-cell-padding-x;
+			}
+
+			.empty-row {
+				$alert-padding-y: 0.75rem !default;
+				$alert-padding-x: 1.25rem !default;
+				position: relative;
+				padding: $alert-padding-y $alert-padding-x;
+				margin-bottom: 0;
+			}
+		}
+
+		.datatable-row-left {
+			background-color: $white;
+			background-position: 100% 0;
+			background-repeat: repeat-y;
+			background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==);		
+	
+		}
+	
+		.datatable-row-right {
+			background-position: 0 0;
+			background-color: $white;
+			background-repeat: repeat-y;
+			background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQI12PQkNdi1VTQ5gbSwkAsDQARLAIGtOSFUAAAAABJRU5ErkJggg==);
+		}
+	}
+
+	.datatable-footer {
+		margin-top: -1px;
+		.page-count {
+			line-height: 2.5rem;
+			height: 2.5rem;
+			padding: 0 $table-cell-padding-x;
+			font-weight: $font-weight-bolder;
+		}
+		.datatable-pager {
+			margin: 0 10px;
+			vertical-align: top;
+			ul {
+				&.pager {
+					display: inline-flex;
+					align-items: center;
+				}
+
+				li {
+					margin: 10px 0px;
+					&:not(.disabled) {
+						
+						&:hover {
+							a {
+								color: $primary;
+							}
+						}
+
+						&.active {
+							a {
+								color: $white;
+								background-color: $primary;
+							}
+						}
+					}
+
+					&.disabled {
+						a {
+							color: $gray-400;
+						}
+					}
+				}
+			}
+			a {
+				height: 1.5rem;
+				min-width: 1.5rem;
+				line-height: 1.5rem;
+				margin-right: 0.4rem;
+				text-align: center;
+				border-radius: 50%;
+			}
+			.datatable-icon-left,
+			.datatable-icon-skip,
+			.datatable-icon-right,
+			.datatable-icon-prev {
+				font-size: 18px;
+				line-height: 32px;
+				padding: 0 3px;
+			}
+		}
+	}
+	
+	.datatable-summary-row {
+		.datatable-body-row {
+			.datatable-body-cell {
+				font-weight: $font-weight-bolder;
+			}
+		}
+	}
+
+	.datatable-body-cell-label {
+		width: 100%;
+	}
+
+	.allow-overflow {
+		overflow: initial !important;
+	}
+
+	&.table-hover {
+		.datatable-row-group {
+			&:hover {
+				background-color: $table-hover-bg;
+			} 
+		}
+	}
+	
+	&.table-striped {
+		.datatable-body .datatable-body-row {
+			@if $table-striped-order == even {
+				&.datatable-row-even {
+					background-color: $table-striped-bg;
+
+					.datatable-body-cell-label {
+						color: $table-striped-color
+					}
+				}
+			}
+
+			@if $table-striped-order == odd {
+				&.datatable-row-odd {
+					background-color: $table-striped-bg;
+
+					.datatable-body-cell-label {
+						color: $table-striped-color
+					}
+				}
+			}
+		}
+	}
+	
+	.datatable-tree-button {
+		border: 0;
+		background-color: rgba($primary, 0.15);
+		color: $primary;
+		border-radius: $border-radius;
+
+		&:disabled {
+			opacity: 0.4;
+		}
+	}
+
+	&.multi-click-selection .datatable-body-row.active .datatable-row-group, 
+	&.multi-selection .datatable-body-row.active, 
+	&.multi-selection .datatable-body-row.active .datatable-row-group, 
+	&.single-selection .datatable-body-row.active, 
+	&.single-selection .datatable-body-row.active .datatable-row-group {
+		background-color: rgba($primary, 0.15);
+		color: $primary;
+	}
+
+	&.cell-selection .datatable-body-cell.active, 
+	&.cell-selection .datatable-body-cell.active .datatable-row-group {
+		background-color: rgba($primary, 0.15);
+		color: $primary;
+	}
+
+	.datatable-body-cell,
+  	.datatable-header-cell {
+		display: flex !important;
+		align-items: center;
+	}
+
+	.form-check {
+		margin-bottom: 0;
+	}
+}
+
+.demo-table-scroll {
+	height: 300px;
+}
+
+.ngx-datatable.scroll-vertical .datatable-body {
+	height: 300px !important;
+}
+
+[class^='datatable-icon-']::before, [class*=' datatable-icon-']::before {
+	line-height: unset;
+}
