@@ -9,6 +9,9 @@ import { FieldsOfStudyComponent } from '@app/uits-portal/moduls/public/views/Abo
 import { DepartmentComponent } from '@app/uits-portal/moduls/public/views/AboutPage/Documents/department/department.component';
 import { UniversityComponent } from '@app/uits-portal/moduls/public/views/AboutPage/Documents/university/university.component';
 import { ContactsComponent } from './moduls/public/views/AboutPage/contacts/contacts.component';
+import { PracticesComponent } from '@app/uits-portal/moduls/public/views/scientific-activity/post-graduate/practices/practices.component';
+import { SpecialitiesComponent } from '@app/uits-portal/moduls/public/views/scientific-activity/post-graduate/specialities/specialities.component';
+import { DissertationsComponent } from '@app/uits-portal/moduls/public/views/scientific-activity/post-graduate/dissertations/dissertations.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { ContactsComponent } from './moduls/public/views/AboutPage/contacts/cont
     FieldsOfStudyComponent,
     DepartmentComponent,
     UniversityComponent,
-    ContactsComponent
+    ContactsComponent,
+    PracticesComponent,
+    SpecialitiesComponent,
+    DissertationsComponent
   ],
   imports: [
     CommonModule,

@@ -1,14 +1,14 @@
 import { NavMenu } from '@app/shared/types/nav-menu.interface';
 
-const home: NavMenu[] = [
+const main: NavMenu[] = [
     {
-        path: '/home',
-        title: 'Home',
+        path: '/main',
+        title: 'Main',
         translateKey: 'NAV.HOME',
         type: 'item',
         iconType: 'feather',
         icon: 'icon-home',
-        key: 'home',
+        key: 'main',
         submenu: []
     },
 ]
@@ -21,98 +21,98 @@ const about: NavMenu[] = [
         type: 'title',
         iconType: 'feather',
         icon: 'icon-file',
-        key: 'menu-with-title',
+        key: 'about',
         submenu: [
           {
-            path: '/news',
+            path: 'about/news',
             title: 'News',
             translateKey: 'NAV.NEWS',
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'news',
+            key: 'about/news',
             submenu: []
           },
             {
-                path: '/employee',
-                title: 'employee',
+                path: 'about/employee',
+                title: 'Employee',
                 translateKey: 'NAV.EMPLOYEE',
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'employee',
+                key: 'about/employee',
                 submenu: [
                   {
-                    path: '/teachers',
+                    path: 'about/employee/teachers',
                     title: 'Teachers',
                     translateKey: 'NAV.TEACHERS',
                     type: 'item',
                     iconType: 'feather',
                     icon: 'icon-file',
-                    key: 'teachers',
+                    key: 'about/employee/teachers',
                     submenu: []
                   },
                   {
-                    path: '/uvp',
+                    path: 'about/employee/uvp',
                     title: 'Uvp',
                     translateKey: 'NAV.UVP',
                     type: 'item',
                     iconType: 'feather',
                     icon: 'icon-file',
-                    key: 'uvp',
+                    key: 'about/employee/uvp',
                     submenu: []
                   }
                 ]
             },
           {
-            path: '/fieldOfStudy',
-            title: 'FieldOfStudy',
+            path: 'about/fieldsOfStudy',
+            title: 'FieldsOfStudy',
             translateKey: 'NAV.FIELD_OF_STUDY',
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'fieldOfStudy',
+            key: 'about/fieldsOfStudy',
             submenu: []
           },
           {
-            path: '/documents',
+            path: 'about/documents',
             title: 'Documents',
             translateKey: 'NAV.DOCUMENTS.TITLE',
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'documents',
+            key: 'about/documents',
             submenu: [
               {
-                path: '/departmentDocuments',
+                path: 'about/documents/departmentDocuments',
                 title: 'DepartmentDocuments',
                 translateKey: 'NAV.DOCUMENTS.DEPARTMENT',
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'departmentDocuments',
+                key: 'about/documents/departmentDocuments',
                 submenu: []
               },
               {
-                path: '/university',
+                path: 'about/documents/university',
                 title: 'University',
                 translateKey: 'NAV.DOCUMENTS.UNIVERSITY',
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'university',
+                key: 'about/documents/university',
                 submenu: []
               },
             ]
           },
           {
-            path: '/contacts',
+            path: 'about/contacts',
             title: 'Contacts',
             translateKey: 'NAV.CONTACTS',
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'contacts',
+            key: 'about/contacts',
             submenu: []
           },
         ]
@@ -127,7 +127,7 @@ const educationActivities: NavMenu[] = [
         type: 'title',
         iconType: 'feather',
         icon: 'icon-align-left',
-        key: 'nav-wth-submenu',
+        key: 'educationActivities',
         submenu: [
             {
                 path: '/bachelor',
@@ -136,7 +136,7 @@ const educationActivities: NavMenu[] = [
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'nav-wth-submenu.submenu-1',
+                key: 'bachelor',
                 submenu: [
                   {
                     path: '/studyPlan',
@@ -145,7 +145,7 @@ const educationActivities: NavMenu[] = [
                     type: 'item',
                     iconType: 'feather',
                     icon: 'icon-file',
-                    key: 'nav-wth-submenu.submenu-1',
+                    key: 'studyPlan',
                     submenu:[]
                   },
                   {
@@ -155,7 +155,7 @@ const educationActivities: NavMenu[] = [
                     type: 'item',
                     iconType: 'feather',
                     icon: 'icon-file',
-                    key: 'nav-wth-submenu.submenu-1',
+                    key: 'schedule',
                     submenu:[
 
                     ]
@@ -167,7 +167,7 @@ const educationActivities: NavMenu[] = [
                     type: 'item',
                     iconType: 'feather',
                     icon: 'icon-file',
-                    key: 'nav-wth-submenu.submenu-1',
+                    key: 'graduation',
                     submenu:[
 
                     ]
@@ -179,7 +179,7 @@ const educationActivities: NavMenu[] = [
                     type: 'item',
                     iconType: 'feather',
                     icon: 'icon-file',
-                    key: 'nav-wth-submenu.submenu-1',
+                    key: 'practices',
                     submenu:[]
                   }
                 ],
@@ -191,7 +191,7 @@ const educationActivities: NavMenu[] = [
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'nav-wth-submenu.submenu-2',
+            key: 'magistracy',
             submenu: [
               {
                 path: '/studyPlan',
@@ -200,7 +200,7 @@ const educationActivities: NavMenu[] = [
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'nav-wth-submenu.submenu-1',
+                key: 'studyPlan',
                 submenu:[]
               },
               {
@@ -210,7 +210,7 @@ const educationActivities: NavMenu[] = [
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'nav-wth-submenu.submenu-1',
+                key: 'schedule',
                 submenu:[
 
                 ]
@@ -222,7 +222,7 @@ const educationActivities: NavMenu[] = [
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'nav-wth-submenu.submenu-1',
+                key: 'graduation',
                 submenu:[
 
                 ]
@@ -234,7 +234,7 @@ const educationActivities: NavMenu[] = [
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'nav-wth-submenu.submenu-1',
+                key: 'practices',
                 submenu:[]
               }
             ]
@@ -250,25 +250,25 @@ const scientificActivity: NavMenu[] = [
     type: 'title',
     iconType: 'feather',
     icon: 'icon-home',
-    key: 'home',
+    key: 'scientificActivity',
     submenu: [
       {
-        path: '/postGraduate',
-        title: 'PostGraduate',
+        path: '/scientificActivity/postGraduate',
+        title: 'ScientificActivity/PostGraduate',
         translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.TITLE',
         type: 'item',
         iconType: 'feather',
         icon: 'icon-align-left',
-        key: 'nav-wth-submenu',
+        key: 'scientificActivity/postGraduate',
         submenu:[
           {
-            path: '/practices',
-            title: 'Practices',
+            path: '/scientificActivity/postGraduate/practices',
+            title: 'scientificActivity/postGraduate/Practices',
             translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.PRACTICES',
             type: 'title',
             iconType: 'feather',
             icon: 'icon-align-left',
-            key: 'nav-wth-submenu',
+            key: 'scientificActivity/postGraduate/practices',
             submenu:[]
           },
           {
@@ -278,7 +278,7 @@ const scientificActivity: NavMenu[] = [
             type: 'title',
             iconType: 'feather',
             icon: 'icon-align-left',
-            key: 'nav-wth-submenu',
+            key: 'specialities',
             submenu:[]
           },
           {
@@ -288,7 +288,7 @@ const scientificActivity: NavMenu[] = [
             type: 'title',
             iconType: 'feather',
             icon: 'icon-align-left',
-            key: 'nav-wth-submenu',
+            key: 'dissertations',
             submenu:[]
           }
         ]
@@ -300,7 +300,7 @@ const scientificActivity: NavMenu[] = [
         type: 'item',
         iconType: 'feather',
         icon: 'icon-align-left',
-        key: 'nav-wth-submenu',
+        key: 'scientificPublications',
         submenu:[]
       },
       {
@@ -310,7 +310,7 @@ const scientificActivity: NavMenu[] = [
         type: 'item',
         iconType: 'feather',
         icon: 'icon-align-left',
-        key: 'nav-wth-submenu',
+        key: 'scientificWork',
         submenu:[]
       },
       {
@@ -320,7 +320,7 @@ const scientificActivity: NavMenu[] = [
         type: 'item',
         iconType: 'feather',
         icon: 'icon-align-left',
-        key: 'nav-wth-submenu',
+        key: 'conferences',
         submenu:[]
       }
     ]
@@ -329,7 +329,7 @@ const scientificActivity: NavMenu[] = [
 
 
 export const navConfiguration: NavMenu[] = [
-    ...home,
+    ...main,
     ...about,
     ...educationActivities,
     ...scientificActivity,

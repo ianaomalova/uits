@@ -10,7 +10,7 @@ import { APP_LAYOUT_ROUTES } from './routes/app-layout.routes';
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: 'main',
         pathMatch: 'full',
     },
     {

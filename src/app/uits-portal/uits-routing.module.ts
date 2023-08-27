@@ -8,33 +8,35 @@ import {FieldsOfStudyComponent} from '@app/uits-portal/moduls/public/views/About
 import {DepartmentComponent} from '@app/uits-portal/moduls/public/views/AboutPage/Documents/department/department.component';
 import {UniversityComponent} from '@app/uits-portal/moduls/public/views/AboutPage/Documents/university/university.component';
 import {ContactsComponent} from '@app/uits-portal/moduls/public/views/AboutPage/contacts/contacts.component';
+import {PracticesComponent} from '@app/uits-portal/moduls/public/views/scientific-activity/post-graduate/practices/practices.component';
 
 const routes: Routes = [
   {
-    path:'home', component: HomePageComponent, data:{
-      title: 'Home', hidePageHeader: true
-    }
+    path:'main', component: HomePageComponent
   },
   {
-    path:'news', component: NewsComponent
+    path:'about/news', component: NewsComponent
   },
   {
-    path:'teachers', component: TeachersComponent
+    path:'about/employee/teachers', component: TeachersComponent
   },
   {
-    path: 'uvp', component: UVPComponent
+    path: 'about/employee/uvp', component: UVPComponent
   },
   {
-    path:'fieldOfStudy', component: FieldsOfStudyComponent
+    path:'about/fieldsOfStudy', component: FieldsOfStudyComponent
   },
   {
-    path:'departmentDocuments', component: DepartmentComponent
+    path:'about/documents/departmentDocuments', component: DepartmentComponent
   },
   {
-    path: 'university', component: UniversityComponent
+    path: 'about/documents/university', component: UniversityComponent
   },
   {
-    path: 'contacts', component: ContactsComponent
+    path: 'about/contacts', component: ContactsComponent
+  },
+  {
+    path:'scientificActivity/postGraduate/practices', component: PracticesComponent
   }
 ]
 @NgModule({
