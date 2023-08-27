@@ -10,17 +10,17 @@ import { APP_LAYOUT_ROUTES } from './routes/app-layout.routes';
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/home',
         pathMatch: 'full',
     },
-    { 
-        path: '', 
+    {
+        path: '',
         component: AppLayoutComponent,
-        children: APP_LAYOUT_ROUTES 
+        children: APP_LAYOUT_ROUTES
     },
-    { 
-        path: '', 
-        component: AuthLayoutComponent, 
+    {
+        path: '',
+        component: AuthLayoutComponent,
         children: AUTH_LAYOUT_ROUTES
     }
 ];

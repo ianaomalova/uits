@@ -1,4 +1,4 @@
-<header-nav 
+<header-nav
     layoutType="horizontal"
     [color]="headerNavColor"
     [isMobile]="isMobile"
@@ -6,4 +6,3 @@
 <header-navbar *ngIf="!isMobile" [color]="navMenuColor"></header-navbar>
 <mobile-nav *ngIf="isMobile" [isOpen]="isMobileNavOpen" [color]="navMenuColor"></mobile-nav>
 <content layoutType="horizontal"></content>
-

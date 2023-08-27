@@ -30,7 +30,7 @@ const about: NavMenu[] = [
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'menu-with-title.menu-with-title-item-2',
+            key: 'news',
             submenu: []
           },
             {
@@ -40,7 +40,7 @@ const about: NavMenu[] = [
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'menu-with-title.menu-with-title-item-1',
+                key: 'employee',
                 submenu: [
                   {
                     path: '/teachers',
@@ -49,7 +49,7 @@ const about: NavMenu[] = [
                     type: 'item',
                     iconType: 'feather',
                     icon: 'icon-file',
-                    key: 'menu-with-title.menu-with-title-item-1',
+                    key: 'teachers',
                     submenu: []
                   },
                   {
@@ -59,7 +59,7 @@ const about: NavMenu[] = [
                     type: 'item',
                     iconType: 'feather',
                     icon: 'icon-file',
-                    key: 'menu-with-title.menu-with-title-item-1',
+                    key: 'uvp',
                     submenu: []
                   }
                 ]
@@ -71,7 +71,7 @@ const about: NavMenu[] = [
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'menu-with-title.menu-with-title-item-2',
+            key: 'fieldOfStudy',
             submenu: []
           },
           {
@@ -81,16 +81,16 @@ const about: NavMenu[] = [
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'menu-with-title.menu-with-title-item-2',
+            key: 'documents',
             submenu: [
               {
-                path: '/department',
-                title: 'Department',
+                path: '/departmentDocuments',
+                title: 'DepartmentDocuments',
                 translateKey: 'NAV.DOCUMENTS.DEPARTMENT',
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'menu-with-title.menu-with-title-item-8',
+                key: 'departmentDocuments',
                 submenu: []
               },
               {
@@ -100,7 +100,7 @@ const about: NavMenu[] = [
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'menu-with-title.menu-with-title-item-8',
+                key: 'university',
                 submenu: []
               },
             ]
@@ -112,7 +112,7 @@ const about: NavMenu[] = [
             type: 'item',
             iconType: 'feather',
             icon: 'icon-file',
-            key: 'menu-with-title.menu-with-title-item-2',
+            key: 'contacts',
             submenu: []
           },
         ]
