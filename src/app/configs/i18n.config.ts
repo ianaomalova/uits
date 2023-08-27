@@ -1,6 +1,6 @@
 export const supportedLanguages = {
-    en_US: 'English',
-    fr_FR: 'French'
+    ru_RU: 'Русский',
+    en_US: 'English'
 }
 
 export const defaultLanguge = localStorage.getItem('lang') ||  Object.keys(supportedLanguages)[0]

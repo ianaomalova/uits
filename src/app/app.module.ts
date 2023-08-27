@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports: [
         BrowserModule,
@@ -37,7 +37,7 @@ import { AppComponent } from './app.component';
     ],
     providers: [
         {
-            provide: LocationStrategy, 
+            provide: LocationStrategy,
             useClass: PathLocationStrategy
         }
     ],

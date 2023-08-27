@@ -1,134 +1,336 @@
 import { NavMenu } from '@app/shared/types/nav-menu.interface';
 
-const dashboard: NavMenu[] = [
+const home: NavMenu[] = [
     {
-        path: '/dashboard',
-        title: 'Dashboard',
-        translateKey: 'NAV.DASHBOARD',
+        path: '/home',
+        title: 'Home',
+        translateKey: 'NAV.HOME',
         type: 'item',
         iconType: 'feather',
         icon: 'icon-home',
-        key: 'dashboard',
+        key: 'home',
         submenu: []
     },
 ]
 
-const menuWithTitle: NavMenu[] = [
+const about: NavMenu[] = [
     {
-        path: '',
-        title: 'Menu with Title',
-        translateKey: 'NAV.MENU_WITH_TITLE',
+        path: '/about',
+        title: 'About',
+        translateKey: 'NAV.ABOUT',
         type: 'title',
         iconType: 'feather',
         icon: 'icon-file',
         key: 'menu-with-title',
         submenu: [
+          {
+            path: '/news',
+            title: 'News',
+            translateKey: 'NAV.NEWS',
+            type: 'item',
+            iconType: 'feather',
+            icon: 'icon-file',
+            key: 'menu-with-title.menu-with-title-item-2',
+            submenu: []
+          },
             {
-                path: '/menu-1',
-                title: 'Menu 1',
-                translateKey: 'NAV.MENU_WITH_TITLE_ITEM_1',
+                path: '/employee',
+                title: 'employee',
+                translateKey: 'NAV.EMPLOYEE',
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
                 key: 'menu-with-title.menu-with-title-item-1',
-                submenu: []
+                submenu: [
+                  {
+                    path: '/teachers',
+                    title: 'Teachers',
+                    translateKey: 'NAV.TEACHERS',
+                    type: 'item',
+                    iconType: 'feather',
+                    icon: 'icon-file',
+                    key: 'menu-with-title.menu-with-title-item-1',
+                    submenu: []
+                  },
+                  {
+                    path: '/uvp',
+                    title: 'Uvp',
+                    translateKey: 'NAV.UVP',
+                    type: 'item',
+                    iconType: 'feather',
+                    icon: 'icon-file',
+                    key: 'menu-with-title.menu-with-title-item-1',
+                    submenu: []
+                  }
+                ]
             },
-            {
-                path: '/menu-2',
-                title: 'Menu 2',
-                translateKey: 'NAV.MENU_WITH_TITLE_ITEM_2',
+          {
+            path: '/fieldOfStudy',
+            title: 'FieldOfStudy',
+            translateKey: 'NAV.FIELD_OF_STUDY',
+            type: 'item',
+            iconType: 'feather',
+            icon: 'icon-file',
+            key: 'menu-with-title.menu-with-title-item-2',
+            submenu: []
+          },
+          {
+            path: '/documents',
+            title: 'Documents',
+            translateKey: 'NAV.DOCUMENTS.TITLE',
+            type: 'item',
+            iconType: 'feather',
+            icon: 'icon-file',
+            key: 'menu-with-title.menu-with-title-item-2',
+            submenu: [
+              {
+                path: '/department',
+                title: 'Department',
+                translateKey: 'NAV.DOCUMENTS.DEPARTMENT',
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'menu-with-title.menu-with-title-item-2',
+                key: 'menu-with-title.menu-with-title-item-8',
                 submenu: []
-            },
+              },
+              {
+                path: '/university',
+                title: 'University',
+                translateKey: 'NAV.DOCUMENTS.UNIVERSITY',
+                type: 'item',
+                iconType: 'feather',
+                icon: 'icon-file',
+                key: 'menu-with-title.menu-with-title-item-8',
+                submenu: []
+              },
+            ]
+          },
+          {
+            path: '/contacts',
+            title: 'Contacts',
+            translateKey: 'NAV.CONTACTS',
+            type: 'item',
+            iconType: 'feather',
+            icon: 'icon-file',
+            key: 'menu-with-title.menu-with-title-item-2',
+            submenu: []
+          },
         ]
     }
 ]
 
-const navWithSubMenu: NavMenu[] = [
+const educationActivities: NavMenu[] = [
     {
-        path: '',
-        title: 'Nav with submenu',
-        translateKey: 'NAV.NAV_WITH_SUBMENU',
-        type: 'collapse',
+        path: '/educationActivities',
+        title: 'EducationActivities',
+        translateKey: 'NAV.EDUCATION_ACTIVITIES.TITLE',
+        type: 'title',
         iconType: 'feather',
         icon: 'icon-align-left',
         key: 'nav-wth-submenu',
         submenu: [
             {
-                path: '/submenu-1',
-                title: 'Submenu 1',
-                translateKey: 'NAV.SUBMENU_1',
+                path: '/bachelor',
+                title: 'Bachelor',
+                translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.TITLE',
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
                 key: 'nav-wth-submenu.submenu-1',
-                submenu: []
+                submenu: [
+                  {
+                    path: '/studyPlan',
+                    title: 'StudyPlan',
+                    translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.STUDY_PLAN',
+                    type: 'item',
+                    iconType: 'feather',
+                    icon: 'icon-file',
+                    key: 'nav-wth-submenu.submenu-1',
+                    submenu:[]
+                  },
+                  {
+                    path: '/schedule',
+                    title: 'Schedule',
+                    translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.SCHEDULE.TITLE',
+                    type: 'item',
+                    iconType: 'feather',
+                    icon: 'icon-file',
+                    key: 'nav-wth-submenu.submenu-1',
+                    submenu:[
+
+                    ]
+                  },
+                  {
+                    path: '/graduation',
+                    title: 'Graduation',
+                    translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.GRADUATION.TITLE',
+                    type: 'item',
+                    iconType: 'feather',
+                    icon: 'icon-file',
+                    key: 'nav-wth-submenu.submenu-1',
+                    submenu:[
+
+                    ]
+                  },
+                  {
+                    path: '/practices',
+                    title: 'Practices',
+                    translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.PRACTICES.TITLE',
+                    type: 'item',
+                    iconType: 'feather',
+                    icon: 'icon-file',
+                    key: 'nav-wth-submenu.submenu-1',
+                    submenu:[]
+                  }
+                ],
             },
-            {
-                path: '/submenu-2',
-                title: 'Submenu 2',
-                translateKey: 'NAV.SUBMENU_2',
+          {
+            path: '/magistracy',
+            title: 'Magistracy',
+            translateKey: 'NAV.EDUCATION_ACTIVITIES.MAGISTRACY.TITLE',
+            type: 'item',
+            iconType: 'feather',
+            icon: 'icon-file',
+            key: 'nav-wth-submenu.submenu-2',
+            submenu: [
+              {
+                path: '/studyPlan',
+                title: 'StudyPlan',
+                translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.STUDY_PLAN',
                 type: 'item',
                 iconType: 'feather',
                 icon: 'icon-file',
-                key: 'nav-wth-submenu.submenu-2',
-                submenu: []
-            },
+                key: 'nav-wth-submenu.submenu-1',
+                submenu:[]
+              },
+              {
+                path: '/schedule',
+                title: 'Schedule',
+                translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.SCHEDULE.TITLE',
+                type: 'item',
+                iconType: 'feather',
+                icon: 'icon-file',
+                key: 'nav-wth-submenu.submenu-1',
+                submenu:[
+
+                ]
+              },
+              {
+                path: '/graduation',
+                title: 'Graduation',
+                translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.GRADUATION.TITLE',
+                type: 'item',
+                iconType: 'feather',
+                icon: 'icon-file',
+                key: 'nav-wth-submenu.submenu-1',
+                submenu:[
+
+                ]
+              },
+              {
+                path: '/practices',
+                title: 'Practices',
+                translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.PRACTICES.TITLE',
+                type: 'item',
+                iconType: 'feather',
+                icon: 'icon-file',
+                key: 'nav-wth-submenu.submenu-1',
+                submenu:[]
+              }
+            ]
+          }
         ]
     }
+]
+const scientificActivity: NavMenu[] = [
+  {
+    path: '/scientificActivity',
+    title: 'ScientificActivity',
+    translateKey: 'NAV.SCIENTIFIC_ACTIVITY.TITLE',
+    type: 'title',
+    iconType: 'feather',
+    icon: 'icon-home',
+    key: 'home',
+    submenu: [
+      {
+        path: '/postGraduate',
+        title: 'PostGraduate',
+        translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.TITLE',
+        type: 'item',
+        iconType: 'feather',
+        icon: 'icon-align-left',
+        key: 'nav-wth-submenu',
+        submenu:[
+          {
+            path: '/practices',
+            title: 'Practices',
+            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.PRACTICES',
+            type: 'title',
+            iconType: 'feather',
+            icon: 'icon-align-left',
+            key: 'nav-wth-submenu',
+            submenu:[]
+          },
+          {
+            path: '/specialities',
+            title: 'Specialities',
+            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.SPECIALITIES',
+            type: 'title',
+            iconType: 'feather',
+            icon: 'icon-align-left',
+            key: 'nav-wth-submenu',
+            submenu:[]
+          },
+          {
+            path: '/dissertations',
+            title: 'Dissertations',
+            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.DISSERTATIONS.TITLE',
+            type: 'title',
+            iconType: 'feather',
+            icon: 'icon-align-left',
+            key: 'nav-wth-submenu',
+            submenu:[]
+          }
+        ]
+      },
+      {
+        path: '/scientificPublications',
+        title: 'ScientificPublications',
+        translateKey: 'NAV.SCIENTIFIC_ACTIVITY.SCIENTIFIC_PUBLICATIONS',
+        type: 'item',
+        iconType: 'feather',
+        icon: 'icon-align-left',
+        key: 'nav-wth-submenu',
+        submenu:[]
+      },
+      {
+        path: '/scientificWork',
+        title: 'ScientificWork',
+        translateKey: 'NAV.SCIENTIFIC_ACTIVITY.SCIENTIFIC_WORK',
+        type: 'item',
+        iconType: 'feather',
+        icon: 'icon-align-left',
+        key: 'nav-wth-submenu',
+        submenu:[]
+      },
+      {
+        path: '/conferences',
+        title: 'Conferences',
+        translateKey: 'NAV.SCIENTIFIC_ACTIVITY.CONFERENCES',
+        type: 'item',
+        iconType: 'feather',
+        icon: 'icon-align-left',
+        key: 'nav-wth-submenu',
+        submenu:[]
+      }
+    ]
+  },
 ]
 
-const subMenuWithTitle: NavMenu[] = [
-    {
-        path: '',
-        title: 'Submenu with title',
-        translateKey: 'NAV.SUBMENU_WITH_TITLE',
-        type: 'title',
-        iconType: 'feather',
-        icon: 'icon-package',
-        key: 'submenu-with-title',
-        submenu: [
-            {
-                path: '',
-                title: 'Menu',
-                translateKey: 'NAV.MENU',
-                type: 'collapse',
-                iconType: 'feather',
-                icon: 'icon-box',
-                key: 'submenu-with-title.menu',
-                submenu : [
-                    {
-                        path: '/ui-elements/accordion',
-                        title: 'Submenu 1',
-                        translateKey: 'NAV.SUBMENU_1',
-                        type: 'item',
-                        iconType: '',
-                        icon: '',
-                        key: 'submenu-with-title.menu.submenu-1',
-                        submenu: []
-                    },
-                    {
-                        path: '/ui-elements/alert',
-                        title: 'Submenu 2',
-                        translateKey: 'NAV.SUBMENU_2',
-                        type: 'item',
-                        iconType: '',
-                        icon: '',
-                        key: 'submenu-with-title.menu.submenu-2',
-                        submenu: []
-                    }
-                ],
-            },
-        ]
-    }
-]
 
 export const navConfiguration: NavMenu[] = [
-    ...dashboard,
-    ...navWithSubMenu,
-    ...menuWithTitle,
-    ...subMenuWithTitle
+    ...home,
+    ...about,
+    ...educationActivities,
+    ...scientificActivity,
 ]

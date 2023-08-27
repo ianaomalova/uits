@@ -4,7 +4,7 @@ import { Select } from '@ngxs/store';
 import { AppConfig } from '@app/shared/types/app-config.interface';
 import { Observable, Subscription } from 'rxjs';
 import { en_US } from './i18n/en/index'
-import { fr_FR } from './i18n/fr/index'
+import { ru_RU } from './i18n/ru/index'
 
 const storageKey = 'lang'
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     constructor(private translateService: TranslateService) {
         translateService.setTranslation('en_US', en_US);
-        translateService.setTranslation('fr_FR', fr_FR);
+        translateService.setTranslation('ru_RU', ru_RU);
     }
 
     ngOnInit() {
@@ -27,8 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
             this.currentLang = localStorage.getItem(storageKey) || app.lang || this.translateService.getBrowserCultureLang();
             this.translateService.use(this.currentLang);
         });
-        this.langChangeSubscription = this.translateService.onLangChange.subscribe((event: LangChangeEvent) => { 
-            localStorage.setItem(storageKey, event.lang); 
+        this.langChangeSubscription = this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+            localStorage.setItem(storageKey, event.lang);
         });
     }
 
