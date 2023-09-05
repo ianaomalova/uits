@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:15.0-alpine
+    container_name: uits
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./backend/db.local.env
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
