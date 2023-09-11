@@ -10,8 +10,8 @@ import { DropdownItem } from './dropdown-item.directive';
         DropdownMenu,
         DropdownItem
     ],
-    imports: [ 
-        CommonModule 
+    imports: [
+        CommonModule
     ],
     exports: [
         Dropdown,

@@ -3,17 +3,17 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Select } from '@ngxs/store';
 import { AppConfig } from '@app/shared/types/app-config.interface';
 import { Observable, Subscription } from 'rxjs';
-import { en_US } from './i18n/en/index'
-import { ru_RU } from './i18n/ru/index'
+import { en_US } from './i18n/en/index';
+import { ru_RU } from './i18n/ru/index';
 
-const storageKey = 'lang'
+const storageKey = 'lang';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, OnDestroy {
-    @Select((state: { app: AppConfig; }) => state.app) app$: Observable<AppConfig>;
+    @Select((state: { app: AppConfig }) => state.app) app$: Observable<AppConfig>;
     private langChangeSubscription!: Subscription;
     currentLang: string;
 

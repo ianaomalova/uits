@@ -9,7 +9,7 @@ import {
     ApexYAxis,
     ApexTitleSubtitle,
     ApexLegend
-} from "ng-apexcharts";
+} from 'ng-apexcharts';
 
 export const COLOR_1 = '#11a1fd';
 export const COLOR_2 = '#00c569';
@@ -29,7 +29,7 @@ export const COLORS = [
 	COLOR_3,
 	COLOR_4,
 	COLOR_5
-]
+];
 
 export const COLORS_LIGHT = [
 	COLOR_1_LIGHT,
@@ -37,7 +37,7 @@ export const COLORS_LIGHT = [
 	COLOR_3_LIGHT,
 	COLOR_4_LIGHT,
 	COLOR_5_LIGHT
-]
+];
 
 export const COLOR_AXES = '#edf2f9';
 export const COLOR_TEXT = '#455560';
@@ -45,9 +45,9 @@ export const COLOR_TEXT = '#455560';
 
 export const ApexStrokeDefault: ApexStroke = {
     width: 3,
-    curve: "smooth",
+    curve: 'smooth',
     lineCap: 'round'
-}
+};
 
 export const ApexChartDefault: ApexChart = {
     type: 'line',
@@ -57,13 +57,13 @@ export const ApexChartDefault: ApexChart = {
     toolbar: {
         show: false
     }
-}
+};
 
 export const ApexDataLabelDefault: ApexDataLabels = {
     enabled: false
-}
+};
 
-export const ApexColorDefault: string[] = [...COLORS]
+export const ApexColorDefault: string[] = [...COLORS];
 
 export const ApexBarDefault: ApexPlotOptions = {
 	bar: {
@@ -71,4 +71,4 @@ export const ApexBarDefault: ApexPlotOptions = {
 		columnWidth: '25px',
         borderRadius: 4
 	},
-}
+};

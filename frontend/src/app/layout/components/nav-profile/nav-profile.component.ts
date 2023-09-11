@@ -32,7 +32,7 @@ export class NavProfileComponent implements OnInit {
             icon: 'feather icon-power',
             item: 'Sign Out'
         }
-    ]
+    ];
 
     ngOnInit(): void { }
 }

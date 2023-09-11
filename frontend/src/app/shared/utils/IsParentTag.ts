@@ -1,16 +1,16 @@
 export const IsParentTag = (nativeElement: HTMLElement, parentTag: string): boolean => {
-    let parentIsTag = false
-    let parent = nativeElement.parentElement
-    let findLen = 3, lowerName = ''
+    let parentIsTag = false;
+    let parent = nativeElement.parentElement;
+    let findLen = 3; let lowerName = '';
     while (findLen) {
-        lowerName = parent.localName.toLowerCase()
+        lowerName = parent.localName.toLowerCase();
         if (lowerName.indexOf('el') > -1) {
-            parentIsTag = lowerName === parentTag
-            findLen = 0
+            parentIsTag = lowerName === parentTag;
+            findLen = 0;
         } else {
-            parent = parent.parentElement
-            findLen --
+            parent = parent.parentElement;
+            findLen --;
         }
     }
-    return parentIsTag
-}
+    return parentIsTag;
+};

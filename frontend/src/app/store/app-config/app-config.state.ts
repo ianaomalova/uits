@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { AppConfig } from '@app/shared/types/app-config.interface';
-import { 
+import {
     UpdateConfig,
     UpdateSideNavCollapse,
     UpdateCurrentLanguage,
-    UpdateMobileNavCollapse 
+    UpdateMobileNavCollapse
 } from './app-config.action';
-import { AppConfiguration } from '@app/configs/app.config'
+import { AppConfiguration } from '@app/configs/app.config';
 
 @State<AppConfig>({
     name: 'app',

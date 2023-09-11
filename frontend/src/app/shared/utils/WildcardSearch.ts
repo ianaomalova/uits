@@ -1,12 +1,12 @@
 /**
  * Wild card search on all property of the object
- * @param {Number | String} input - any value to search
- * @param {Array} list - array for search
- * @return {Array} array of object contained keyword
+ * @param input - any value to search
+ * @param list - array for search
+ * @return array of object contained keyword
  */
 export function WildcardSearch<T>(list: T[], input: string | number): T[] {
     const searchText = (item) => {
-        for (let key in item) {
+        for (const key in item) {
             if (item[key] == null) {
                 continue;
             }

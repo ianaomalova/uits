@@ -11,7 +11,7 @@ const main: NavMenu[] = [
         key: 'main',
         submenu: []
     },
-]
+];
 
 const about: NavMenu[] = [
     {
@@ -117,7 +117,7 @@ const about: NavMenu[] = [
           },
         ]
     }
-]
+];
 
 const educationActivities: NavMenu[] = [
     {
@@ -241,7 +241,7 @@ const educationActivities: NavMenu[] = [
           }
         ]
     }
-]
+];
 const scientificActivity: NavMenu[] = [
   {
     path: '/scientificActivity',
@@ -325,7 +325,7 @@ const scientificActivity: NavMenu[] = [
       }
     ]
   },
-]
+];
 
 
 export const navConfiguration: NavMenu[] = [
@@ -333,4 +333,4 @@ export const navConfiguration: NavMenu[] = [
     ...about,
     ...educationActivities,
     ...scientificActivity,
-]
+];

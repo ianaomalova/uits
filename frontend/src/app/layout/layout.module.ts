@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { RouterModule } from "@angular/router";
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { LogoModule } from '@app/shared/components/logo/logo.module';
 import { NavMenuModule } from '@app/shared/components/nav-menu/nav-menu.module';
@@ -28,6 +28,7 @@ import { NavConfigComponent } from './components/nav-config/nav-config.component
 import { ThemeConfiguratorComponent } from './components/theme-configurator/theme-configurator.component';
 import { VerticalMenuContentComponent } from './components/vertical-menu-content/vertical-menu-content.component';
 import { MobileNavComponent } from './components/mobile-nav/mobile-nav.component';
+import { NavAuthLinkComponent } from './components/nav-auth-link/nav-auth-link.component';
 
 const mandatoryComponents = [
     AppLayoutComponent,
@@ -43,20 +44,22 @@ const mandatoryComponents = [
     PageHeaderComponent,
     VerticalMenuContentComponent,
     MobileNavComponent
-]
+];
 
 const optionalComponents = [
     NavNotificationComponent,
     NavProfileComponent,
     NavI18NComponent,
     NavConfigComponent,
-    ThemeConfiguratorComponent
-]
+    ThemeConfiguratorComponent,
+    NavAuthLinkComponent
+];
 
 @NgModule({
     declarations: [
         ...mandatoryComponents,
-        ...optionalComponents
+        ...optionalComponents,
+        NavAuthLinkComponent
     ],
     imports: [
         SharedModule,

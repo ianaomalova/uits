@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
-    "start": "ng serve --port 4200 -o",
+    "start": "ng serve --port 4200 --proxy-config proxy.conf.json -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -58,13 +58,24 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.7",
+    "@angular-eslint/builder": "14.4.0",
+    "@angular-eslint/eslint-plugin": "14.4.0",
+    "@angular-eslint/eslint-plugin-template": "14.4.0",
+    "@angular-eslint/schematics": "14.4.0",
+    "@angular-eslint/template-parser": "14.4.0",
     "@angular/cli": "^14.2.7",
     "@angular/compiler-cli": "^14.2.8",
     "@types/googlemaps": "^3.43.3",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
-    "codelyzer": "^0.0.28",
+    "@typescript-eslint/eslint-plugin": "5.43.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^6.7.0",
+    "@typescript-eslint/parser": "5.43.0",
+    "eslint": "^8.28.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jsdoc": "^46.6.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.4",
@@ -75,7 +86,6 @@
     "protractor": "^7.0.0",
     "raw-loader": "^4.0.2",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
     "typescript": "~4.8.3"
   }
 }

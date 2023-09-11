@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { distinctUntilChanged, filter, map, startWith } from "rxjs/operators";
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
 
 interface Breadcrumb {
     label: string;
@@ -17,12 +17,12 @@ interface Breadcrumb {
 })
 export class PageHeaderComponent implements OnInit {
     breadcrumbs$: Observable<Breadcrumb[]>;
-    @Input() showTitle: boolean = true;
+    @Input() showTitle = true;
 
     constructor(private router: Router,  private activatedRoute: ActivatedRoute) {
     }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
         this.breadcrumbs$ = this.router.events.pipe(
             startWith(new NavigationEnd(0, '/', '/')),
             filter(event => event instanceof NavigationEnd),distinctUntilChanged(),
@@ -31,10 +31,10 @@ export class PageHeaderComponent implements OnInit {
     }
 
     private buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
-        let label = '', path = '/'
+        let label = ''; let path = '/';
         if (route.routeConfig) {
             if (route.routeConfig.data && route.routeConfig.data.title) {
-                label = route.routeConfig.data['title'];
+                label = route.routeConfig.data.title;
             } else {
                 label = route.routeConfig.path;
             }
@@ -46,7 +46,7 @@ export class PageHeaderComponent implements OnInit {
 
         const nextUrl = path && path !== '/dashboard' ? `${url}${path}` : url;
         const breadcrumb = <Breadcrumb>{
-            label: label, 
+            label,
             url: nextUrl
         };
 

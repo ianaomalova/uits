@@ -1,0 +1,34 @@
+<div class="alert alert-danger" *ngIf="showResult">
+
+</div>
+<form [formGroup]="formGroup" (ngSubmit)="login()">
+    <div class="form-group mb-3">
+        <label class="form-label">Username</label>
+        <input
+            type="text"
+            class="form-control no-validation-icon no-success-validation"
+            formControlName="username"
+        >
+    </div>
+    <div class="mb-3 ">
+        <label class="form-label d-flex justify-content-between">
+            <span>Password</span>
+            <a class="text-primary font" href="">Forget Password?</a>
+        </label>
+        <div class="form-group input-affix flex-column">
+            <label class="d-none">Password</label>
+            <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control no-validation-icon no-success-validation"
+                formControlName="password"
+            >
+            <i
+                class="suffix-icon feather cursor-pointer text-dark"
+                [ngClass]="showPassword ? 'icon-eye-off' : 'icon-eye'"
+                (click)="onShowPasswordClick()"
+            >
+            </i>
+        </div>
+    </div>
+    <button class="btn btn-primary w-100" type="submit">Log In</button>
+</form>

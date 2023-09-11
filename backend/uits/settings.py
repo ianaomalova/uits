@@ -32,6 +32,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Third party apps
+
+THIRD_INSTALLED_APPS = [
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth'
+]
+
+# Local application definition
+
+LOCAL_INSTALLED_APPS = [
+    'users.apps.UsersConfig',
+]
 
 # Application definition
 
@@ -42,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    *THIRD_INSTALLED_APPS,
+    *LOCAL_INSTALLED_APPS
 ]
 
 MIDDLEWARE = [
@@ -74,24 +89,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'uits.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env('POSTGRES_DB'),
-            'USER': env('POSTGRES_USER'),
-            'PASSWORD': env('POSTGRES_PASSWORD'),
-            'HOST': 'localhost',
-            'PORT': '5432',
-            'OPTIONS': {
-                'client_encoding': 'UTF8'
-            },
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'OPTIONS': {
+            'client_encoding': 'UTF8'
+        },
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -111,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -123,7 +135,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -133,3 +144,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'

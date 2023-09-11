@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'login-form',
@@ -8,11 +8,11 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms"
 export class LoginFormComponent implements OnInit {
 
     formGroup: UntypedFormGroup;
-    showResult = false
-    showPassword = false
+    showResult = false;
+    showPassword = false;
 
-    @Input() thirPartyLogin = true
- 
+    @Input() thirPartyLogin = true;
+
     constructor(private formBuilder: UntypedFormBuilder) {}
 
     ngOnInit() {
@@ -25,15 +25,15 @@ export class LoginFormComponent implements OnInit {
             ]]
         });
     }
- 
+
     login() {
         console.log(this.formGroup);
     }
 
-    onShowPasswordClick () {
-        this.showPassword = !this.showPassword
+    onShowPasswordClick() {
+        this.showPassword = !this.showPassword;
     }
- 
+
     onReset() {
         this.formGroup.reset();
     }

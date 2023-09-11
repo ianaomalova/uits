@@ -10,27 +10,27 @@ import { RegisterV3Component } from './register-v3/register-v3.component';
 const routes: Routes = [
     {
         path: 'login',
-        component: LoginComponent 
+        component: LoginComponent
     },
     {
         path: 'login/v2',
-        component: LoginV2Component 
+        component: LoginV2Component
     },
     {
         path: 'login/v3',
-        component: LoginV3Component 
+        component: LoginV3Component
     },
     {
         path: 'register',
-        component: RegisterComponent 
+        component: RegisterComponent
     },
     {
         path: 'register/v2',
-        component: RegisterV2Component 
+        component: RegisterV2Component
     },
     {
         path: 'register/v3',
-        component: RegisterV3Component 
+        component: RegisterV3Component
     },
 ];
 

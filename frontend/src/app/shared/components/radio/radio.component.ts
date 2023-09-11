@@ -1,15 +1,15 @@
 import {
-    Component, 
-    Input, 
-    Output, 
-    EventEmitter, 
-    ElementRef, 
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ElementRef,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
-    ViewChild, 
+    ViewChild,
     forwardRef
-} from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'radio',
@@ -22,12 +22,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
     }]
 })
 export class RadioComponent implements ControlValueAccessor {
-   
+
     @Input() value: any;
     @Input() name: string;
     @Input() disabled: boolean;
     @Input() inputId: string;
-    @Input() inline: boolean = false;
+    @Input() inline = false;
     @ViewChild('radio') el: ElementRef;
     @Output() onClick: EventEmitter<any> = new EventEmitter();
     @Output() onFocus: EventEmitter<any> = new EventEmitter();
@@ -38,7 +38,7 @@ export class RadioComponent implements ControlValueAccessor {
     public focused: boolean;
 
     constructor(public cd: ChangeDetectorRef) {}
-    
+
     handleClick(event, radioButton, focus) {
         event.preventDefault();
         if (this.disabled) {
@@ -49,7 +49,7 @@ export class RadioComponent implements ControlValueAccessor {
             radioButton.focus();
         }
     }
-    
+
     select(event) {
         if (!this.disabled) {
             this.el.nativeElement.checked = true;
@@ -58,15 +58,15 @@ export class RadioComponent implements ControlValueAccessor {
             this.onClick.emit(event);
         }
     }
-            
-    writeValue(value: any) : void {
+
+    writeValue(value: any): void {
         this.checked = (value == this.value);
         if (this.el && this.el.nativeElement) {
             this.el.nativeElement.checked = this.checked;
         }
         this.cd.markForCheck();
     }
-    
+
     registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
@@ -74,12 +74,12 @@ export class RadioComponent implements ControlValueAccessor {
     registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
-    
+
     setDisabledState(val: boolean): void {
         this.disabled = val;
         this.cd.markForCheck();
     }
-    
+
     onInputFocus(event) {
         this.focused = true;
         this.onFocus.emit(event);
@@ -90,7 +90,7 @@ export class RadioComponent implements ControlValueAccessor {
         this.onModelTouched();
         this.onBlur.emit(event);
     }
-    
+
     onChange(event) {
         this.select(event);
     }

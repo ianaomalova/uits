@@ -15,5 +15,5 @@ export class SampleBoxComponent implements AfterContentInit {
     if (typeof PR !== 'undefined') {
         PR.prettyPrint();
     }
-  }  
+  }
 }

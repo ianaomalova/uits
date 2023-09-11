@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { LayoutType } from '@app/shared/types/app-config.interface';
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { filter, map, startWith} from "rxjs/operators";
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map, startWith} from 'rxjs/operators';
 
 @Component({
     selector: 'content',
@@ -16,9 +16,9 @@ import { filter, map, startWith} from "rxjs/operators";
 })
 export class ContentComponent implements OnInit {
 
-    @Input() collapse: boolean
-    @Input() layoutType: LayoutType
-    @Input() pageHeader: boolean = true
+    @Input() collapse: boolean;
+    @Input() layoutType: LayoutType;
+    @Input() pageHeader = true;
 
     constructor(private router: Router,  private activatedRoute: ActivatedRoute) {
         this.router.events.pipe(
@@ -29,8 +29,8 @@ export class ContentComponent implements OnInit {
                 while (child) {
                     if (child.firstChild) {
                         child = child.firstChild;
-                    } else if (child.snapshot.data && child.snapshot.data['hidePageHeader']) {
-                        return child.snapshot.data['hidePageHeader'];
+                    } else if (child.snapshot.data && child.snapshot.data.hidePageHeader) {
+                        return child.snapshot.data.hidePageHeader;
                     } else {
                         return null;
                     }
@@ -39,10 +39,10 @@ export class ContentComponent implements OnInit {
             })
         )
         .subscribe((data: NavigationEnd) => {
-            data ? this.pageHeader = false : this.pageHeader = true
-        })
+            data ? this.pageHeader = false : this.pageHeader = true;
+        });
     }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
     }
 }

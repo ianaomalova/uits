@@ -1,15 +1,15 @@
-import { 
-    Component, 
-    OnInit, 
-    ChangeDetectionStrategy, 
-    ChangeDetectorRef, 
-    Input, 
-    ViewChild, 
-    ElementRef 
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Input,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
 
-type ShapeType = 'circle' | 'square' 
-type SizeType = 'large' | 'default' | 'small'
+type ShapeType = 'circle' | 'square';
+type SizeType = 'large' | 'default' | 'small';
 
 @Component({
     selector: 'avatar',
@@ -39,9 +39,9 @@ export class AvatarComponent implements OnInit {
     @Input() alt?: string;
     @Input() icon?: string;
 
-    isText: boolean = false;
-    isImg: boolean = true;
-    isIcon: boolean = false;
+    isText = false;
+    isImg = true;
+    isIcon = false;
     textStyles = {};
     customSize: string | null = null;
 

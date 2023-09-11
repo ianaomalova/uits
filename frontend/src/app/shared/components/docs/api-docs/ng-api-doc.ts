@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 export type BsDatepickerViewMode = 'day' | 'month' | 'year';
 
 const customFormDoc: any = {

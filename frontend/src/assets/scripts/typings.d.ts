@@ -1,7 +1,7 @@
 // Typings reference file, you can add your own global typings here
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
 
-// tslint:disable
+/* eslint-disable */
 
 declare const System: any;
 declare const ENV: string;

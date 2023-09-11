@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input,} from '@angular/core';
 @Directive({
     selector: '[dropdownItem]',
     host: {
-        'class': 'dropdown-item', 
+        class: 'dropdown-item',
         '[class.disabled]': 'disabled',
         '[class.active]': 'active'
     }

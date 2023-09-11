@@ -1,12 +1,12 @@
 import {
 	OnInit,
-	Component, 
-	Input, 
+	Component,
+	Input,
 	ChangeDetectionStrategy
-} from '@angular/core'
-import { DocumentWrapper } from './dropdown.service'
+} from '@angular/core';
+import { DocumentWrapper } from './dropdown.service';
 
-type DirectionType = 'dropdown' | 'dropup' | 'dropright'
+type DirectionType = 'dropdown' | 'dropup' | 'dropright';
 
 @Component({
 	selector: 'dropdown',
@@ -21,8 +21,8 @@ type DirectionType = 'dropdown' | 'dropup' | 'dropright'
 	]
 })
 export class Dropdown implements OnInit {
-	@Input() dropDirection: DirectionType = 'dropdown'
-	@Input() dropdownClass: string = ''
+	@Input() dropDirection: DirectionType = 'dropdown';
+	@Input() dropdownClass = '';
 
 	constructor() { }
 
