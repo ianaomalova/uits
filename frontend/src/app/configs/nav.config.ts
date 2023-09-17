@@ -65,7 +65,7 @@ const about: NavMenu[] = [
                 ]
             },
           {
-            path: 'about/fieldsOfStudy',
+            path: 'about/fields-of-study',
             title: 'FieldsOfStudy',
             translateKey: 'NAV.FIELD_OF_STUDY',
             type: 'item',
@@ -84,7 +84,7 @@ const about: NavMenu[] = [
             key: 'about/documents',
             submenu: [
               {
-                path: 'about/documents/departmentDocuments',
+                path: 'about/documents/department',
                 title: 'DepartmentDocuments',
                 translateKey: 'NAV.DOCUMENTS.DEPARTMENT',
                 type: 'item',

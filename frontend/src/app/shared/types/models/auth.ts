@@ -1,6 +1,8 @@
 export interface Profile {
-  username: string
-  firstName: string
-  secondName: string
-  email: string
+  email: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  isSuperuser: boolean;
+  isModerator: boolean;
 }

@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {LoginForm} from "@app/shared/types/models/forms";
-import {AuthService} from "@app/shared/services/auth.service";
+import {Component, OnInit} from '@angular/core';
+import {LoginForm} from '@app/shared/types/models/forms';
+import {AuthService} from '@app/shared/services/auth.service';
+import {Router} from '@angular/router';
+import {PagesConfig} from '@app/configs/pages.config';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
 
   }
 
@@ -17,6 +20,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(data: LoginForm) {
-    this.authService.login(data).subscribe();
+    this.authService.login(data).subscribe(_ => {
+      this.router.navigateByUrl(PagesConfig.home);
+    });
   }
 }

@@ -1,1 +1,85 @@
-<p>news works!</p>
+<div *ngIf="(posts$ | async).length !== 0; else createPost">
+  <div class="card" *ngFor="let post of posts$ | async">
+    <post-actions
+      [post]="post"
+      (create)="onCreatePost($event)"
+      (edit)="onEditPost($event)"
+      (delete)="onDeletePost($event)"
+    ></post-actions>
+    <div class="card-body">
+      <quill-view [content]="post.content" format="html" theme="snow"></quill-view>
+    </div>
+    <div class="card-footer">
+      {{post.author.firstName}} {{post.author.lastName}} {{post.createdAt | date: 'long'}}
+    </div>
+  </div>
+</div>
+<ng-template #createPost>
+
+  <div *ngIf="profile.isModerator || profile.isSuperuser; else empty"
+       class="d-flex justify-content-center cursor-pointer"
+       (click)="onCreatePost(-1)">
+    <i class="feather icon-plus-circle"
+       [ngStyle]="{
+       fontSize: '1.5rem'
+       }"></i>
+    <span class="ms-2" [ngStyle]="{paddingTop: '1px'}">Создать новость</span>
+  </div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="d-flex justify-content-center">
+    <span>Здесь пока ничего нет</span>
+  </div>
+</ng-template>
+<ng-template #deleteConfirmModal bsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Вы уверены что хотите удалить новость?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex gap-2">
+      <button class="btn btn-danger" (click)="onDeleteConfirm()">Удалить</button>
+      <button class="btn btn-outline-secondary" (click)="modalRef.hide()">Отменить</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #createPostModal bsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Создание новости</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <quill-editor [(ngModel)]="createPostContent">
+    </quill-editor>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-info" (click)="onCreateConfirm()">Создать</button>
+    <button class="btn btn-outline-secondary" (click)="modalRef.hide()">Отменить</button>
+  </div>
+</ng-template>
+
+<ng-template #editPostModal bsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Изменение новости</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <quill-editor [(ngModel)]="chosenPost.content">
+    </quill-editor>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-info" (click)="onEditConfirm()">Изменить</button>
+    <button class="btn btn-outline-secondary" (click)="modalRef.hide()">Отменить</button>
+  </div>
+</ng-template>

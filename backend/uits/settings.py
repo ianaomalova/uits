@@ -37,13 +37,14 @@ ALLOWED_HOSTS = []
 THIRD_INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
-    'dj_rest_auth'
+    'dj_rest_auth',
 ]
 
 # Local application definition
 
 LOCAL_INSTALLED_APPS = [
     'users.apps.UsersConfig',
+    'department.news.apps.NewsConfig'
 ]
 
 # Application definition
@@ -146,3 +147,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
+
+REST_AUTH = {
+    'USER_DETAILS_SERIALIZER': 'users.serializers.UserDetailsSerializer'
+}

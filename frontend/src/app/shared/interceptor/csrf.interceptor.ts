@@ -1,6 +1,6 @@
 import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {Injectable} from "@angular/core";
+import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
 
 const getCookie = (name) => {
   let cookieValue = null;
@@ -17,20 +17,20 @@ const getCookie = (name) => {
     }
   }
   return cookieValue;
-}
+};
 
 @Injectable()
 export class CSRFInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const csrfCookie = getCookie('csrftoken')
-    console.log('Current method is ' + req.method)
+    const csrfCookie = getCookie('csrftoken');
+    console.log('Current method is ' + req.method + ' url: ' + req.url);
     if (csrfCookie){
       req = req.clone({
         setHeaders: {
           'X-CSRFToken': csrfCookie
         }
-      })
+      });
     }
     return next.handle(req);
   }

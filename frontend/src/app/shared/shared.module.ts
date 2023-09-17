@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {TranslateModule} from '@ngx-translate/core';
-import {CSRFInterceptor} from "@app/shared/interceptor/csrf.interceptor";
+import {CSRFInterceptor} from '@app/shared/interceptor/csrf.interceptor';
 
 @NgModule({
   declarations: [],

@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { LoginFormComponent } from './login/components/login-form/login-form.component';
-import {LogoModule} from "@app/shared/components/logo/logo.module";
-import {NgBootstrapFormValidationModule} from "ng-bootstrap-form-validation";
-import {ReactiveFormsModule} from "@angular/forms";
-import {SharedModule} from "@app/shared/shared.module";
+import {LogoModule} from '@app/shared/components/logo/logo.module';
+import {NgBootstrapFormValidationModule} from 'ng-bootstrap-form-validation';
+import {ReactiveFormsModule} from '@angular/forms';
+import {SharedModule} from '@app/shared/shared.module';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,

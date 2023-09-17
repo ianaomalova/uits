@@ -33,7 +33,7 @@ export function TimeSince(val: string | number | Date): string | number {
     let token = 'ago';
     let list_choice = 1;
 
-    if (seconds == 0) {
+    if (seconds === 0) {
         return 'Just now';
     }
     if (seconds < 0) {
@@ -43,6 +43,7 @@ export function TimeSince(val: string | number | Date): string | number {
     }
     let i = 0;
     let format: (string | number)[];
+  // eslint-disable-next-line no-cond-assign
     while (format = time_formats[i++])
         {if (seconds < format[0]) {
         if (typeof format[2] == 'string')

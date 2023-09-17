@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'fields-of-study', component: FieldsOfStudyComponent
   },
   {
-    path: 'documents/departments', component: DepartmentComponent
+    path: 'documents/department', component: DepartmentComponent
   },
   {
     path: 'documents/university', component: UniversityComponent

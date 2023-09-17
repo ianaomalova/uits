@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 interface LoginForm {
-  username: string
-  password: string
+  username: string;
+  password: string;
 }
 
 @Component({
@@ -35,7 +35,7 @@ export class LoginFormComponent implements OnInit {
   login() {
     console.log(this.formGroup);
     if (this.formGroup.valid){
-      console.log(this.formGroup.valid)
+      console.log(this.formGroup.valid);
       this.onSubmit.emit(this.formGroup.value);
     }
   }

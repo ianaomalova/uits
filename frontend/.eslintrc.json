@@ -45,8 +45,9 @@
         "@angular-eslint/no-output-on-prefix": "off",
         "@angular-eslint/no-input-rename": "off",
         "jsdoc/newline-after-description": "off",
-        "@typescript-eslint/naming-convention": "warn",
-        "@typescript-eslint/member-ordering": "warn"
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/member-ordering": "warn",
+        "@typescript-eslint/member-delimiter-style": "off"
       }
     },
     {
