@@ -8,6 +8,9 @@ export const ApiConfig = {
     department: {
         news: {
             posts: 'api/department/news/posts/'
+        },
+        employee: {
+            employee: 'api/department/employee/employee'
         }
     }
 };
