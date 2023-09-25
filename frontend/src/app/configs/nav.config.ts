@@ -20,7 +20,7 @@ const about: NavMenu[] = [
         translateKey: 'NAV.ABOUT',
         type: 'title',
         iconType: 'feather',
-        icon: 'icon-file',
+        icon: 'icon-search',
         key: 'about',
         submenu: [
           {
@@ -29,7 +29,7 @@ const about: NavMenu[] = [
             translateKey: 'NAV.NEWS',
             type: 'item',
             iconType: 'feather',
-            icon: 'icon-file',
+            icon: 'icon-globe',
             key: 'about/news',
             submenu: []
           },
@@ -39,7 +39,7 @@ const about: NavMenu[] = [
                 translateKey: 'NAV.EMPLOYEE',
                 type: 'item',
                 iconType: 'feather',
-                icon: 'icon-file',
+                icon: 'icon-users',
                 key: 'about/employee',
                 submenu: [
                   {
@@ -48,7 +48,7 @@ const about: NavMenu[] = [
                     translateKey: 'NAV.TEACHERS',
                     type: 'item',
                     iconType: 'feather',
-                    icon: 'icon-file',
+                    icon: 'icon-user',
                     key: 'about/employee/teachers',
                     submenu: []
                   },
@@ -58,7 +58,7 @@ const about: NavMenu[] = [
                     translateKey: 'NAV.UVP',
                     type: 'item',
                     iconType: 'feather',
-                    icon: 'icon-file',
+                    icon: 'icon-user',
                     key: 'about/employee/uvp',
                     submenu: []
                   }
@@ -70,7 +70,7 @@ const about: NavMenu[] = [
             translateKey: 'NAV.FIELD_OF_STUDY',
             type: 'item',
             iconType: 'feather',
-            icon: 'icon-file',
+            icon: 'icon-list',
             key: 'about/fieldsOfStudy',
             submenu: []
           },
@@ -80,7 +80,7 @@ const about: NavMenu[] = [
             translateKey: 'NAV.DOCUMENTS.TITLE',
             type: 'item',
             iconType: 'feather',
-            icon: 'icon-file',
+            icon: 'icon-folder',
             key: 'about/documents',
             submenu: [
               {
@@ -89,7 +89,7 @@ const about: NavMenu[] = [
                 translateKey: 'NAV.DOCUMENTS.DEPARTMENT',
                 type: 'item',
                 iconType: 'feather',
-                icon: 'icon-file',
+                icon: 'icon-file-text',
                 key: 'about/documents/departmentDocuments',
                 submenu: []
               },
@@ -99,7 +99,7 @@ const about: NavMenu[] = [
                 translateKey: 'NAV.DOCUMENTS.UNIVERSITY',
                 type: 'item',
                 iconType: 'feather',
-                icon: 'icon-file',
+                icon: 'icon-file-text',
                 key: 'about/documents/university',
                 submenu: []
               },
@@ -111,7 +111,7 @@ const about: NavMenu[] = [
             translateKey: 'NAV.CONTACTS',
             type: 'item',
             iconType: 'feather',
-            icon: 'icon-file',
+            icon: 'icon-phone',
             key: 'about/contacts',
             submenu: []
           },
