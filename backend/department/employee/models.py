@@ -11,7 +11,7 @@ class Teacher(models.Model):
     # Степень, звание, должность
     degree = models.CharField(max_length=100, blank=True, null=True)
     rank = models.CharField(max_length=100, blank=True, null=True)
-    position = models.CharField(max_length=100, blank=True, null=True)
+    position = models.CharField(max_length=100)
 
     # Общая информация
     bio = models.TextField(blank=True, null=True)
