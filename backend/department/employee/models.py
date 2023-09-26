@@ -2,7 +2,7 @@ from django.db import models
 
 
 # Create your models here.
-class Employee(models.Model):
+class Teacher(models.Model):
     # Основная информация
     last_name = models.CharField(max_length=50)
     first_name = models.CharField(max_length=50)

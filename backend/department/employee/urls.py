@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import EmployeeAPIViewSet
+from .views import TeacherAPIViewSet
 
 urlpatterns = [
-    path('employee/', EmployeeAPIViewSet.as_view({
-        'get': 'list'
+    path('teachers/', TeacherAPIViewSet.as_view({
+        'get': 'list',
+        'post': 'create'
     }))
 ]
