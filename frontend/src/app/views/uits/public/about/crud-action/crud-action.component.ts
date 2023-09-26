@@ -4,7 +4,7 @@ interface Identifiable {
   id: number;
 }
 enum ActionType {
-  ADD,
+  // ADD,
   EDIT,
   DELETE
 }
@@ -26,10 +26,10 @@ export class CrudActionComponent<T extends Identifiable> implements OnInit {
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
 
   actions: Action[] = [
-    {
-      icon: 'feather icon-plus-square',
-      type: ActionType.ADD
-    },
+    // {
+    //   icon: 'feather icon-plus-square',
+    //   type: ActionType.ADD
+    // },
     {
       icon: 'feather icon-edit',
       type: ActionType.EDIT
@@ -58,9 +58,9 @@ export class CrudActionComponent<T extends Identifiable> implements OnInit {
 
   handleAction(type: ActionType) {
     switch (type) {
-      case ActionType.ADD:
-        this.onCreate();
-        break;
+      // case ActionType.ADD:
+      //   this.onCreate();
+      //   break;
       case ActionType.EDIT:
         this.onEdit();
         break;
