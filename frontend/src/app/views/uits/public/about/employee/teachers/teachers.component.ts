@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EmployeeService} from "@app/views/uits/public/about/employee/employee.service";
+import {IEmployee} from "@app/shared/types/models/employee";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-teachers',
@@ -7,16 +9,24 @@ import {EmployeeService} from "@app/views/uits/public/about/employee/employee.se
   styleUrls: ['./teachers.component.css']
 })
 export class TeachersComponent implements OnInit {
-   employees = []
+  showDetails: boolean = false;
 
   constructor(private employeeService: EmployeeService) {
 
   }
 
   ngOnInit(): void {
-    this.employeeService.getAllEmployees().subscribe(data => {
-      console.log(data);
-    })
+    this.getAllTeachers();
+  }
+  getAllTeachers() {
+     this.employeeService.getAllTeachers().subscribe();
   }
 
+  get teacher$ () {
+    return this.employeeService.teacher$;
+  }
+
+  printInfo(employee: IEmployee) {
+    console.log(employee);
+  }
 }
