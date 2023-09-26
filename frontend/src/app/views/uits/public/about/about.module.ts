@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {AboutRoutingModule} from './about-routing.module';
 import {PostActionsComponent} from './news/post-actions/post-actions.component';
+import {CrudActionComponent} from "@app/views/uits/public/about/crud-action/crud-action.component";
 import {NewsComponent} from '@app/views/uits/public/about/news/news.component';
 import {FieldsOfStudyComponent} from '@app/views/uits/public/about/fields-of-study/fields-of-study.component';
 import {TeachersComponent} from '@app/views/uits/public/about/employee/teachers/teachers.component';
@@ -17,30 +18,32 @@ import {SharedModule} from "@app/shared/shared.module";
 
 
 @NgModule({
-  declarations: [
-    ContactsComponent,
-    DepartmentComponent,
-    UniversityComponent,
-    PostActionsComponent,
-    NewsComponent,
-    FieldsOfStudyComponent,
-    TeachersComponent,
-    UVPComponent
-  ],
-  exports: [
-    PostActionsComponent
-  ],
-  imports: [
-    CommonModule,
-    AboutRoutingModule,
-    QuillViewComponent,
-    ModalModule,
-    QuillEditorComponent,
-    QuillConfigModule.forRoot({
-      modules
-    }),
-    SharedModule
-  ]
+    declarations: [
+        ContactsComponent,
+        DepartmentComponent,
+        UniversityComponent,
+        PostActionsComponent,
+        NewsComponent,
+        FieldsOfStudyComponent,
+        TeachersComponent,
+        UVPComponent,
+        CrudActionComponent
+    ],
+    exports: [
+        PostActionsComponent,
+        CrudActionComponent
+    ],
+    imports: [
+        CommonModule,
+        AboutRoutingModule,
+        QuillViewComponent,
+        ModalModule,
+        QuillEditorComponent,
+        QuillConfigModule.forRoot({
+            modules
+        }),
+        SharedModule
+    ]
 })
 export class AboutModule {
 }

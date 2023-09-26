@@ -1,0 +1,13 @@
+<div class="crud-actions">
+  <div
+    *ngFor="let action of actions; let i = index"
+    class="crud-actions__item font-size-lg"
+    [ngClass]="{
+      first: i === 0
+    }"
+
+    (click)="handleAction(action.type)"
+  >
+    <i class="{{action.icon}}"></i>
+  </div>
+</div>

@@ -14,17 +14,21 @@ import {
 import {AboutModule} from '@app/views/uits/public/about/about.module';
 
 
+
 @NgModule({
   declarations: [
     HomeComponent,
     PracticesComponent,
     SpecialitiesComponent,
-    DissertationsComponent
+    DissertationsComponent,
   ],
   imports: [
     CommonModule,
     UitsRoutingModule,
     AboutModule
+  ],
+  exports: [
+
   ]
 })
 export class UitsModule {
