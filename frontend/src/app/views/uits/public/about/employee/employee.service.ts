@@ -23,4 +23,9 @@ export class EmployeeService {
         })
       )
   }
+  createTeacher(teacher: Object) {
+    return this.http.post(ApiConfig.department.employee.employee, {
+      ...teacher
+    })
+  }
 }

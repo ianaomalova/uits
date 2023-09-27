@@ -15,6 +15,7 @@ import {QuillConfigModule, QuillEditorComponent, QuillViewComponent} from 'ngx-q
 import {ModalModule} from "ngx-bootstrap/modal";
 import {modules} from "@app/configs/quill.config";
 import {SharedModule} from "@app/shared/shared.module";
+import {NgBootstrapFormValidationModule} from "ng-bootstrap-form-validation";
 
 
 @NgModule({
@@ -27,23 +28,24 @@ import {SharedModule} from "@app/shared/shared.module";
         FieldsOfStudyComponent,
         TeachersComponent,
         UVPComponent,
-        CrudActionComponent
+        CrudActionComponent,
     ],
     exports: [
         PostActionsComponent,
         CrudActionComponent
     ],
-    imports: [
-        CommonModule,
-        AboutRoutingModule,
-        QuillViewComponent,
-        ModalModule,
-        QuillEditorComponent,
-        QuillConfigModule.forRoot({
-            modules
-        }),
-        SharedModule
-    ]
+  imports: [
+    CommonModule,
+    AboutRoutingModule,
+    QuillViewComponent,
+    ModalModule,
+    QuillEditorComponent,
+    QuillConfigModule.forRoot({
+      modules
+    }),
+    SharedModule,
+    NgBootstrapFormValidationModule
+  ]
 })
 export class AboutModule {
 }

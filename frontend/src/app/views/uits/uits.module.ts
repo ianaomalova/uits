@@ -12,7 +12,7 @@ import {
   SpecialitiesComponent
 } from '@app/views/uits/public/scientific-activity/post-graduate/specialities/specialities.component';
 import {AboutModule} from '@app/views/uits/public/about/about.module';
-
+import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import {AboutModule} from '@app/views/uits/public/about/about.module';
   imports: [
     CommonModule,
     UitsRoutingModule,
-    AboutModule
+    AboutModule,
+    NgBootstrapFormValidationModule.forRoot()
   ],
   exports: [
 
