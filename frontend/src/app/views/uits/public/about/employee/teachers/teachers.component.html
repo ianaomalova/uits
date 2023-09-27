@@ -7,11 +7,6 @@
   <div class="row">
     <div *ngFor="let employee of teacher$ | async" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-4">
       <div class="card bg-light position-relative" style="width: 18rem;">
-        <app-crud-action
-          [item]="employee"
-          (edit)="onEditPost($event)"
-          (delete)="onDeletePost($event)"
-        ></app-crud-action>
         <img src="https://mesto56.ru/oc-content/plugins/avatar_free/avatar/180_avatar.png"
              class="card-img-top rounded-circle mx-auto mt-2"
              alt="...">
@@ -20,6 +15,11 @@
           <h4 class="card-title text-center">{{employee.last_name}} {{employee.first_name}} {{employee.patronymic}}</h4>
         </div>
         <div class="overlay">
+          <app-crud-action
+          [item]="employee"
+          (edit)="onEditPost($event)"
+          (delete)="onDeletePost($event)"
+        ></app-crud-action>
           <div class="overlay-content">
             <!-- Здесь размещаете дополнительную информацию о сотруднике -->
             <p>Дополнительная информация о сотруднике</p>
