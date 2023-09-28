@@ -1,4 +1,4 @@
-<h1>Наши преподаватели</h1>
+<h1>Преподавательский состав кафедры</h1>
 
 <div class="btn-add__item font-size-lg" (click)="onCreateTeacher()">
   <i class="feather icon-plus-square"></i>
@@ -21,8 +21,11 @@
           (delete)="onDeletePost($event)"
         ></app-crud-action>
           <div class="overlay-content">
+            <img src="https://mesto56.ru/oc-content/plugins/avatar_free/avatar/180_avatar.png"
+             class="card-img-top mx-auto mx-5 rounded-circle"
+             alt="...">
             <!-- Здесь размещаете дополнительную информацию о сотруднике -->
-            <p>Дополнительная информация о сотруднике</p>
+            <p>Дополнительная информация о сотруднике <b>{{employee.last_name}} {{employee.first_name}} {{employee.patronymic}}</b></p>
             <button class="btn btn-info" (click)="printInfo(employee)">Подробнее</button>
           </div>
         </div>

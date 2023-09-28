@@ -24,7 +24,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный белый фон */
+  background-color: rgba(255, 255, 255); /* Полупрозрачный белый фон */
   opacity: 0;
   pointer-events: none; /* Отключает события мыши на оверлее */
   transition: opacity 0.4s ease-in-out;
