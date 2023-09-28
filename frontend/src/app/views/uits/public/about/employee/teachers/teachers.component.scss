@@ -1,5 +1,16 @@
+.card {
+  background: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень */
+  transition: transform 0.2s ease-in-out; /* Добавляем анимацию увеличения */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Увеличиваем карту при наведении */
+  z-index: 1; /* Поднимаем карту наверх, чтобы она перекрывала другие карты */
+}
+
 .card-img-top {
-   max-width: 70%;
+   max-width: 60%;
 }
 
 /* Стили для контейнера оверлея */
@@ -48,7 +59,7 @@ $crud-actions-right: 3rem;
    cursor: pointer;
    transition: circles-show-up 200ms ease-in-out;
    i {
-      z-index: 1005;
+      z-index: 2;
     }
  }
 

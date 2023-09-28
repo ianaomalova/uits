@@ -1,4 +1,4 @@
-<h1>Профессорско-преподавательский состав кафедры УИТС</h1>
+<h1>Наши булочки</h1>
 
 <div class="btn-add__item font-size-lg" (click)="onCreateTeacher()">
   <i class="feather icon-plus-square"></i>
@@ -6,13 +6,13 @@
 <div *ngIf="(teacher$ | async).length !== 0; else loading">
   <div class="row">
     <div *ngFor="let employee of teacher$ | async" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-4">
-      <div class="card bg-light position-relative" style="width: 18rem;">
+      <div class="card position-relative bg-secondary" style="width: 18rem;">
         <img src="https://mesto56.ru/oc-content/plugins/avatar_free/avatar/180_avatar.png"
-             class="card-img-top rounded-circle mx-auto mt-2"
+             class="card-img-top mx-auto mt-4 mx-5 rounded-circle"
              alt="...">
         <div class="card-body">
-          <p class="card-text text-center">{{employee.position}} {{employee.degree}} {{employee.rank}}</p>
           <h4 class="card-title text-center">{{employee.last_name}} {{employee.first_name}} {{employee.patronymic}}</h4>
+          <p class="card-text text-center">{{employee.position}} {{employee.degree}} {{employee.rank}}</p>
         </div>
         <div class="overlay">
           <app-crud-action
