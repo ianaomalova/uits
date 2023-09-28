@@ -12,7 +12,7 @@
              alt="...">
         <div class="card-body">
           <h4 class="card-title text-center">{{employee.last_name}} {{employee.first_name}} {{employee.patronymic}}</h4>
-          <p class="card-text text-center">{{employee.position}} {{employee.degree}} {{employee.rank}}</p>
+          <p class="card-text text-center">{{employee.degree ? employee.position + ',' : employee.position}} {{employee.rank ? employee.degree + ',' : employee.degree}} {{employee.rank}}</p>
         </div>
         <div class="overlay">
           <app-crud-action
@@ -25,7 +25,7 @@
              class="card-img-top mx-auto mx-5 rounded-circle"
              alt="...">
             <!-- Здесь размещаете дополнительную информацию о сотруднике -->
-            <p>Дополнительная информация о сотруднике <b>{{employee.last_name}} {{employee.first_name}} {{employee.patronymic}}</b></p>
+            <p>Дополнительная информация о сотруднике <br><b>{{employee.last_name}} {{employee.first_name}} {{employee.patronymic}}</b></p>
             <button class="btn btn-info" (click)="printInfo(employee)">Подробнее</button>
           </div>
         </div>
