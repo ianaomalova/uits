@@ -90,7 +90,7 @@
 
 <ng-template #deleteTeacherModal bsModal>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Вы уверены что хотите удалить преподавателя?</h4>
+    <h4 class="modal-title pull-left">Вы уверены, что хотите удалить преподавателя {{chosenTeacher.last_name}} {{chosenTeacher.first_name}} {{chosenTeacher.patronymic}}?</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
