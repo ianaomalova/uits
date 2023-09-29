@@ -24,7 +24,9 @@ export class TeachersComponent implements OnInit {
   }
   createTeacherForm: UntypedFormGroup
   modalRef: BsModalRef;
+  chosenTeacher: IEmployee;
   @ViewChild('createTeacherModal') createTeacherModal;
+  @ViewChild('deleteTeacherModal') deleteTeacherModal;
 
   customLastNameMessages: ErrorMessage[] = [
     {
@@ -64,6 +66,10 @@ export class TeachersComponent implements OnInit {
     return this.employeeService.teacher$;
   }
 
+  teacher(id: number) {
+    return this.teacher$.getValue().find(p => p.id === id);
+  }
+
   printInfo(employee: IEmployee) {
     console.log(employee);
   }
@@ -76,8 +82,17 @@ export class TeachersComponent implements OnInit {
     console.log('On Edit Emit', id);
   }
 
-  onDeletePost(id: any) {
-    console.log('On Delete Emit', id);
+  onDeleteTeacher(id: number) {
+    this.chosenTeacher = this.teacher(id);
+    this.openModal(this.deleteTeacherModal);
+  }
+
+  deleteTeacherConfirm() {
+    this.employeeService.deleteTeacher(this.chosenTeacher.id).subscribe(data => {
+      console.log(data);
+      this.getAllTeachers();
+      this.modalRef.hide();
+    })
   }
 
   openModal(template: TemplateRef<any>) {

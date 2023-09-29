@@ -28,4 +28,8 @@ export class EmployeeService {
       ...teacher
     })
   }
+
+  deleteTeacher(id:number) {
+    return this.http.delete(`${ApiConfig.department.employee.employee}/${id}`)
+  }
 }

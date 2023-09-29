@@ -18,7 +18,7 @@
           <app-crud-action
           [item]="employee"
           (edit)="onEditPost($event)"
-          (delete)="onDeletePost($event)"
+          (delete)="onDeleteTeacher($event)"
         ></app-crud-action>
           <div class="overlay-content">
             <img src="https://mesto56.ru/oc-content/plugins/avatar_free/avatar/180_avatar.png"
@@ -84,6 +84,21 @@
           </div>
         </form>
       </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #deleteTeacherModal bsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Вы уверены что хотите удалить преподавателя?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex gap-2">
+      <button class="btn btn-danger" (click)="deleteTeacherConfirm()">Удалить</button>
+      <button class="btn btn-outline-secondary" (click)="modalRef.hide()">Отменить</button>
     </div>
   </div>
 </ng-template>
