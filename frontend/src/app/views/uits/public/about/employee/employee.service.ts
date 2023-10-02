@@ -15,7 +15,7 @@ export class EmployeeService {
 
   getAllTeachers() {
     //return this.http.get(ApiConfig.department.employee.employee)
-    return this.http.get<IEmployee[]>(ApiConfig.department.employee.employee)
+    return this.http.get<IEmployee[]>(ApiConfig.department.employee.teacher)
       .pipe(
         map(teachers => {
             this.teacher$.next(teachers);
@@ -24,12 +24,12 @@ export class EmployeeService {
       )
   }
   createTeacher(teacher: Object) {
-    return this.http.post(ApiConfig.department.employee.employee, {
+    return this.http.post(ApiConfig.department.employee.teacher, {
       ...teacher
     })
   }
 
   deleteTeacher(id:number) {
-    return this.http.delete(`${ApiConfig.department.employee.employee}/${id}`)
+    return this.http.delete(`${ApiConfig.department.employee.teacher}/${id}`)
   }
 }

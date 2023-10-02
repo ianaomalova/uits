@@ -10,7 +10,7 @@ export const ApiConfig = {
             posts: 'api/department/news/posts/'
         },
         employee: {
-            employee: 'api/department/employee/teachers/'
+            teacher: 'api/department/employee/teachers/'
         }
     }
 };
