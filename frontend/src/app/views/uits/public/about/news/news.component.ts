@@ -1,31 +1,41 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NewsService} from '@app/views/uits/public/about/news/news.service';
 import {Post} from '@app/shared/types/models/news';
 import {BehaviorSubject} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {ModalDirection} from '@app/shared/types/modal-direction';
-import {AuthService} from "@app/shared/services/auth.service";
-import {Profile} from "@app/shared/types/models/auth";
+import {AuthService} from '@app/shared/services/auth.service';
+import {Profile} from '@app/shared/types/models/auth';
+import {PagesConfig} from '@app/configs/pages.config';
+import {Permission} from '@app/shared/types/permission.enum';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+  styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
   modalRef: BsModalRef;
 
   chosenPost: Post = null;
 
+  createPostTitle = '';
+  createPostDescription = '';
   createPostContent = '';
 
-  @ViewChild('deleteConfirmModal') deleteConfirmModal;
+  changePermission: Permission = Permission.MODERATOR;
+
   @ViewChild('createPostModal') createPostModal;
+  @ViewChild('deleteConfirmModal') deleteConfirmModal;
   @ViewChild('editPostModal') editPostModal;
+
+  isMobile: boolean;
 
   constructor(private newsService: NewsService,
               private modalService: BsModalService,
               private authService: AuthService) {
+
+    this.isMobile = window.innerWidth < 992;
   }
 
   get profile(): Profile {
@@ -34,6 +44,14 @@ export class NewsComponent implements OnInit {
 
   get posts$(): BehaviorSubject<Post[]> {
     return this.newsService.posts$;
+  }
+
+  @HostListener('window:resize', ['$event']) onWindowResize(event) {
+    if (event.target.innerWidth < 992) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
   }
 
   post(id: number) {
@@ -74,14 +92,26 @@ export class NewsComponent implements OnInit {
   }
 
   onCreateConfirm() {
-    this.newsService.createPost(this.createPostContent).subscribe(p => {
+    const postToCreate = {
+      title: this.createPostTitle,
+      shortDescription: this.createPostDescription,
+      content: this.createPostContent
+    };
+    this.newsService.createPost(
+      postToCreate
+    ).subscribe(p => {
       this.getPosts();
       this.modalRef.hide();
     });
   }
 
   onEditConfirm() {
-    this.newsService.updatePost(this.chosenPost.id, this.chosenPost.content).subscribe(p => {
+    const postToEdit = {
+      title: this.chosenPost.title,
+      short_description: this.chosenPost.shortDescription,
+      content: this.chosenPost.content,
+    };
+    this.newsService.updatePost(this.chosenPost.id, postToEdit).subscribe(p => {
       this.getPosts();
       this.modalRef.hide();
     });
@@ -89,5 +119,18 @@ export class NewsComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, Object.assign({}, {class: `${ModalDirection.Up}`}));
+  }
+
+  getPostURL(id: number) {
+    return PagesConfig.about.news + id;
+  }
+
+  onEditorResize($event: UIEvent) {
+    // $event.
+  }
+
+  cancelChanges() {
+    this.modalRef.hide();
+    this.getPosts();
   }
 }

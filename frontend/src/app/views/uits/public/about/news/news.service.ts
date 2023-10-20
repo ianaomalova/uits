@@ -23,6 +23,7 @@ export class NewsService implements OnPaginate {
   getPosts(page = this.page): Observable<Post[]> {
     return this.http.get<Snaked<IPost>[]>(ApiConfig.department.news.posts).pipe(
       map(_posts => {
+        console.log(_posts);
         const posts = _posts.map(post => new Post(post));
         this.posts$.next(posts);
         return posts;
@@ -34,15 +35,25 @@ export class NewsService implements OnPaginate {
     return this.http.delete(ApiConfig.department.news.posts + id);
   }
 
-  createPost(content: string) {
+  createPost({title, shortDescription, content}) {
     return this.http.post(ApiConfig.department.news.posts, {
+      title,
+      short_description: shortDescription,
       content
     });
   }
 
-  updatePost(id: number, content: string) {
-    return this.http.patch(ApiConfig.department.news.posts + id, {
-      content
-    });
+  updatePost(id: number, postToEdit) {
+    return this.http.patch<Snaked<Post>>(ApiConfig.department.news.posts + id, {
+      ...postToEdit
+    }).pipe(
+      map(post => new Post(post))
+    );
+  }
+
+  getPost(id: number) {
+    return this.http.get<Snaked<Post>>(ApiConfig.department.news.posts + id).pipe(
+      map(post => new Post(post))
+    );
   }
 }

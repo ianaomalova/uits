@@ -15,3 +15,7 @@ class Teacher(models.Model):
 
     # Общая информация
     bio = models.TextField(blank=True, null=True)
+
+
+    def get_last_job(self):
+        return self.hashtagscanjob_set.order_by('-created_at').first()

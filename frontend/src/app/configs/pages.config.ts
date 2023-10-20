@@ -3,5 +3,8 @@ export const PagesConfig = {
     login: '/auth/login',
     logout: '/auth/logout',
   },
-  home: '/home'
+  home: '/home',
+  about: {
+    news: '/about/news/'
+  }
 };

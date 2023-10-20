@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 
 import {AboutRoutingModule} from './about-routing.module';
 import {PostActionsComponent} from './news/post-actions/post-actions.component';
-import {CrudActionComponent} from "@app/views/uits/public/about/crud-action/crud-action.component";
 import {NewsComponent} from '@app/views/uits/public/about/news/news.component';
 import {FieldsOfStudyComponent} from '@app/views/uits/public/about/fields-of-study/fields-of-study.component';
 import {TeachersComponent} from '@app/views/uits/public/about/employee/teachers/teachers.component';
@@ -12,10 +11,12 @@ import {DepartmentComponent} from '@app/views/uits/public/about/documents/depart
 import {UniversityComponent} from '@app/views/uits/public/about/documents/university/university.component';
 import {ContactsComponent} from '@app/views/uits/public/about/contacts/contacts.component';
 import {QuillConfigModule, QuillEditorComponent, QuillViewComponent} from 'ngx-quill';
-import {ModalModule} from "ngx-bootstrap/modal";
-import {modules} from "@app/configs/quill.config";
-import {SharedModule} from "@app/shared/shared.module";
-import {NgBootstrapFormValidationModule} from "ng-bootstrap-form-validation";
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {modules} from '@app/configs/quill.config';
+import {SharedModule} from '@app/shared/shared.module';
+import {NgBootstrapFormValidationModule} from 'ng-bootstrap-form-validation';
+import {CrudActionModule} from "@app/shared/components/crud-action/crud-action.module";
+import { PostComponent } from './news/post/post.component';
 
 
 @NgModule({
@@ -28,11 +29,10 @@ import {NgBootstrapFormValidationModule} from "ng-bootstrap-form-validation";
         FieldsOfStudyComponent,
         TeachersComponent,
         UVPComponent,
-        CrudActionComponent,
+        PostComponent,
     ],
     exports: [
         PostActionsComponent,
-        CrudActionComponent
     ],
   imports: [
     CommonModule,
@@ -44,7 +44,8 @@ import {NgBootstrapFormValidationModule} from "ng-bootstrap-form-validation";
       modules
     }),
     SharedModule,
-    NgBootstrapFormValidationModule
+    NgBootstrapFormValidationModule,
+    CrudActionModule
   ]
 })
 export class AboutModule {

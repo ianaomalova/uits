@@ -5,4 +5,5 @@ export interface Profile {
   username: string;
   isSuperuser: boolean;
   isModerator: boolean;
+  isAnonymous: boolean;
 }

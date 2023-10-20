@@ -20,6 +20,8 @@ class UserDetailsSerializer(DefaultUserDetailsSerializer):
             extra_fields.append('is_moderator')
         if hasattr(UserModel, 'is_superuser'):
             extra_fields.append('is_superuser')
+        if hasattr(UserModel, 'is_anonymous'):
+            extra_fields.append('is_anonymous')
         model = UserModel
         fields = ('pk', *extra_fields)
         read_only_fields = ('email', 'is_moderator', 'is_superuser')

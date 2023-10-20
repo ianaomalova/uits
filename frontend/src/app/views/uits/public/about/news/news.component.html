@@ -1,29 +1,28 @@
-<div *ngIf="(posts$ | async).length !== 0; else createPost">
-  <div class="card" *ngFor="let post of posts$ | async">
-    <post-actions
-      [post]="post"
-      (create)="onCreatePost($event)"
-      (edit)="onEditPost($event)"
-      (delete)="onDeletePost($event)"
-    ></post-actions>
-    <div class="card-body">
-      <quill-view [content]="post.content" format="html" theme="snow"></quill-view>
-    </div>
-    <div class="card-footer">
-      {{post.author.firstName}} {{post.author.lastName}} {{post.createdAt | date: 'long'}}
-    </div>
-  </div>
+<div class="mb-4">
+  <ng-container [ngTemplateOutlet]="titlePage"></ng-container>
 </div>
-<ng-template #createPost>
 
-  <div *ngIf="profile.isModerator || profile.isSuperuser; else empty"
-       class="d-flex justify-content-center cursor-pointer"
-       (click)="onCreatePost(-1)">
-    <i class="feather icon-plus-circle"
-       [ngStyle]="{
+<ng-container *ngIf="!isMobile">
+  <ng-container *ngTemplateOutlet="gridDesktop"></ng-container>
+</ng-container>
+<ng-container *ngIf="isMobile">
+  <ng-container *ngTemplateOutlet="gridMobile"></ng-container>
+</ng-container>
+<ng-template #titlePage>
+
+  <div class="d-flex"
+  >
+    <h1>Новости</h1>
+    <div *ngIf="profile.isModerator || profile.isSuperuser"
+         class="d-flex align-items-center ms-3 cursor-pointer btn-hover"
+         (click)="onCreatePost(-1)"
+    >
+      <i class="feather icon-plus-circle"
+         [ngStyle]="{
        fontSize: '1.5rem'
        }"></i>
-    <span class="ms-2" [ngStyle]="{paddingTop: '1px'}">Создать новость</span>
+      <span class="ms-2" [ngStyle]="{paddingTop: '1px'}">Создать новость</span>
+    </div>
   </div>
 </ng-template>
 
@@ -56,6 +55,17 @@
     </button>
   </div>
   <div class="modal-body">
+    <div class="mb-3">
+      <label for="post-title" class="form-label">Заголовок</label>
+      <input type="text" id="post-title" class="form-control" [(ngModel)]="createPostTitle">
+    </div>
+    <div class="mb-3">
+      <label for="post-description" class="form-label">Краткое описание</label>
+      <textarea id="post-description"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="createPostDescription"></textarea>
+    </div>
     <quill-editor [(ngModel)]="createPostContent">
     </quill-editor>
   </div>
@@ -74,12 +84,85 @@
     </button>
   </div>
   <div class="modal-body">
-    <quill-editor [(ngModel)]="chosenPost.content">
+    <div class="mb-3">
+      <label for="post-title-edit" class="form-label">Заголовок</label>
+      <input type="text" id="post-title-edit" class="form-control" [(ngModel)]="chosenPost.title">
+    </div>
+    <div class="mb-3">
+      <label for="post-description-edit" class="form-label">Краткое описание</label>
+      <textarea id="post-description-edit"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="chosenPost.shortDescription"></textarea>
+    </div>
+    <quill-editor [(ngModel)]="chosenPost.content" theme="snow" (resize)="onEditorResize($event)">
     </quill-editor>
   </div>
 
   <div class="modal-footer">
     <button class="btn btn-info" (click)="onEditConfirm()">Изменить</button>
-    <button class="btn btn-outline-secondary" (click)="modalRef.hide()">Отменить</button>
+    <button class="btn btn-outline-secondary" (click)="cancelChanges()">Отменить</button>
+  </div>
+</ng-template>
+
+
+<ng-template
+  #cardPost
+  let-post="post"
+>
+  <div class="card-header">
+    <h3>
+      <a class="btn-hover" [routerLink]="getPostURL(post.id)">{{post.title}}</a>
+    </h3>
+  </div>
+  <app-crud-action
+    [item]="post"
+    [permission]="changePermission"
+    (edit)="onEditPost($event)"
+    (delete)="onDeletePost($event)"
+  ></app-crud-action>
+  <div class="card-body">
+    <!--      <quill-view [content]="post.content" format="html" theme="snow"></quill-view>-->
+    <p>{{post.shortDescription}}</p>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex justify-content-between">
+      <div class="date">
+        {{post.author.firstName}} {{post.author.lastName}} {{post.createdAt | date: 'long'}}
+      </div>
+      <div class="more" style="z-index: 50">
+        <a [routerLink]="getPostURL(post.id)">Подробнее</a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #gridDesktop>
+  <div class="d-grid grid-news" *ngIf="(posts$ | async).length !== 0; else empty">
+    <div class="col">
+      <div *ngFor="let post of posts$ | async; let i = index">
+        <div class="card" *ngIf="i % 2 === 0">
+          <ng-container *ngTemplateOutlet="cardPost;context:{post}"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div *ngFor="let post of posts$ | async; let i = index">
+        <div class="card" *ngIf="i % 2 !== 0">
+          <ng-container *ngTemplateOutlet="cardPost;context:{post}"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #gridMobile>
+  <div *ngIf="(posts$ | async).length !== 0; else empty">
+      <div *ngFor="let post of posts$ | async; let i = index">
+        <div class="card">
+          <ng-container *ngTemplateOutlet="cardPost;context:{post}"></ng-container>
+        </div>
+      </div>
   </div>
 </ng-template>

@@ -1,4 +1,6 @@
-<div class="crud-actions">
+<div *ngIf="!disabled" class="crud-actions" [ngStyle]="{
+  height: 60 * actions.length
+}">
   <div
     *ngFor="let action of actions; let i = index"
     class="crud-actions__item font-size-lg"

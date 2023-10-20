@@ -9,14 +9,13 @@ import {AuthGuard} from '@app/shared/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'home', component: HomeComponent, canActivate: [AuthGuard]
+    path: 'home', component: HomeComponent
   },
   {
     path: 'about', loadChildren: () => import('@app/views/uits/public/about/about.module').then(m => m.AboutModule),
-    canActivate: [AuthGuard]
   },
   {
-    path: 'scientific-activities/post-graduate/practices', component: PracticesComponent, canActivate: [AuthGuard]
+    path: 'scientific-activities/post-graduate/practices', component: PracticesComponent
   }
 ];
 

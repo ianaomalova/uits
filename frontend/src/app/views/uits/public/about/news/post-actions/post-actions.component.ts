@@ -27,11 +27,11 @@ export class PostActionsComponent implements OnInit {
 
   @Output() delete: EventEmitter<Post['id']> = new EventEmitter<Post['id']>();
 
-  actions: Action[] = [
-    {
-      icon: 'feather icon-plus-square',
-      type: ActionType.ADD
-    },
+  @Input() actions: Action[] = [
+    // {
+    //   icon: 'feather icon-plus-square',
+    //   type: ActionType.ADD
+    // },
     {
       icon: 'feather icon-edit',
       type: ActionType.EDIT

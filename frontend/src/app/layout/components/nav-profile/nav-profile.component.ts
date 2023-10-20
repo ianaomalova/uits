@@ -3,6 +3,7 @@ import {AuthService} from '@app/shared/services/auth.service';
 import {Profile} from '@app/shared/types/models/auth';
 import {PagesConfig} from '@app/configs/pages.config';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 const emptyUser: Partial<Profile> = {
   username: 'Loading...',
@@ -35,14 +36,17 @@ export class NavProfileComponent implements OnInit {
   ];
   protected readonly PagesConfig = PagesConfig;
 
-  constructor(private authService: AuthService,
+  constructor(public authService: AuthService,
               public router: Router) {
   }
 
-  get profile(): Profile {
-    return this.authService.profile$.getValue() ?? emptyUser as Profile;
-  }
-
   ngOnInit(): void {
+    // this.authService.retrieveProfile().subscribe(
+    //   {
+    //     next: profile => {
+    //
+    //     }
+    //   }
+    // )
   }
 }

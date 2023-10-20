@@ -7,10 +7,14 @@ import {FieldsOfStudyComponent} from '@app/views/uits/public/about/fields-of-stu
 import {DepartmentComponent} from '@app/views/uits/public/about/documents/department/department.component';
 import {UniversityComponent} from '@app/views/uits/public/about/documents/university/university.component';
 import {ContactsComponent} from '@app/views/uits/public/about/contacts/contacts.component';
+import {PostComponent} from '@app/views/uits/public/about/news/post/post.component';
 
 const routes: Routes = [
   {
     path: 'news', component: NewsComponent
+  },
+  {
+    path: 'news/:id', component: PostComponent
   },
   {
     path: 'employee/teachers', component: TeachersComponent
