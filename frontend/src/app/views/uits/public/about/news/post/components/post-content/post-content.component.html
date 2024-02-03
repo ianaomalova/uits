@@ -4,12 +4,12 @@
 </div>
 
 <div *ngIf="(post | async) as post">
-  <app-crud-action
-    [item]="post"
-    [permission]="changePermission"
-    (edit)="onEditPost($event)"
-    (delete)="onDeletePost($event)"
-  ></app-crud-action>
+<!--  <app-crud-action-->
+<!--    [item]="post"-->
+<!--    [permission]="changePermission"-->
+<!--    (edit)="onEditPost($event)"-->
+<!--    (delete)="onDeletePost($event)"-->
+<!--  ></app-crud-action>-->
   <quill-view style="padding: 0" [content]="post.content" format="html" theme="snow"></quill-view>
   <hr>
   <div class="d-flex justify-content-between">
