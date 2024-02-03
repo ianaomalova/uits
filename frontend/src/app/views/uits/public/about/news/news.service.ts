@@ -3,7 +3,7 @@ import {OnPaginate} from '@app/shared/types/paginate.interface';
 import {HttpClient} from '@angular/common/http';
 import {ApiConfig} from '@app/configs/api.config';
 import {BehaviorSubject, map, Observable} from 'rxjs';
-import {IPost, Post} from '@app/shared/types/models/news';
+import {IPost, ListPost, Post} from '@app/shared/types/models/news';
 import {Snaked} from "@app/shared/utils/SnakeToCamelCase";
 
 @Injectable({
@@ -14,17 +14,21 @@ export class NewsService implements OnPaginate {
   page = 1;
   itemsPerPage = 15;
 
-  posts$: BehaviorSubject<Post[]>;
+  posts$: BehaviorSubject<ListPost[]>;
 
   constructor(private http: HttpClient) {
-    this.posts$ = new BehaviorSubject<Post[]>([]);
+    this.posts$ = new BehaviorSubject<ListPost[]>([]);
   }
 
-  getPosts(page = this.page): Observable<Post[]> {
-    return this.http.get<Snaked<IPost>[]>(ApiConfig.department.news.posts).pipe(
+  getPosts(page = this.page): Observable<ListPost[]> {
+    return this.http.get<Snaked<ListPost>[]>(ApiConfig.department.news.posts, {
+      params: {
+        page
+      }
+    }).pipe(
       map(_posts => {
         console.log(_posts);
-        const posts = _posts.map(post => new Post(post));
+        const posts = _posts.map(post => new ListPost(post));
         this.posts$.next(posts);
         return posts;
       })
@@ -35,12 +39,8 @@ export class NewsService implements OnPaginate {
     return this.http.delete(ApiConfig.department.news.posts + id);
   }
 
-  createPost({title, shortDescription, content}) {
-    return this.http.post(ApiConfig.department.news.posts, {
-      title,
-      short_description: shortDescription,
-      content
-    });
+  createPost(formData: FormData) {
+    return this.http.post(ApiConfig.department.news.posts, formData);
   }
 
   updatePost(id: number, postToEdit) {

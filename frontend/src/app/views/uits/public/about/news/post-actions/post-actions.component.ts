@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Post} from '@app/shared/types/models/news';
+import {ListPost} from '@app/shared/types/models/news';
 
 enum ActionType {
   ADD,
@@ -19,13 +19,13 @@ type Action = {
 })
 export class PostActionsComponent implements OnInit {
 
-  @Input() post: Post;
+  @Input() post: ListPost;
 
-  @Output() create: EventEmitter<Post['id']> = new EventEmitter<Post['id']>();
+  @Output() create: EventEmitter<ListPost['id']> = new EventEmitter<ListPost['id']>();
 
-  @Output() edit: EventEmitter<Post['id']> = new EventEmitter<Post['id']>();
+  @Output() edit: EventEmitter<ListPost['id']> = new EventEmitter<ListPost['id']>();
 
-  @Output() delete: EventEmitter<Post['id']> = new EventEmitter<Post['id']>();
+  @Output() delete: EventEmitter<ListPost['id']> = new EventEmitter<ListPost['id']>();
 
   @Input() actions: Action[] = [
     // {

@@ -2,7 +2,7 @@ import { NavMenu } from '@app/shared/types/nav-menu.interface';
 
 const main: NavMenu[] = [
     {
-        path: '/main',
+        path: '/home',
         title: 'Main',
         translateKey: 'NAV.HOME',
         type: 'item',

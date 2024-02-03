@@ -1,13 +1,13 @@
-import {Component, HostListener, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NewsService} from '@app/views/uits/public/about/news/news.service';
-import {Post} from '@app/shared/types/models/news';
+import {ListPost} from '@app/shared/types/models/news';
 import {BehaviorSubject} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {ModalDirection} from '@app/shared/types/modal-direction';
 import {AuthService} from '@app/shared/services/auth.service';
 import {Profile} from '@app/shared/types/models/auth';
 import {PagesConfig} from '@app/configs/pages.config';
-import {Permission} from '@app/shared/types/permission.enum';
+import {ru} from 'date-fns/locale';
 
 @Component({
   selector: 'app-news',
@@ -17,19 +17,22 @@ import {Permission} from '@app/shared/types/permission.enum';
 export class NewsComponent implements OnInit {
   modalRef: BsModalRef;
 
-  chosenPost: Post = null;
+  @Input() title = 'Новости'
+  @Input() isEditable: boolean = true
 
+  locale = ru;
   createPostTitle = '';
   createPostDescription = '';
   createPostContent = '';
 
-  changePermission: Permission = Permission.MODERATOR;
 
   @ViewChild('createPostModal') createPostModal;
   @ViewChild('deleteConfirmModal') deleteConfirmModal;
   @ViewChild('editPostModal') editPostModal;
 
   isMobile: boolean;
+
+  selectedImage: File | null = null;
 
   constructor(private newsService: NewsService,
               private modalService: BsModalService,
@@ -42,7 +45,7 @@ export class NewsComponent implements OnInit {
     return this.authService.profile$.getValue();
   }
 
-  get posts$(): BehaviorSubject<Post[]> {
+  get posts$(): BehaviorSubject<ListPost[]> {
     return this.newsService.posts$;
   }
 
@@ -59,60 +62,39 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPosts();
+    this.setPosts();
   }
 
-  getPosts() {
+  setPosts() {
     this.newsService.getPosts().subscribe();
   }
 
-  onCreatePost(postId: Post['id']) {
+
+  onCreatePost() {
     console.log('On Create Emit');
     this.openModal(this.createPostModal);
   }
 
-  onEditPost(postId: Post['id']) {
-    console.log('On Edit Emit');
-    this.chosenPost = this.post(postId);
-    this.openModal(this.editPostModal);
-  }
-
-  onDeletePost(postId: Post['id']) {
-    console.log('On Delete Emit');
-    this.chosenPost = this.post(postId);
-    this.openModal(this.deleteConfirmModal);
-  }
-
-  onDeleteConfirm() {
-    this.newsService.deletePost(this.chosenPost.id).subscribe(res => {
-      console.log(res);
-      this.getPosts();
-      this.modalRef.hide();
-    });
-  }
 
   onCreateConfirm() {
+    const formData = new FormData();
+
     const postToCreate = {
       title: this.createPostTitle,
-      shortDescription: this.createPostDescription,
+      short_description: this.createPostDescription,
       content: this.createPostContent
     };
-    this.newsService.createPost(
-      postToCreate
-    ).subscribe(p => {
-      this.getPosts();
-      this.modalRef.hide();
-    });
-  }
 
-  onEditConfirm() {
-    const postToEdit = {
-      title: this.chosenPost.title,
-      short_description: this.chosenPost.shortDescription,
-      content: this.chosenPost.content,
-    };
-    this.newsService.updatePost(this.chosenPost.id, postToEdit).subscribe(p => {
-      this.getPosts();
+    Object.keys(postToCreate).forEach(key => {
+      formData.append(key, postToCreate[key]);
+    });
+
+    formData.append('preview_image', this.selectedImage, this.selectedImage.name);
+
+    this.newsService.createPost(
+      formData
+    ).subscribe(p => {
+      this.setPosts();
       this.modalRef.hide();
     });
   }
@@ -122,15 +104,17 @@ export class NewsComponent implements OnInit {
   }
 
   getPostURL(id: number) {
+    console.log(this.posts$.getValue())
     return PagesConfig.about.news + id;
   }
 
-  onEditorResize($event: UIEvent) {
-    // $event.
+
+  onFileSelected(event: any) {
+    this.selectedImage = event.target.files[0];
+    console.log("Selected image: ", this.selectedImage);
   }
 
-  cancelChanges() {
-    this.modalRef.hide();
-    this.getPosts();
+  getDateFromString(dateISO: string): Date {
+    return new Date(dateISO);
   }
 }

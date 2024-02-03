@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from users.permissions import IsModerator
 from .models import Post
-from .serializers import PostSerializer, CreatePostSerializer
+from .serializers import PostSerializer, CreatePostSerializer, ListPostSerializer
 
 
 # Create your views here.
@@ -23,6 +23,10 @@ class PostAPIViewSet(ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def get_serializer_class(self, *args, **kwargs):
-        if self.request.method == 'POST':
-            return CreatePostSerializer
-        return self.serializer_class
+        match self.action:
+            case 'list':
+                return ListPostSerializer
+            case 'create':
+                return CreatePostSerializer
+            case _:
+                return self.serializer_class

@@ -1,0 +1,84 @@
+<div class="mb-3">
+  <ng-container [ngTemplateOutlet]="titlePage"></ng-container>
+</div>
+
+<ng-container *ngIf="!isMobile">
+  <ng-container *ngTemplateOutlet="gridDesktop"></ng-container>
+</ng-container>
+<ng-container *ngIf="isMobile">
+  <ng-container *ngTemplateOutlet="gridMobile"></ng-container>
+</ng-container>
+<ng-template #titlePage>
+  <p class="fs-2 fw-bold">{{ 'HOME.LATEST_NEWS.TITLE' | translate }}</p>
+</ng-template>
+
+<ng-template #empty>
+  <div class="d-flex justify-content-center">
+    <span>{{ 'HOME.LATEST_NEWS.EMPTY' | translate }}</span>
+  </div>
+</ng-template>
+
+
+<ng-template
+  #cardPost
+  let-post="post"
+  let-size="size"
+>
+  <a [routerLink]="getPostURL(post.id)">
+    <div class="news-cover-wrapper" [ngStyle]="{
+      'min-height': size === 'small'? '12rem':'25rem'
+    }">
+      <div class="news-cover-overlay p-4 d-flex flex-column justify-content-between">
+        <div
+          class="d-flex align-items-center text-white font-monospace text-uppercase">
+          <i class="feather icon-user me-3"></i>{{ post.author.firstName + " " + post.author.lastName }}
+        </div>
+        <div class="d-block text-white">
+          <div class="font-monospace fs-6 text-uppercase">{{ post.createdAt | date: 'dd.MM.YYYY' }}</div>
+          <div class="fs-4 fw-bold">{{ post.title }}</div>
+        </div>
+      </div>
+      <figure class="news-media-background">
+        <img [src]="post.previewImage" alt="first card post"
+             style="transform: scale(1);transform-origin: 50% 50%;object-position: 50% 50%;object-fit: cover;">
+
+      </figure>
+
+    </div>
+  </a>
+</ng-template>
+
+
+<ng-template #gridDesktop>
+  <div class="d-grid" *ngIf="(posts$ | async).length !== 0; else empty">
+    <div class="row latest-news-row gap-3">
+      <div class="col position-relative" *ngIf="getFirstPost() as firstPost">
+        <ng-container *ngTemplateOutlet="cardPost;context:{post: firstPost}"></ng-container>
+      </div>
+      <div class="d-flex col position-relative flex-row gap-3 p-0" *ngIf="getSecondPost() as secondPost">
+        <div class="col position-relative">
+          <ng-container *ngTemplateOutlet="cardPost;context:{post: secondPost}"></ng-container>
+        </div>
+        <div class="d-flex col position-relative flex-column gap-3" *ngIf="(posts$ | async).length > 2">
+          <div class="col position-relative" *ngIf="getThirdPost() as thirdPost">
+            <ng-container *ngTemplateOutlet="cardPost;context:{post: thirdPost, size: 'small'}"></ng-container>
+          </div>
+          <div class="col position-relative" *ngIf="getFourthPost() as fourthPost">
+            <ng-container *ngTemplateOutlet="cardPost;context:{post: fourthPost, size: 'small'}"></ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #gridMobile>
+  <div *ngIf="(posts$ | async).length !== 0; else empty">
+    <div *ngFor="let post of posts$ | async; let i = index">
+      <div class="card">
+        <ng-container *ngTemplateOutlet="cardPost;context:{post}"></ng-container>
+      </div>
+    </div>
+  </div>
+</ng-template>

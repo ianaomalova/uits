@@ -7,10 +7,15 @@ defusedxml==0.7.1
 dj-rest-auth==5.0.0
 Django==4.2.5
 django-allauth==0.55.2
+django-appconf==1.0.6
 django-environ==0.11.2
+django-imagekit==5.0.0
+django-quill-editor==0.1.40
 djangorestframework==3.14.0
 idna==3.4
 oauthlib==3.2.2
+pilkit==3.0
+pillow==10.2.0
 psycopg2==2.9.7
 pycparser==2.21
 PyJWT==2.8.0

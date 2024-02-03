@@ -7,4 +7,3 @@ from .models import Post
 class PostModelAdmin(admin.ModelAdmin):
     list_display = ['pk','author', 'created_at', 'display']
     list_editable = ['display']
-

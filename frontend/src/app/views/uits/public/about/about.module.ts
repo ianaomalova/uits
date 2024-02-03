@@ -17,6 +17,10 @@ import {SharedModule} from '@app/shared/shared.module';
 import {NgBootstrapFormValidationModule} from 'ng-bootstrap-form-validation';
 import {CrudActionModule} from "@app/shared/components/crud-action/crud-action.module";
 import { PostComponent } from './news/post/post.component';
+import {DateFormatter} from "@amcharts/amcharts4/core";
+import {DateFnsModule} from "ngx-date-fns";
+import { PostContentComponent } from './news/post/components/post-content/post-content.component';
+import { PostInfoComponent } from './news/post/components/post-info/post-info.component';
 
 
 @NgModule({
@@ -30,9 +34,12 @@ import { PostComponent } from './news/post/post.component';
         TeachersComponent,
         UVPComponent,
         PostComponent,
+        PostContentComponent,
+        PostInfoComponent,
     ],
     exports: [
         PostActionsComponent,
+        NewsComponent,
     ],
   imports: [
     CommonModule,
@@ -45,7 +52,8 @@ import { PostComponent } from './news/post/post.component';
     }),
     SharedModule,
     NgBootstrapFormValidationModule,
-    CrudActionModule
+    CrudActionModule,
+    DateFnsModule
   ]
 })
 export class AboutModule {

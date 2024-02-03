@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { en_US } from './i18n/en/index';
 import { ru_RU } from './i18n/ru/index';
 
-const storageKey = 'lang';
+const storageKey = 'uits_lang';
 
 @Component({
     selector: 'app-root',

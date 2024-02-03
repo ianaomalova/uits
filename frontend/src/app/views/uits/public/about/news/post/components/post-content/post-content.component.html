@@ -1,0 +1,68 @@
+<div class="mb-3" *ngIf="(post | async) as post">
+  <img class="mb-1" src="{{post.previewImage}}" alt="{{post.previewImageDescription}}">
+  <p style="font-size: .75rem">{{post.previewImageDescription}}</p>
+</div>
+
+<div *ngIf="(post | async) as post">
+  <app-crud-action
+    [item]="post"
+    [permission]="changePermission"
+    (edit)="onEditPost($event)"
+    (delete)="onDeletePost($event)"
+  ></app-crud-action>
+  <quill-view style="padding: 0" [content]="post.content" format="html" theme="snow"></quill-view>
+  <hr>
+  <div class="d-flex justify-content-between">
+    <div class="date">
+      {{ post.author.firstName }} {{ post.author.lastName }}
+    </div>
+    <div class="more" style="z-index: 50">
+      <a [routerLink]="getReturnURL()">Вернуться</a>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #deleteConfirmModal bsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Вы уверены что хотите удалить новость?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex gap-2">
+      <button class="btn btn-danger" (click)="onDeleteConfirm()">Удалить</button>
+      <button class="btn btn-outline-secondary" (click)="cancelChanges()">Отменить</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editPostModal bsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Изменение новости</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="post-title-edit" class="form-label">Заголовок</label>
+      <input type="text" id="post-title-edit" class="form-control" [(ngModel)]="getPost().title">
+    </div>
+    <div class="mb-3">
+      <label for="post-description-edit" class="form-label">Краткое описание</label>
+      <textarea id="post-description-edit"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="getPost().shortDescription"></textarea>
+    </div>
+    <quill-editor [(ngModel)]="getPost().content">
+    </quill-editor>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-info" (click)="onEditConfirm()">Изменить</button>
+    <button class="btn btn-outline-secondary" (click)="cancelChanges()">Отменить</button>
+  </div>
+</ng-template>

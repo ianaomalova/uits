@@ -38,6 +38,8 @@ THIRD_INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
+    'imagekit',
+    'django_quill'
 ]
 
 # Local application definition
@@ -151,4 +153,28 @@ AUTH_USER_MODEL = 'users.User'
 
 REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'users.serializers.UserDetailsSerializer'
+}
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
+QUILL_CONFIGS = {
+    'default': {
+        'theme': 'snow',
+        'modules': {
+            'syntax': True,
+            'toolbar': [
+                [
+                    {'font': []},
+                    {'header': []},
+                    {'align': []},
+                    'bold', 'italic', 'underline', 'strike', 'blockquote',
+                    {'color': []},
+                    {'background': []},
+                ],
+                ['code-block', 'link'],
+                ['clean'],
+            ]
+        }
+    }
 }

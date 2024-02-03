@@ -13,6 +13,10 @@ import {
 } from '@app/views/uits/public/scientific-activity/post-graduate/specialities/specialities.component';
 import {AboutModule} from '@app/views/uits/public/about/about.module';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
+import { LatestNewsComponent } from './public/home/components/latest-news/latest-news.component';
+import {ModalModule} from "ngx-bootstrap/modal";
+import {QuillEditorComponent} from "ngx-quill";
+import {SharedModule} from "@app/shared/shared.module";
 
 
 @NgModule({
@@ -21,13 +25,17 @@ import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
     PracticesComponent,
     SpecialitiesComponent,
     DissertationsComponent,
+    LatestNewsComponent,
   ],
-  imports: [
-    CommonModule,
-    UitsRoutingModule,
-    AboutModule,
-    NgBootstrapFormValidationModule.forRoot()
-  ],
+    imports: [
+        CommonModule,
+        UitsRoutingModule,
+        AboutModule,
+        NgBootstrapFormValidationModule.forRoot(),
+        ModalModule,
+        QuillEditorComponent,
+        SharedModule
+    ],
   exports: [
 
   ]

@@ -13,9 +13,9 @@
   <div class="d-flex"
   >
     <h1>Новости</h1>
-    <div *ngIf="profile.isModerator || profile.isSuperuser"
+    <div *ngIf="(profile.isModerator || profile.isSuperuser) && isEditable"
          class="d-flex align-items-center ms-3 cursor-pointer btn-hover"
-         (click)="onCreatePost(-1)"
+         (click)="onCreatePost()"
     >
       <i class="feather icon-plus-circle"
          [ngStyle]="{
@@ -31,20 +31,70 @@
     <span>Здесь пока ничего нет</span>
   </div>
 </ng-template>
-<ng-template #deleteConfirmModal bsModal>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Вы уверены что хотите удалить новость?</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="d-flex gap-2">
-      <button class="btn btn-danger" (click)="onDeleteConfirm()">Удалить</button>
-      <button class="btn btn-outline-secondary" (click)="modalRef.hide()">Отменить</button>
+
+<ng-template
+  #cardPost
+  let-post="post"
+>
+  <a [routerLink]="getPostURL(post.id)">
+    <div class="news-cover-wrapper" style="min-height: 25rem;">
+      <div class="news-cover-overlay p-4 d-flex flex-column justify-content-between">
+        <div class="d-flex align-items-center text-white font-monospace text-uppercase">Article</div>
+        <div class="d-block text-white">
+          <div class="font-monospace fs-6 text-uppercase">5 min</div>
+          <div class="fs-4 fw-bold">{{ post.title }}</div>
+        </div>
+      </div>
+      <figure class="news-media-background">
+        <img [src]="post.previewImage" alt="first card post"
+             style="transform: scale(1);transform-origin: 50% 50%;object-position: 50% 50%;object-fit: cover;">
+
+      </figure>
+
+    </div>
+  </a>
+</ng-template>
+
+
+<ng-template #gridDesktop>
+  <ng-container *ngIf="(posts$ | async).length !== 0; else empty">
+    <div class="">
+      <div class="news-content-item"
+           style="min-height: 8.5rem;"
+           *ngFor="let post of (posts$ | async)">
+        <a routerLink="{{getPostURL(post.id)}}" class="news-content-thumbnail">
+          <figure class="news-media-background">
+            <img [src]="post.previewThumbnail" alt="first card post"
+                 style="transform: scale(1);transform-origin: 50% 50%;object-position: 50% 50%;object-fit: cover;">
+          </figure>
+        </a>
+        <div class="news-content-item-inner">
+          <a [routerLink]="getPostURL(post.id)" class="news-content-item-heading">
+            <div class="news-content-item-heading-font">{{ post.title }}</div>
+          </a>
+          <div class="news-content-item-author mb-1">
+            Автор: {{post.author.firstName + " " + post.author.lastName}}
+          </div>
+          <p class="mt-0 mb-1">{{post.shortDescription}}</p>
+          <div class="news-content-item-created-at">{{ getDateFromString(post.createdAt) | dfnsFormat: 'd MMMM yyyy, HH:mm:ss':{ locale } }}</div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #gridMobile>
+  <div *ngIf="(posts$ | async).length !== 0; else empty">
+    <div *ngFor="let post of posts$ | async; let i = index">
+      <div class="card">
+        <ng-container *ngTemplateOutlet="cardPost;context:{post}"></ng-container>
+      </div>
     </div>
   </div>
 </ng-template>
+
+
+
 
 
 <ng-template #createPostModal bsModal>
@@ -66,103 +116,17 @@
                 rows="3"
                 [(ngModel)]="createPostDescription"></textarea>
     </div>
-    <quill-editor [(ngModel)]="createPostContent">
+    <quill-editor class="mb-3" [(ngModel)]="createPostContent">
     </quill-editor>
+    <div class="mb-3">
+      <label for="createImageFile" class="form-label">Превью изображение</label>
+      <input class="form-control" id="createImageFile" type="file" accept="image/*" (change)="onFileSelected($event)"
+             [required]="true"/>
+    </div>
   </div>
 
   <div class="modal-footer">
     <button class="btn btn-info" (click)="onCreateConfirm()">Создать</button>
     <button class="btn btn-outline-secondary" (click)="modalRef.hide()">Отменить</button>
-  </div>
-</ng-template>
-
-<ng-template #editPostModal bsModal>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Изменение новости</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="mb-3">
-      <label for="post-title-edit" class="form-label">Заголовок</label>
-      <input type="text" id="post-title-edit" class="form-control" [(ngModel)]="chosenPost.title">
-    </div>
-    <div class="mb-3">
-      <label for="post-description-edit" class="form-label">Краткое описание</label>
-      <textarea id="post-description-edit"
-                class="form-control"
-                rows="3"
-                [(ngModel)]="chosenPost.shortDescription"></textarea>
-    </div>
-    <quill-editor [(ngModel)]="chosenPost.content" theme="snow" (resize)="onEditorResize($event)">
-    </quill-editor>
-  </div>
-
-  <div class="modal-footer">
-    <button class="btn btn-info" (click)="onEditConfirm()">Изменить</button>
-    <button class="btn btn-outline-secondary" (click)="cancelChanges()">Отменить</button>
-  </div>
-</ng-template>
-
-
-<ng-template
-  #cardPost
-  let-post="post"
->
-  <div class="card-header">
-    <h3>
-      <a class="btn-hover" [routerLink]="getPostURL(post.id)">{{post.title}}</a>
-    </h3>
-  </div>
-  <app-crud-action
-    [item]="post"
-    [permission]="changePermission"
-    (edit)="onEditPost($event)"
-    (delete)="onDeletePost($event)"
-  ></app-crud-action>
-  <div class="card-body">
-    <!--      <quill-view [content]="post.content" format="html" theme="snow"></quill-view>-->
-    <p>{{post.shortDescription}}</p>
-  </div>
-  <div class="card-footer">
-    <div class="d-flex justify-content-between">
-      <div class="date">
-        {{post.author.firstName}} {{post.author.lastName}} {{post.createdAt | date: 'long'}}
-      </div>
-      <div class="more" style="z-index: 50">
-        <a [routerLink]="getPostURL(post.id)">Подробнее</a>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-
-<ng-template #gridDesktop>
-  <div class="d-grid grid-news" *ngIf="(posts$ | async).length !== 0; else empty">
-    <div class="col">
-      <div *ngFor="let post of posts$ | async; let i = index">
-        <div class="card" *ngIf="i % 2 === 0">
-          <ng-container *ngTemplateOutlet="cardPost;context:{post}"></ng-container>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div *ngFor="let post of posts$ | async; let i = index">
-        <div class="card" *ngIf="i % 2 !== 0">
-          <ng-container *ngTemplateOutlet="cardPost;context:{post}"></ng-container>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #gridMobile>
-  <div *ngIf="(posts$ | async).length !== 0; else empty">
-      <div *ngFor="let post of posts$ | async; let i = index">
-        <div class="card">
-          <ng-container *ngTemplateOutlet="cardPost;context:{post}"></ng-container>
-        </div>
-      </div>
   </div>
 </ng-template>
