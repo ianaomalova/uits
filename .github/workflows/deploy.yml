@@ -1,0 +1,51 @@
+name: Django/Angular CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build-django:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd ${{ secrets.APPLICATION_PATH }}
+          git checkout master
+          git pull
+          cd ./backend
+          source ./venv/bin/activate
+          pip3.10 install -r requirements.txt
+          python3.10 manage.py migrate
+          systemctl restart uits
+  build-angular:
+      runs-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      - run: |
+          cd frontend
+          npm ci --legacy-peer-deps
+          npm run build-prod
+      # ['SSH_PRIVATE_KEY', 'REMOTE_HOST', 'REMOTE_USER', 'REMOTE_PORT', 'SOURCE', 'TARGET', 'ARGS', 'SSH_CMD_ARGS', 'EXCLUDE', 'SCRIPT_BEFORE', 'SCRIPT_AFTER']
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@v4
+        with:
+          REMOTE_HOST: ${{ secrets.VPS_HOST }}
+          REMOTE_USER: ${{ secrets.VPS_USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SOURCE: frontend/dist/espire/
+          TARGET: /opt/uits-dist
+          SCRIPT_BEFORE: ls
