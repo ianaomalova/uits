@@ -35,3 +35,4 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         SOURCE: dist/
         TARGET: /opt/uits-dist
+        SCRIPT_BEFORE: ls
