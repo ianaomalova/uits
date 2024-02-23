@@ -33,6 +33,6 @@ jobs:
         REMOTE_HOST: ${{ secrets.VPS_HOST }}
         REMOTE_USER: ${{ secrets.VPS_USERNAME }}
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SOURCE: frontend/dist/
+        SOURCE: frontend/dist/espire/
         TARGET: /opt/uits-dist
         SCRIPT_BEFORE: ls
