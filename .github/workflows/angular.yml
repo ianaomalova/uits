@@ -21,6 +21,7 @@ jobs:
       with:
         node-version: 16
         cache: 'npm'
+        working-directory: ./frontend
     - run: cd ./frontend
     - run: npm ci
     # - run: npm audit --audit-level=critical
