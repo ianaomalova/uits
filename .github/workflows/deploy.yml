@@ -1,8 +1,8 @@
-name: Django CI
+name: Django/Angular CI
 
 on:
   push:
-    branches: [ "master", "workflow" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
