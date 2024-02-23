@@ -26,11 +26,12 @@ jobs:
         cd frontend
         npm ci --legacy-peer-deps
         npm run build-prod
+    # ['SSH_PRIVATE_KEY', 'REMOTE_HOST', 'REMOTE_USER', 'REMOTE_PORT', 'SOURCE', 'TARGET', 'ARGS', 'SSH_CMD_ARGS', 'EXCLUDE', 'SCRIPT_BEFORE', 'SCRIPT_AFTER']
     - name: Deploy to server
       uses: easingthemes/ssh-deploy@v4
       with:
-        server: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: dist/
-        target: /opt/uits-dist
+        REMOTE_HOST: ${{ secrets.VPS_HOST }}
+        REMOTE_USER: ${{ secrets.VPS_USERNAME }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SOURCE: dist/
+        TARGET: /opt/uits-dist
