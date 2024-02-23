@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavMenu } from '@app/shared/types/nav-menu.interface';
-import { navConfiguration } from '@app/configs/nav.config'
+import { navConfiguration } from '@app/configs/nav.config';
 import { NavMenuColor } from '@app/shared/types/app-config.interface';
 
 @Component({
@@ -8,18 +8,18 @@ import { NavMenuColor } from '@app/shared/types/app-config.interface';
     templateUrl: './header-navbar.component.html',
     host: {
         '[class.header-navbar]': 'true',
-        '[class.nav-menu-light]': "color === 'light'",
-        '[class.nav-menu-dark]': "color === 'dark'"
+        '[class.nav-menu-light]': 'color === \'light\'',
+        '[class.nav-menu-dark]': 'color === \'dark\''
     }
 })
 export class HeaderNavbarComponent implements OnInit {
 
-    menu : NavMenu[] = []
+    menu: NavMenu[] = [];
     @Input() color: NavMenuColor = 'light';
 
     constructor() { }
 
     ngOnInit(): void {
-        this.menu = navConfiguration
+        this.menu = navConfiguration;
     }
 }

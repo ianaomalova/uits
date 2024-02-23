@@ -14,7 +14,7 @@ export class ExamplesComponent {
   moduleData: NgxModuleData;
 
   constructor(public section: ContentSection, private route: ActivatedRoute) {
-    this.examples = section.content as ComponentExample[]
+    this.examples = section.content as ComponentExample[];
   }
 
   @HostListener('document:click', ['$event'])

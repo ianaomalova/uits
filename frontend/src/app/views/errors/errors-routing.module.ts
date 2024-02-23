@@ -6,11 +6,11 @@ import { Error2Component } from './error-2/error-2.component';
 const routes: Routes = [
     {
         path: 'error-1',
-        component: Error1Component 
+        component: Error1Component
     },
     {
         path: 'error-2',
-        component: Error2Component 
+        component: Error2Component
     }
 ];
 

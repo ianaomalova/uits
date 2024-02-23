@@ -1,6 +1,6 @@
-import { Component, ContentChild, Host, Input, OnInit, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core'
-import { AnimationTriggerMetadata, trigger, state, style, animate, transition } from '@angular/animations'
-import { NavMenu } from './nav-menu.component'
+import { Component, ContentChild, Host, Input, OnInit, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { AnimationTriggerMetadata, trigger, state, style, animate, transition } from '@angular/animations';
+import { NavMenu } from './nav-menu.component';
 
 const dropAnimation: AnimationTriggerMetadata = trigger(
     'dropAnimation', [
@@ -27,7 +27,7 @@ const dropAnimation: AnimationTriggerMetadata = trigger(
         })),
         transition('* => *', animate(`150ms ease-out`)),
     ]
-)
+);
 
 
 @Component({
@@ -37,74 +37,74 @@ const dropAnimation: AnimationTriggerMetadata = trigger(
 	templateUrl: './nav-submenu.component.html'
 })
 export class NavSubmenu implements OnInit {
-  
-	@ContentChild('title') titleTmp: TemplateRef<any>
-	
-	@Input() index: string
-	@Input() title: string
-	@Input() defaultOpen: boolean
 
-	timer: any
-	opened: boolean = false
-	active: boolean = false
-	subActive: boolean = false
-	disableHover: boolean = false
-	
+	@ContentChild('title') titleTmp: TemplateRef<any>;
+
+	@Input() index: string;
+	@Input() title: string;
+	@Input() defaultOpen: boolean;
+
+	timer: any;
+	opened = false;
+	active = false;
+	subActive = false;
+	disableHover = false;
+
 	constructor(@Host() public rootMenu: NavMenu, private cdr: ChangeDetectorRef) {
 	}
-	
+
 	mouseenterHandle(): void {
-		this.active = true
-		if (this.disableHover) return
-		clearTimeout(this.timer)
+		this.active = true;
+		if (this.disableHover) {return;}
+		clearTimeout(this.timer);
 		this.timer = setTimeout(() => {
-			this.rootMenu.openMenu(this.index)
-			this.updateOpened()
-			clearTimeout(this.timer)
-		}, 150)
+			this.rootMenu.openMenu(this.index);
+			this.updateOpened();
+			clearTimeout(this.timer);
+		}, 150);
 	}
-	
+
 	mouseleaveHandle(): void {
-		this.active = false
-		if (this.disableHover) return
-		clearTimeout(this.timer)
+		this.active = false;
+		if (this.disableHover) {return;}
+		clearTimeout(this.timer);
 		this.timer = setTimeout(() => {
-			this.rootMenu.closeMenu(this.index)
-			this.updateOpened()
-			clearTimeout(this.timer)
-		}, 150)
+			this.rootMenu.closeMenu(this.index);
+			this.updateOpened();
+			clearTimeout(this.timer);
+		}, 150);
 	}
-	
+
 	selectHandle(path: string): void {
-		this.rootMenu.selectHandle(this.index, path)
+		this.rootMenu.selectHandle(this.index, path);
 		if (this.rootMenu.mode !== 'vertical') {
-			this.rootMenu.closeMenu(this.index)
+			this.rootMenu.closeMenu(this.index);
 		}
-		this.updateOpened()
+		this.updateOpened();
 	}
-	
+
 	updateOpened(): void {
-		this.opened = this.rootMenu.openedMenus.indexOf(this.index) > -1
+		this.opened = this.rootMenu.openedMenus.indexOf(this.index) > -1;
 		this.cdr.markForCheck();
 	}
-	
+
 	clickHandle(): void {
-		if (!this.disableHover) return
+		if (!this.disableHover) {return;}
 		if (this.opened) {
-			this.rootMenu.closeMenu(this.index)
+			this.rootMenu.closeMenu(this.index);
 		} else {
-			this.rootMenu.openMenu(this.index)
+			this.rootMenu.openMenu(this.index);
 		}
-		this.updateOpened()
+		this.updateOpened();
 	}
-	
+
 	ngOnInit(): void {
 		if(this.defaultOpen) {
-			this.rootMenu.openMenu(this.index)
+			this.rootMenu.openMenu(this.index);
 		}
-		this.updateOpened()
-		this.active = this.index === this.rootMenu.model
-		this.disableHover = this.rootMenu.mode === 'vertical' || this.rootMenu.menuTrigger !== 'hover'
+		this.updateOpened();
+		this.active = this.index === this.rootMenu.model;
+		this.disableHover = this.rootMenu.mode === 'vertical' || this.rootMenu.menuTrigger !== 'hover';
 	}
-  
+
 }

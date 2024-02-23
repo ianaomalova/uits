@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
-import { AuthLayoutComponent } from "./layout/auth-layout/auth-layout.component";
-import { AppLayoutComponent } from "./layout/app-layout/app-layout-component";
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { AppLayoutComponent } from './layout/app-layout/app-layout-component';
 
-import { AUTH_LAYOUT_ROUTES } from "./routes/auth-layout.routes";
+import { AUTH_LAYOUT_ROUTES } from './routes/auth-layout.routes';
 import { APP_LAYOUT_ROUTES } from './routes/app-layout.routes';
 
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'main',
+        redirectTo: 'home',
         pathMatch: 'full',
     },
     {

@@ -1,0 +1,14 @@
+<ng-container *ngIf="post | async">
+  <ng-container *ngTemplateOutlet="info;context:{post: post.getValue()}"></ng-container>
+</ng-container>
+
+<ng-template #info
+  let-post="post"
+>
+  <div class="post-info">
+    <div class="post-info-author">{{post.author.firstName + " " + post.author.lastName}}</div>
+    <hr>
+    <div class="post-info-created-at text-uppercase">{{getDateFromString(post.createdAt) | dfnsFormat: 'd MMMM yyyy, HH:mm:ss':{ locale } }}</div>
+    <hr>
+  </div>
+</ng-template>

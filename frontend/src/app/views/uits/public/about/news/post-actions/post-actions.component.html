@@ -1,0 +1,13 @@
+<div class="post-actions">
+  <div
+    *ngFor="let action of actions; let i = index"
+    class="post-actions__item font-size-lg"
+    [ngClass]="{
+      first: i === 0
+    }"
+
+    (click)="handleAction(action.type)"
+  >
+    <i class="{{action.icon}}"></i>
+  </div>
+</div>

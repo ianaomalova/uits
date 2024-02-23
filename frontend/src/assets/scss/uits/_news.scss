@@ -1,0 +1,77 @@
+.news-content-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+
+  .news-content-thumbnail {
+    margin-bottom: 0;
+    position: relative;
+
+  }
+
+
+  .news-content-item-inner {
+    .news-content-item-heading {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #000;
+
+      .news-content-item-heading-font {
+        font-family: Inter, sans-serif;
+        line-height: 1.05em;
+        font-weight: 700;
+        font-size: 1.375rem;
+      }
+    }
+
+    .news-content-item-author {
+
+    }
+
+    .news-content-item-created-at {
+      font-style: italic;
+    }
+  }
+}
+
+.news-cover-wrapper {
+  .news-cover-overlay {
+    position: absolute;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    background: linear-gradient(65.99deg, #000 0, transparent 99.04%) repeat;
+    width: 100%;
+    height: 100%;
+
+    .news-title {
+      color: white;
+    }
+  }
+}
+
+.news-media-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+  }
+}
+
+.ql-editor{
+  padding: 0 !important;
+}

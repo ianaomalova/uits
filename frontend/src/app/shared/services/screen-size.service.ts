@@ -29,7 +29,7 @@ export class ScreenSizeService {
         {
             id: SCREEN_SIZE.XXL, name: 'xxl', size: 1440
         }
-    ]
+    ];
 
     get onResize$(): Observable<number[]> {
         return this.resizeSubject.asObservable().pipe(distinctUntilChanged());
@@ -38,12 +38,10 @@ export class ScreenSizeService {
     private resizeSubject: Subject<number[]>;
 
     onResize(size: number) {
-        const currentSize = this.sizes.filter(elm => {
-            return elm.size <= size
-        });
-        const sizeArr: number[] = []
+        const currentSize = this.sizes.filter(elm => elm.size <= size);
+        const sizeArr: number[] = [];
         for (let i = 0; i < currentSize.length; i++) {
-            sizeArr.push(currentSize[i].id)
+            sizeArr.push(currentSize[i].id);
         }
         this.resizeSubject.next(sizeArr);
     }

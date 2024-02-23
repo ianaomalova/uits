@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { AppConfig } from '@app/shared/types/app-config.interface';
 import { Observable } from 'rxjs';
-import { UpdateCurrentLanguage } from '@app/store/app-config/app-config.action'
+import { UpdateCurrentLanguage } from '@app/store/app-config/app-config.action';
 import { supportedLanguages } from  '@app/configs/i18n.config';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,32 +15,32 @@ import { TranslateService } from '@ngx-translate/core';
     }
 })
 export class NavI18NComponent implements OnInit {
-    @Select((state: { app: AppConfig; }) => state.app) app$: Observable<AppConfig>;
+    @Select((state: { app: AppConfig }) => state.app) app$: Observable<AppConfig>;
     currentLang: string;
-    languageList = []
+    languageList = [];
 
     constructor(private store: Store, private translateService: TranslateService, ) {
     }
 
     ngOnInit(): void {
-        this.getLanguageList()
+        this.getLanguageList();
         this.app$.subscribe(app => {
             this.currentLang = app.lang;
         });
     }
 
     getLanguageList() {
-        let list = []
+        const list = [];
         for (const key in supportedLanguages) {
             if (Object.prototype.hasOwnProperty.call(supportedLanguages, key)) {
                 const lang = supportedLanguages[key];
                 list.push({
-                    key: key,
-                    lang: lang
-                })
+                    key,
+                    lang
+                });
             }
         }
-        this.languageList = list
+        this.languageList = list;
     }
 
     setLanguage(language: string) {

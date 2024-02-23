@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NavMenu } from './nav-menu.component';
-import { NavSubmenu } from './nav-submenu.component'
-import { NavMenuItem } from './nav-menu-item.component' 
-import { NavMenuItemGroup } from './nav-menu-item-group.component'
+import { NavSubmenu } from './nav-submenu.component';
+import { NavMenuItem } from './nav-menu-item.component';
+import { NavMenuItemGroup } from './nav-menu-item-group.component';
 
 @NgModule({
     declarations: [
@@ -13,8 +13,8 @@ import { NavMenuItemGroup } from './nav-menu-item-group.component'
         NavMenuItem,
         NavMenuItemGroup
     ],
-    imports: [ 
-        CommonModule 
+    imports: [
+        CommonModule
     ],
     exports: [
         NavMenu,

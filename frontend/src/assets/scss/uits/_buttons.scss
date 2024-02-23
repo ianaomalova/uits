@@ -1,0 +1,7 @@
+
+.btn-hover {
+  &:hover {
+    color: $primary;
+  }
+  transition: color 100ms ease-in-out;
+}

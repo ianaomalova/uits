@@ -18,6 +18,6 @@ import { UploadDraggerComponent } from './upload-dragger.component';
 })
 export class UploadModule {
     static forRoot(): ModuleWithProviders<UploadModule> {
-        return { ngModule: UploadModule, providers: [UploadService] }
+        return { ngModule: UploadModule, providers: [UploadService] };
     }
 }

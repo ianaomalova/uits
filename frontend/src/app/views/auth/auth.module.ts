@@ -15,7 +15,7 @@ import { RegisterV2Component } from './register-v2/register-v2.component';
 import { RegisterV3Component } from './register-v3/register-v3.component';
 
 @NgModule({
-    declarations: [ 
+    declarations: [
         LoginComponent,
         RegisterFormComponent,
         LoginFormComponent,
@@ -24,6 +24,9 @@ import { RegisterV3Component } from './register-v3/register-v3.component';
         RegisterComponent,
         RegisterV2Component,
         RegisterV3Component
+    ],
+    exports: [
+        LoginFormComponent
     ],
     imports: [
         AuthRoutingModule,

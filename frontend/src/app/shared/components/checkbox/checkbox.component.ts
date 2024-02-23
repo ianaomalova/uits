@@ -1,6 +1,6 @@
-import { 
-    Component, 
-    Input, 
+import {
+    Component,
+    Input,
     Output,
     EventEmitter,
     forwardRef,
@@ -30,22 +30,22 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     @Input() value: any;
     @Input() name: string;
-    @Input() disabled: boolean;    
+    @Input() disabled: boolean;
     @Input() single: boolean;
-    @Input() inputId: string;  
+    @Input() inputId: string;
     @Input() readonly: boolean;
-    @Input() inline: boolean = false;
+    @Input() inline = false;
     @ViewChild('checkbox') el: ElementRef;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
     model: any;
     onModelChange: Function = () => {};
     onModelTouched: Function = () => {};
-    focused: boolean = false;
-    checked: boolean = false;
+    focused = false;
+    checked = false;
 
     constructor(private cd: ChangeDetectorRef) {}
 
-    onClick(event,checkbox,focus:boolean) {
+    onClick(event,checkbox,focus: boolean) {
         event.preventDefault();
         if (this.disabled || this.readonly) {
             return;
@@ -56,7 +56,7 @@ export class CheckboxComponent implements ControlValueAccessor {
             checkbox.focus();
         }
     }
-    
+
     updateModel(event) {
         if (!this.single) {
             if (this.checked) {
@@ -70,11 +70,11 @@ export class CheckboxComponent implements ControlValueAccessor {
         }
         this.onChange.emit({
             checked:this.checked,
-            value: this.value, 
+            value: this.value,
             originalEvent: event
         });
     }
-    
+
     handleChange(event) {
         if (!this.readonly) {
             this.checked = event.target.checked;
@@ -101,7 +101,7 @@ export class CheckboxComponent implements ControlValueAccessor {
             this.model = [this.value];
         }
     }
-    
+
     onFocus() {
         this.focused = true;
     }
@@ -114,13 +114,13 @@ export class CheckboxComponent implements ControlValueAccessor {
     focus() {
         this.el.nativeElement.focus();
     }
-     
-    writeValue(model: any) : void {
+
+    writeValue(model: any): void {
         this.model = model;
         this.checked = this.isChecked();
         this.cd.markForCheck();
     }
-    
+
     registerOnChange(fn: Function): void {
         this.onModelChange = fn;
     }
@@ -128,7 +128,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
-    
+
     setDisabledState(val: boolean): void {
         this.disabled = val;
         this.cd.markForCheck();

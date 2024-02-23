@@ -1,5 +1,5 @@
-export function TimeSince (val: string | number | Date): string | number {
-    let time: number
+export function TimeSince(val: string | number | Date): string | number {
+    let time: number;
     switch (typeof val) {
         case 'number':
             time = val;
@@ -7,7 +7,7 @@ export function TimeSince (val: string | number | Date): string | number {
             time = +new Date(val);
         break;
             case 'object':
-        if (val.constructor === Date) time = val.getTime();
+        if (val.constructor === Date) {time = val.getTime();}
             break;
         default:
             time = +new Date();
@@ -29,12 +29,12 @@ export function TimeSince (val: string | number | Date): string | number {
         [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
         [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
     ];
-    let seconds = (+new Date() - time) / 1000
-    let token: string = 'ago'
-    let list_choice: number = 1;
+    let seconds = (+new Date() - time) / 1000;
+    let token = 'ago';
+    let list_choice = 1;
 
-    if (seconds == 0) {
-        return 'Just now'
+    if (seconds === 0) {
+        return 'Just now';
     }
     if (seconds < 0) {
         seconds = Math.abs(seconds);
@@ -42,14 +42,14 @@ export function TimeSince (val: string | number | Date): string | number {
         list_choice = 2;
     }
     let i = 0;
-    let format: (string | number)[]
+    let format: (string | number)[];
+  // eslint-disable-next-line no-cond-assign
     while (format = time_formats[i++])
-        if (seconds < format[0]) {
+        {if (seconds < format[0]) {
         if (typeof format[2] == 'string')
-            return format[list_choice];
+            {return format[list_choice];}
         else
-            return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
-        }
+            {return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;}
+        }}
     return time;
 }
-  

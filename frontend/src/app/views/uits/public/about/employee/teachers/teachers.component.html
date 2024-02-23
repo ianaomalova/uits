@@ -1,0 +1,104 @@
+<h1>Преподавательский состав кафедры</h1>
+
+<div class="btn-add__item font-size-lg" (click)="onCreateTeacher()">
+  <i class="feather icon-plus-square"></i>
+</div>
+<div *ngIf="(teacher$ | async).length !== 0; else loading">
+  <div class="row">
+    <div *ngFor="let employee of teacher$ | async" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-4">
+      <div class="card position-relative" style="width: 18rem;">
+        <img src="https://mesto56.ru/oc-content/plugins/avatar_free/avatar/180_avatar.png"
+             class="card-img-top mx-auto mt-4 mx-5 rounded-circle"
+             alt="...">
+        <div class="card-body">
+          <h4 class="card-title text-center">{{employee.last_name}} {{employee.first_name}} {{employee.patronymic}}</h4>
+          <p class="card-text text-center">{{employee.degree ? employee.position + ',' : employee.position}} {{employee.rank ? employee.degree + ',' : employee.degree}} {{employee.rank}}</p>
+        </div>
+        <div class="overlay">
+          <app-crud-action
+          [item]="employee"
+          (edit)="onEditPost($event)"
+          (delete)="onDeleteTeacher($event)"
+        ></app-crud-action>
+          <div class="overlay-content">
+            <img src="https://mesto56.ru/oc-content/plugins/avatar_free/avatar/180_avatar.png"
+             class="card-img-top mx-auto mx-5 rounded-circle"
+             alt="...">
+            <!-- Здесь размещаете дополнительную информацию о сотруднике -->
+            <p>Дополнительная информация о сотруднике <br><b>{{employee.last_name}} {{employee.first_name}} {{employee.patronymic}}</b></p>
+            <button class="btn btn-info" (click)="printInfo(employee)">Подробнее</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #loading>
+  <h3>Сотрудников пока нет</h3>
+</ng-template>
+
+<ng-template #createTeacherModal bsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Добавить преподавателя</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div>
+        <form [formGroup]="createTeacherForm" (validSubmit)="onSubmit()">
+          <div class="form-group mb-3" [customErrorMessages]="customLastNameMessages">
+            <label class="control-label">Фамилия</label>
+            <input type="text" class="form-control" formControlName="last_name">
+          </div>
+          <div class="form-group mb-3" [customErrorMessages]="customFirstNameMessages">
+            <label class="control-label">Имя</label>
+            <input type="text" class="form-control" formControlName="first_name">
+          </div>
+          <div class="form-group mb-3">
+            <label class="control-label">Отчество</label>
+            <input type="text" class="form-control" formControlName="patronymic">
+          </div>
+          <div class="form-group mb-3" [customErrorMessages]="customPositionMessages">
+            <label class="control-label">Должность</label>
+            <input type="text" class="form-control" formControlName="position">
+          </div>
+          <div class="form-group mb-3">
+            <label class="control-label">Ученая степень</label>
+            <input type="text" class="form-control" formControlName="degree">
+          </div>
+          <div class="form-group mb-3">
+            <label class="control-label">Звание</label>
+            <input type="text" class="form-control" formControlName="rank">
+          </div>
+          <div class="form-group mb-3">
+            <label class="control-label">Описание</label>
+            <textarea type="text" class="form-control" formControlName="bio"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-info" type="submit">Добавить</button>
+            <button class="btn btn-outline-secondary" (click)="closeForm()">Отменить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #deleteTeacherModal bsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Вы уверены, что хотите удалить преподавателя {{chosenTeacher.last_name}} {{chosenTeacher.first_name}} {{chosenTeacher.patronymic}}?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex gap-2">
+      <button class="btn btn-danger" (click)="deleteTeacherConfirm()">Удалить</button>
+      <button class="btn btn-outline-secondary" (click)="modalRef.hide()">Отменить</button>
+    </div>
+  </div>
+</ng-template>

@@ -13,10 +13,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, HostBinding } from '
 })
 export class ColumnPanelComponent implements OnInit {
 
-    @Input() panelWidth: number = 300
-    @Input() borderRight: boolean = false
-    @Input() borderLeft: boolean = false
-    @Input() isMobileActive: boolean
+    @Input() panelWidth = 300;
+    @Input() borderRight = false;
+    @Input() borderLeft = false;
+    @Input() isMobileActive: boolean;
 
     @HostBinding('style.max-width') maxWidth: string;
     @HostBinding('style.min-width') minWidth: string;
@@ -25,8 +25,8 @@ export class ColumnPanelComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-        this.maxWidth = `${this.panelWidth}px`
-        this.minWidth = `${this.panelWidth}px`
-        this.left = `-${this.panelWidth}px`
+        this.maxWidth = `${this.panelWidth}px`;
+        this.minWidth = `${this.panelWidth}px`;
+        this.left = `-${this.panelWidth}px`;
     }
 }

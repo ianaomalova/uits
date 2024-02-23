@@ -13,8 +13,8 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class AppLayoutComponent implements OnInit {
 
-    @Select((state: { app: AppConfig; }) => state.app) app$: Observable<AppConfig>;
-    
+    @Select((state: { app: AppConfig }) => state.app) app$: Observable<AppConfig>;
+
     layout: LayoutType;
     subscription: Subscription;
 
@@ -23,12 +23,12 @@ export class AppLayoutComponent implements OnInit {
 
     ngOnInit() {
         this.subscription = this.app$.subscribe(app => {
-            this.layout = app.layoutType
+            this.layout = app.layoutType;
             this.cdr.detectChanges();
         });
     }
 
     ngOnDestroy(){
-        this.subscription.unsubscribe()
+        this.subscription.unsubscribe();
     }
 }

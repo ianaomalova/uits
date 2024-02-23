@@ -1,17 +1,17 @@
 import {
-	Component, 
+	Component,
 	ElementRef,
-	OnDestroy, 
+	OnDestroy,
 	Renderer2,
-	Input, 
-	Output, 
+	Input,
+	Output,
 	EventEmitter,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef
-} from '@angular/core'
-import { DocumentWrapper } from './dropdown.service'
+} from '@angular/core';
+import { DocumentWrapper } from './dropdown.service';
 
-type MenuAlignmentType = 'left' | 'right'
+type MenuAlignmentType = 'left' | 'right';
 
 @Component({
 	selector: 'dropdown-menu',
@@ -36,8 +36,8 @@ export class DropdownMenu implements OnDestroy {
 	documentResizeListener: any;
 
     @Input() appendTo: any;
-    @Input() dropdownMenuClass: string = '';
-    @Input() alignment: MenuAlignmentType = 'left'
+    @Input() dropdownMenuClass = '';
+    @Input() alignment: MenuAlignmentType = 'left';
 	@Output() onShow: EventEmitter<any> = new EventEmitter();
     @Output() onHide: EventEmitter<any> = new EventEmitter();
 
@@ -45,26 +45,26 @@ export class DropdownMenu implements OnDestroy {
 
 	toggle(event) {
 		if (this.visible)
-			this.hide();
+			{this.hide();}
 		else
-			this.show(event);
+			{this.show(event);}
 		this.preventDocDefault = true;
 	}
 
 	hide() {
         this.visible = false;
-        this.onOverlayHide()
-        this.onHide.emit({})
+        this.onOverlayHide();
+        this.onHide.emit({});
         this.cd.markForCheck();
 	}
-	
+
 	show(event) {
         this.target = event.currentTarget;
         this.visible = true;
         this.preventDocDefault = true;
         this.bindDocClickListener();
         this.bindDocResizeListener();
-        this.onShow.emit({})
+        this.onShow.emit({});
         this.cd.markForCheck();
 	}
 
@@ -80,14 +80,14 @@ export class DropdownMenu implements OnDestroy {
             this.docClickListener = null;
         }
 	}
-	
+
 	unbindDocResizeListener() {
         if (this.documentResizeListener) {
             window.removeEventListener('resize', this.documentResizeListener);
             this.documentResizeListener = null;
         }
 	}
-	
+
 	bindDocClickListener() {
         if (!this.docClickListener) {
             const documentTarget: any = this.el ? this.el.nativeElement.ownerDocument : 'document';
@@ -100,23 +100,23 @@ export class DropdownMenu implements OnDestroy {
             });
         }
     }
-    
+
     bindDocResizeListener() {
         this.documentResizeListener = this.onWindowResize.bind(this);
         window.addEventListener('resize', this.documentResizeListener);
 	}
-	
+
 	onWindowResize() {
         this.hide();
     }
-	
+
 	onOverlayHide() {
         this.unbindDocClickListener();
         this.unbindDocResizeListener();
         this.preventDocDefault = false;
         this.target = null;
     }
-	
+
 	ngOnDestroy() {
         this.restoreOverlayAppend();
         this.onOverlayHide();

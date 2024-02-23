@@ -11,7 +11,7 @@ import { Error2Component } from './error-2/error-2.component';
         Error1Component,
         Error2Component
     ],
-    imports: [ 
+    imports: [
         ErrorsRoutingModule,
         SharedModule,
         LogoModule,

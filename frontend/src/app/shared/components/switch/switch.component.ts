@@ -1,15 +1,15 @@
 import {
-    Component, 
-    Input, 
-    Output, 
-    EventEmitter, 
-    ElementRef, 
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ElementRef,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
     ViewChild,
     forwardRef
-} from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'switch',
@@ -29,7 +29,7 @@ export class SwitchComponent implements ControlValueAccessor {
     @Input() name: string;
     @Input() disabled: boolean;
     @Input() inputId: string;
-    @Input() inline: boolean = false;
+    @Input() inline = false;
     @ViewChild('switch') el: ElementRef;
     @Output() onChange: EventEmitter<any> = new EventEmitter();
     public onModelChange: Function = () => {};
@@ -76,7 +76,7 @@ export class SwitchComponent implements ControlValueAccessor {
         this.onModelTouched();
     }
 
-    writeValue(checked: any) : void {
+    writeValue(checked: any): void {
         this.checked = checked;
         this.cd.markForCheck();
     }
@@ -88,7 +88,7 @@ export class SwitchComponent implements ControlValueAccessor {
     registerOnTouched(fn: Function): void {
         this.onModelTouched = fn;
     }
-    
+
     setDisabledState(val: boolean): void {
         this.disabled = val;
         this.cd.markForCheck();

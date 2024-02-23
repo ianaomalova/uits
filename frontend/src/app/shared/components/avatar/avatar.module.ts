@@ -6,8 +6,8 @@ import { AvatarComponent } from './avatar.component';
     declarations: [
         AvatarComponent
     ],
-    imports: [ 
-        CommonModule 
+    imports: [
+        CommonModule
     ],
     exports: [
         AvatarComponent

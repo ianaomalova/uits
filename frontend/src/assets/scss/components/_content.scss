@@ -39,7 +39,7 @@
         .content-min-height {
             min-height: calc(100vh - #{$header-nav-height} - #{$layout-content-gutter} - #{$layout-content-gutter} - #{$footer-height} - 2px);
         }
-        
+
         .content-max-height {
             max-height: calc(100vh - #{$header-nav-height} - #{$layout-content-gutter} - #{$layout-content-gutter} - #{$footer-height} - 2px);
         }
@@ -48,11 +48,11 @@
 
 .horizontal-layout {
     .content {
-        margin-top: $header-nav-height;
-        
-        @include screen-laptop-above {
-            margin-top: $header-nav-height + $header-navbar-height;
-        }
+        margin-top: $header-nav-height + $header-navbar-height;
+
+        //@include screen-laptop-above {
+        //    margin-top: $header-nav-height + $header-navbar-height;
+        //}
 
         .main {
             padding: $layout-content-gutter 0;
@@ -61,7 +61,7 @@
         .content-min-height {
             min-height: calc(100vh - #{$header-nav-height} - #{$header-navbar-height} - #{$layout-content-gutter} - #{$layout-content-gutter} - #{$footer-height} - 2px);
         }
-        
+
         .content-max-height {
             max-height: calc(100vh - #{$header-nav-height} - #{$header-navbar-height} - #{$layout-content-gutter} - #{$layout-content-gutter} - #{$footer-height} - 2px);
         }

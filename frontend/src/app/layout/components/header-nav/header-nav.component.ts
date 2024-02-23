@@ -1,7 +1,7 @@
-import { 
-    Component, 
+import {
+    Component,
     ChangeDetectionStrategy,
-    ViewEncapsulation, 
+    ViewEncapsulation,
     OnInit,
     Input,
     HostBinding
@@ -23,23 +23,23 @@ import { ColorContrast } from '@app/shared/utils/ColorContrast';
 })
 export class HeaderNavComponent implements OnInit {
 
-    @Input() layoutType: LayoutType
-    @Input() collapse: boolean
-    @Input() isMobile: boolean
-    @Input()@HostBinding('style.background-color') color: string = '#ffffff'
+    @Input() layoutType: LayoutType;
+    @Input() collapse: boolean;
+    @Input() isMobile: boolean;
+    @Input()@HostBinding('style.background-color') color = '#ffffff';
 
-    logoColor: 'light' | 'dark'
+    logoColor: 'light' | 'dark';
 
     @HostBinding('class') get headingClass() {
-        const color = ColorContrast(this.color)
-        this.logoColor = color
-        return `header-text-${color}`
+        const color = ColorContrast(this.color);
+        this.logoColor = color;
+        return `header-text-${color}`;
     }
 
 
     constructor() { }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
     }
 }
 

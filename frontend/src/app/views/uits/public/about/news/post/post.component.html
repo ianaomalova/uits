@@ -1,0 +1,46 @@
+<ng-container *ngIf="!isMobile">
+  <ng-container *ngTemplateOutlet="desktop"></ng-container>
+</ng-container>
+<ng-container *ngIf="isMobile">
+  <ng-container *ngTemplateOutlet="mobile"></ng-container>
+</ng-container>
+
+<ng-template #desktop>
+  <div class="d-grid gap-3">
+    <div class="row gap-3">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <div *ngIf="(post$ | async) as post" class="">
+          <h1>{{ post.title }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row gap-3">
+      <div class="col-3">
+        <app-post-info [post]="post$"></app-post-info>
+      </div>
+      <div class="col-6">
+        <app-post-content [post]="post$"></app-post-content>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #mobile>
+  <div class="d-grid gap-3">
+    <div class="row">
+      <div class="col">
+        <div *ngIf="(post$ | async) as post" class="">
+          <h1>{{ post.title }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <app-post-info [post]="post$"></app-post-info>
+    </div>
+    <div class="row">
+      <app-post-content [post]="post$"></app-post-content>
+    </div>
+  </div>
+</ng-template>
