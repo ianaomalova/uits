@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 import environ
@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 # Load db environment variables
-environ.Env.read_env(BASE_DIR / 'db.local.env')
+environ.Env.read_env(BASE_DIR / os.environ.get('DB_ENVIRONMENT_FILE', 'db.local.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
