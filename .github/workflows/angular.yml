@@ -15,14 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: cd ./frontend
     - uses: actions/checkout@v3
     - name: Use Node.js 16
       uses: actions/setup-node@v3
       with:
         node-version: 16
         cache: 'npm'
-        working-directory: ./frontend
-    - run: cd ./frontend
     - run: npm ci
     # - run: npm audit --audit-level=critical
     - run: npm run build-prod
