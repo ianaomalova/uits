@@ -19,8 +19,10 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd ${{ secrets.APPLICATION_PATH }}
-          git checkout {{ secrets.DEPLOY_BRANCH }}
+          git checkout master
           git pull
           cd ./backend
           source ./venv/bin/activate
-          python manage.py migrate
+          pip3.10 install -r requirements.txt
+          python3.10 manage.py migrate
+          systemctl restart uits
