@@ -1,0 +1,26 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "master", "workflow" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd ${{ secrets.APPLICATION_PATH }}
+          git checkout {{ secrets.DEPLOY_BRANCH }}
+          git pull
+          cd ./backend
+          source ./venv/bin/activate
+          python manage.py migrate
