@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.conf import settings
-from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFit
+from imagekit.models import ImageSpecField, ProcessedImageField
+from imagekit.processors import ResizeToFit, Resize
 from django_quill.fields import QuillField
 
 User = get_user_model()
@@ -13,8 +13,13 @@ class Post(models.Model):
     title = models.CharField(max_length=100, verbose_name="Заголовок", default="")
     short_description = models.TextField(max_length=280)
 
-    preview_image = models.ImageField(verbose_name="Превью фото", upload_to="photos/%Y/%m/%d",
-                                      default=settings.BASE_DIR / "photos/default.jpg")
+    preview_image = ProcessedImageField(
+        verbose_name="Превью фото",
+        upload_to="photos/%Y/%m/%d",
+        processors=[ResizeToFit(800)],  # Указываем только максимальную ширину
+        format='JPEG',
+        options={'quality': 60}
+    )
     preview_thumbnail = ImageSpecField(source="preview_image",
                                        processors=[ResizeToFit(240)],
                                        format='JPEG',

@@ -1,5 +1,5 @@
 <div class="mb-3" *ngIf="(post | async) as post">
-  <img class="mb-1" src="{{post.previewImage}}" alt="{{post.previewImageDescription}}">
+  <img class="mb-1 img-fluid" src="{{post.previewImage}}" alt="{{post.previewImageDescription}}">
   <p style="font-size: .75rem">{{post.previewImageDescription}}</p>
 </div>
 
@@ -17,7 +17,7 @@
       {{ post.author.firstName }} {{ post.author.lastName }}
     </div>
     <div class="more" style="z-index: 50">
-      <a [routerLink]="getReturnURL()">Вернуться</a>
+      <a [routerLink]="getReturnURL()">{{ 'NAV.RETURN' | translate }}</a>
     </div>
   </div>
 </div>

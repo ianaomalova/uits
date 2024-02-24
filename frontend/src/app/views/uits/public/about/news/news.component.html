@@ -12,17 +12,17 @@
 
   <div class="d-flex"
   >
-    <h1>Новости</h1>
-    <div *ngIf="(profile.isModerator || profile.isSuperuser) && isEditable"
-         class="d-flex align-items-center ms-3 cursor-pointer btn-hover"
-         (click)="onCreatePost()"
-    >
-      <i class="feather icon-plus-circle"
-         [ngStyle]="{
-       fontSize: '1.5rem'
-       }"></i>
-      <span class="ms-2" [ngStyle]="{paddingTop: '1px'}">Создать новость</span>
-    </div>
+    <h1>{{'NEWS.TITLE' | translate}}</h1>
+<!--    <div *ngIf="(profile.isModerator || profile.isSuperuser) && isEditable"-->
+<!--         class="d-flex align-items-center ms-3 cursor-pointer btn-hover"-->
+<!--         (click)="onCreatePost()"-->
+<!--    >-->
+<!--      <i class="feather icon-plus-circle"-->
+<!--         [ngStyle]="{-->
+<!--       fontSize: '1.5rem'-->
+<!--       }"></i>-->
+<!--      <span class="ms-2" [ngStyle]="{paddingTop: '1px'}">Создать новость</span>-->
+<!--    </div>-->
   </div>
 </ng-template>
 

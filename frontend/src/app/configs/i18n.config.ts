@@ -3,4 +3,4 @@ export const supportedLanguages = {
     en_US: 'English'
 };
 
-export const defaultLanguge = localStorage.getItem('lang') ||  Object.keys(supportedLanguages)[0];
+export const defaultLanguge = localStorage.getItem('uits_lang') ||  Object.keys(supportedLanguages)[0];

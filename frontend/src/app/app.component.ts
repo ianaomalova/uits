@@ -3,8 +3,8 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Select } from '@ngxs/store';
 import { AppConfig } from '@app/shared/types/app-config.interface';
 import { Observable, Subscription } from 'rxjs';
-import { en_US } from './i18n/en/index';
-import { ru_RU } from './i18n/ru/index';
+import { en_US } from '@app/i18n/en';
+import { ru_RU } from '@app/i18n/ru';
 
 const storageKey = 'uits_lang';
 

@@ -51,4 +51,6 @@ export class PostComponent implements OnInit {
       this.post$.next(post);
     });
   }
+
+  protected readonly PagesConfig = PagesConfig;
 }

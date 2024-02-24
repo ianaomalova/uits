@@ -8,7 +8,12 @@
 <ng-template #desktop>
   <div class="d-grid gap-3">
     <div class="row gap-3">
-      <div class="col-3"></div>
+      <div class="col-3 d-flex align-items-center">
+        <div class="more" style="z-index: 50">
+          {{ 'NAV.ABOUT' | translate }} /
+          <a [routerLink]="PagesConfig.about.news">{{ 'NEWS.TITLE' | translate }}</a>
+        </div>
+      </div>
       <div class="col-6">
         <div *ngIf="(post$ | async) as post" class="">
           <h1>{{ post.title }}</h1>

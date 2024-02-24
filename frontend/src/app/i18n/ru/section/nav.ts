@@ -84,5 +84,10 @@ export const nav = {
       SCIENTIFIC_WORK:'Научная работа',
       CONFERENCES:'Конференции'
     },
+    PROFILE: {
+      PROFILE: 'Личный кабинет',
+      SIGN_OUT: 'Выход'
+    },
+    RETURN: 'Вернуться'
   }
 };

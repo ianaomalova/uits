@@ -4,7 +4,7 @@
             (click)="navProfile.toggle($event)">
     <div class="toggle-wrapper d-flex align-items-center">
       <avatar [size]="35" src="/assets/images/avatars/thumb-1.jpg"></avatar>
-      <span class="fw-bold mx-1">{{profile.username}}</span>
+      <span class="fw-bold mx-1">{{ profile.firstName ?? profile.username }} {{ profile.firstName ? profile.lastName : '' }}</span>
       <i class="feather icon-chevron-down"></i>
     </div>
     <dropdown-menu #navProfile alignment="right">
@@ -12,8 +12,9 @@
         <div class="d-flex align-items-center">
           <avatar src="/assets/images/avatars/thumb-1.jpg"></avatar>
           <div class="d-flex flex-column ms-1">
-            <span class="fw-bold text-dark">{{profile.firstName}} {{profile.lastName}}</span>
-            <span class="font-size-sm">{{profile.email}}</span>
+            <span
+              class="fw-bold text-dark">{{ profile.firstName }} {{ profile.lastName }}</span>
+            <span class="font-size-sm">{{ profile.email }}</span>
           </div>
         </div>
       </div>
@@ -21,7 +22,7 @@
          (click)="router.navigateByUrl(menuItem.path)">
         <div class="d-flex align-items-center gap-2">
           <i class="font-size-lg" [ngClass]="menuItem.icon"></i>
-          <span>{{menuItem.item}}</span>
+          <span>{{ menuItem.item }}</span>
         </div>
       </a>
     </dropdown-menu>
