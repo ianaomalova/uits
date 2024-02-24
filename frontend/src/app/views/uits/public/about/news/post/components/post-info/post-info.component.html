@@ -8,7 +8,7 @@
   <div class="post-info">
     <div class="post-info-author">{{post.author.firstName + " " + post.author.lastName}}</div>
     <hr>
-    <div class="post-info-created-at text-uppercase">{{getDateFromString(post.createdAt) | dfnsFormat: 'd MMMM yyyy, HH:mm:ss':{ locale } }}</div>
+    <div class="post-info-created-at">{{getDateFromString(post.createdAt) | dfnsFormat: 'd MMMM yyyy, HH:mm:ss':{ locale } }}</div>
     <hr>
   </div>
 </ng-template>

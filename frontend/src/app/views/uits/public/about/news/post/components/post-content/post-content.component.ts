@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NewsService} from "@app/views/uits/public/about/news/news.service";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {Router} from "@angular/router";
@@ -13,10 +13,11 @@ import {BehaviorSubject} from "rxjs";
   templateUrl: './post-content.component.html',
   styleUrls: ['./post-content.component.scss']
 })
-export class PostContentComponent implements OnInit {
+export class PostContentComponent implements OnInit, AfterViewInit {
   modalRef: BsModalRef;
   changePermission: Permission = Permission.MODERATOR;
   @Input() post: BehaviorSubject<Post>;
+  @Input() returnTo: string;
   @ViewChild('deleteConfirmModal') deleteConfirmModal;
   @ViewChild('editPostModal') editPostModal;
 
@@ -26,10 +27,15 @@ export class PostContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.returnTo)
   }
 
+  ngAfterViewInit(): void {
+    console.log(this.returnTo)
 
-  getPost(){
+  }
+
+  getPost() {
     return this.post.getValue();
   }
 
@@ -62,7 +68,7 @@ export class PostContentComponent implements OnInit {
   }
 
   getReturnURL() {
-    return PagesConfig.about.news;
+    return this.returnTo;
   }
 
 

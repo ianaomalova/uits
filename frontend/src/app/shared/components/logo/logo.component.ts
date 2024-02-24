@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import {PagesConfig} from "@app/configs/pages.config";
 
 @Component({
     selector: 'logo',
@@ -37,4 +38,6 @@ export class LogoComponent implements OnInit {
         const logoUrl = `${urlPrefix}${chain.join('-')}.png`;
         return logoUrl;
     }
+
+  protected readonly PagesConfig = PagesConfig;
 }

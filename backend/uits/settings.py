@@ -163,19 +163,40 @@ QUILL_CONFIGS = {
     'default': {
         'theme': 'snow',
         'modules': {
-            'syntax': True,
+            'syntax': True,  # Включает подсветку синтаксиса, требует подключения Highlight.js
             'toolbar': [
-                [
-                    {'font': []},
-                    {'header': []},
-                    {'align': []},
-                    'bold', 'italic', 'underline', 'strike', 'blockquote',
-                    {'color': []},
-                    {'background': []},
-                ],
-                ['code-block', 'link'],
-                ['clean'],
-            ]
+                ['bold', 'italic', 'underline', 'strike'],  # жирный, курсив, подчеркнутый, зачеркнутый
+                ['blockquote', 'code-block'],  # блок цитирования, блок кода
+
+                [{'header': 1}, {'header': 2}],  # Заголовки разного уровня
+                [{'list': 'ordered'}, {'list': 'bullet'}],  # Нумерованный и маркированный списки
+                [{'script': 'sub'}, {'script': 'super'}],  # Нижний и верхний индексы
+                [{'indent': '-1'}, {'indent': '+1'}],  # Изменение отступа
+                [{'direction': 'rtl'}],  # Направление текста справа налево
+
+                [{'size': ['small', False, 'large', 'huge']}],  # Размер текста
+                [{'header': [1, 2, 3, 4, 5, 6, False]}],  # Заголовки
+
+                [{'color': []}, {'background': []}],  # Выбор цвета текста и фона
+                [{'font': []}],  # Выбор шрифта
+                [{'align': []}],  # Выравнивание текста
+
+                ['link', 'image', 'video', 'formula'],  # Вставка ссылок, изображений, видео, формул
+                ['clean']  # Удаление форматирования
+            ],
+            "imageCompressor": {
+                "quality": 0.8,
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "imageType": "image/jpeg",
+                "debug": False,
+                "suppressErrorLogging": True,
+            },
+            # quill-resize
+            "resize": {
+                "showSize": True,
+                "locale": {},
+            },
         }
     }
 }

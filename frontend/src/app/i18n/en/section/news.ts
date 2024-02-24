@@ -1,5 +1,8 @@
 export const news = {
   NEWS: {
-    TITLE: 'News'
+    TITLE: 'News',
+    ANNOUNCEMENTS: {
+      TITLE: "Announcements"
+    }
   }
 }

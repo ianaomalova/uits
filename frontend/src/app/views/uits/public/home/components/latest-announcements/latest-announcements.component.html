@@ -1,0 +1,60 @@
+<!--CONTENT-->
+<div class="mb-3">
+  <ng-container [ngTemplateOutlet]="titlePage"></ng-container>
+</div>
+<ng-container *ngIf="!isMobile">
+  <ng-container *ngTemplateOutlet="desktop"></ng-container>
+</ng-container>
+<ng-container *ngIf="isMobile">
+  <ng-container *ngTemplateOutlet="mobile"></ng-container>
+</ng-container>
+
+<!--CONTENT END-->
+
+
+<!--TEMPLATES-->
+<ng-template #titlePage>
+  <p class="fs-2 fw-bold">{{ 'HOME.LATEST_ANNOUNCEMENTS.TITLE' | translate }}</p>
+</ng-template>
+
+
+<ng-template #desktop>
+  <div class="row">
+    <ng-container *ngFor="let post of posts$ | async">
+      <ng-container *ngTemplateOutlet="announcementCard;context:{post}"></ng-container>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #mobile>
+  <ng-container *ngFor="let post of posts$ | async">
+    <div class="row mb-3">
+      <ng-container *ngTemplateOutlet="announcementCard;context:{post}"></ng-container>
+    </div>
+  </ng-container>
+</ng-template>
+
+
+<ng-template
+  #announcementCard
+
+  let-post="post"
+>
+  <div class="col">
+    <a [routerLink]="getPostUrl(post.id)" class="d-flex align-items-center">
+      <div class="pe-3">
+        <img src="{{post.previewThumbnail}}" class="rounded-circle"
+             alt="idk what this is image"
+             style="width: 60px; height: 60px;">
+      </div>
+      <div>
+        <div class="text-muted" style="font-size: 0.75rem;">{{ post.createdAt | timeFromDate }}</div>
+        <div style="font-size: 0.875rem;">{{ post.title }}</div>
+        <div class="text-muted" style="font-size: 0.75rem;">
+          <i class="fas fa-newspaper"></i> {{ post.author.firstName + " " + post.author.lastName }}
+        </div>
+      </div>
+    </a>
+  </div>
+</ng-template>
+

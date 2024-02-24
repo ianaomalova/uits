@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import PostAPIViewSet
+from .views import PostAPIViewSet, AnnouncementAPIViewSet
 
 urlpatterns = [
     path('posts/', PostAPIViewSet.as_view({
@@ -8,8 +8,13 @@ urlpatterns = [
         'post': 'create'
     })),
     path('posts/<int:pk>', PostAPIViewSet.as_view({
-        'delete': 'destroy',
-        'patch': 'partial_update',
+        'get': 'retrieve'
+    })),
+    path('announcements/', AnnouncementAPIViewSet.as_view({
+        'get': 'list',
+        'post': 'create'
+    })),
+    path('announcements/<int:pk>', AnnouncementAPIViewSet.as_view({
         'get': 'retrieve'
     }))
 ]

@@ -8,6 +8,10 @@ import {DepartmentComponent} from '@app/views/uits/public/about/documents/depart
 import {UniversityComponent} from '@app/views/uits/public/about/documents/university/university.component';
 import {ContactsComponent} from '@app/views/uits/public/about/contacts/contacts.component';
 import {PostComponent} from '@app/views/uits/public/about/news/post/post.component';
+import {
+  AnnouncementPostComponent
+} from "@app/views/uits/public/about/announcements/announcement-post/announcement-post.component";
+import {AnnouncementsComponent} from "@app/views/uits/public/about/announcements/announcements.component";
 
 const routes: Routes = [
   {
@@ -15,6 +19,12 @@ const routes: Routes = [
   },
   {
     path: 'news/:id', component: PostComponent
+  },
+  {
+    path: 'announcements', component: AnnouncementsComponent
+  },
+  {
+    path: 'announcements/:id', component: AnnouncementPostComponent
   },
   {
     path: 'employee/teachers', component: TeachersComponent

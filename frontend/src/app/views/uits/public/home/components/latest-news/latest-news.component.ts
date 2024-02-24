@@ -8,39 +8,24 @@ import {Profile} from "@app/shared/types/models/auth";
 import {BehaviorSubject} from "rxjs";
 import {ModalDirection} from "@app/shared/types/modal-direction";
 import {PagesConfig} from "@app/configs/pages.config";
+import {ResizableComponent} from "@app/shared/components/base/resizable.component";
 
 @Component({
   selector: 'home-latest-news',
   templateUrl: './latest-news.component.html',
   styleUrls: ['./latest-news.component.scss']
 })
-export class LatestNewsComponent implements OnInit {
+export class LatestNewsComponent extends ResizableComponent implements OnInit {
 
   @Input() title = 'Новости'
-  @Input() isEditable: boolean = true
 
-
-  @ViewChild('createPostModal') createPostModal;
-  @ViewChild('deleteConfirmModal') deleteConfirmModal;
-  @ViewChild('editPostModal') editPostModal;
-
-  isMobile: boolean;
 
   constructor(private newsService: NewsService) {
-
-    this.isMobile = window.innerWidth < 992;
+    super();
   }
 
   get posts$(): BehaviorSubject<ListPost[]> {
     return this.newsService.posts$;
-  }
-
-  @HostListener('window:resize', ['$event']) onWindowResize(event) {
-    if (event.target.innerWidth < 992) {
-      this.isMobile = true;
-    } else {
-      this.isMobile = false;
-    }
   }
 
   post(id: number) {

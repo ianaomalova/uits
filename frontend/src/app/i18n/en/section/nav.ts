@@ -86,6 +86,7 @@ export const nav = {
     },
     "PROFILE": {
       "PROFILE": "Profile",
+      "ADMIN": "Admin Panel",
       "SIGN_OUT": "Sign Out"
     },
     "RETURN": "Return"

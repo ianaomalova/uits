@@ -17,8 +17,7 @@ import {ru} from 'date-fns/locale';
 export class NewsComponent implements OnInit {
   modalRef: BsModalRef;
 
-  @Input() title = 'Новости'
-  @Input() isEditable: boolean = true
+  title = 'Новости'
 
   locale = ru;
   createPostTitle = '';

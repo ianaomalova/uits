@@ -21,6 +21,8 @@ import {DateFormatter} from "@amcharts/amcharts4/core";
 import {DateFnsModule} from "ngx-date-fns";
 import { PostContentComponent } from './news/post/components/post-content/post-content.component';
 import { PostInfoComponent } from './news/post/components/post-info/post-info.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
+import { AnnouncementPostComponent } from './announcements/announcement-post/announcement-post.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { PostInfoComponent } from './news/post/components/post-info/post-info.co
         PostComponent,
         PostContentComponent,
         PostInfoComponent,
+        AnnouncementsComponent,
+        AnnouncementPostComponent,
     ],
     exports: [
         PostActionsComponent,

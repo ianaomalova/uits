@@ -34,7 +34,7 @@
           <i class="feather icon-user me-3"></i>{{ post.author.firstName + " " + post.author.lastName }}
         </div>
         <div class="d-block text-white">
-          <div class="font-monospace fs-6 text-uppercase">{{ post.createdAt | date: 'dd.MM.YYYY' }}</div>
+          <div class="font-monospace fs-6 text-uppercase">{{ post.createdAt | timeFromDate }}</div>
           <div class="fs-4 fw-bold">{{ post.title }}</div>
         </div>
       </div>

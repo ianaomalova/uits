@@ -5,6 +5,8 @@ export const PagesConfig = {
   },
   home: '/home',
   about: {
-    news: '/about/news/'
-  }
+    news: '/about/news/',
+    announcements: '/about/announcements/'
+  },
+  admin: "/admin"
 };

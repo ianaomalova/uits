@@ -11,7 +11,7 @@
       <div class="col-3 d-flex align-items-center">
         <div class="more" style="z-index: 50">
           {{ 'NAV.ABOUT' | translate }} /
-          <a [routerLink]="PagesConfig.about.news">{{ 'NEWS.TITLE' | translate }}</a>
+          <a [routerLink]="PagesConfig.about.announcements">{{ 'NEWS.ANNOUNCEMENTS.TITLE' | translate }}</a>
         </div>
       </div>
       <div class="col-6">
@@ -25,7 +25,7 @@
         <app-post-info [post]="post$"></app-post-info>
       </div>
       <div class="col-6">
-        <app-post-content [post]="post$" [returnTo]="PagesConfig.about.news"></app-post-content>
+        <app-post-content [post]="post$" [returnTo]="PagesConfig.about.announcements"></app-post-content>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
       <app-post-info [post]="post$"></app-post-info>
     </div>
     <div class="row">
-      <app-post-content [post]="post$" [returnTo]="PagesConfig.about.news"></app-post-content>
+      <app-post-content [post]="post$" [returnTo]="PagesConfig.about.announcements"></app-post-content>
     </div>
   </div>
 </ng-template>

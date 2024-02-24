@@ -1,5 +1,5 @@
 import {Snaked, SnakeObjectToCamelCase} from '@app/shared/utils/SnakeToCamelCase';
-import {Profile} from '@app/shared/types/models/auth';
+import {createAnonymousProfile, Profile} from '@app/shared/types/models/auth';
 import {string} from "@amcharts/amcharts4/core";
 import {id} from "@swimlane/ngx-datatable";
 
@@ -29,15 +29,7 @@ abstract class BasePost implements IPost {
     try {
       this.author = SnakeObjectToCamelCase(post.author);
     } catch (e) {
-      this.author = {
-        firstName: '',
-        lastName: '',
-        username: '',
-        email: '',
-        isModerator: false,
-        isSuperuser: false,
-        isAnonymous: true
-      };
+      this.author = createAnonymousProfile();
     }
   }
 }

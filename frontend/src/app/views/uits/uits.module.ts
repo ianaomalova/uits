@@ -17,6 +17,7 @@ import { LatestNewsComponent } from './public/home/components/latest-news/latest
 import {ModalModule} from "ngx-bootstrap/modal";
 import {QuillEditorComponent} from "ngx-quill";
 import {SharedModule} from "@app/shared/shared.module";
+import { LatestAnnouncementsComponent } from './public/home/components/latest-announcements/latest-announcements.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import {SharedModule} from "@app/shared/shared.module";
     SpecialitiesComponent,
     DissertationsComponent,
     LatestNewsComponent,
+    LatestAnnouncementsComponent,
   ],
     imports: [
         CommonModule,

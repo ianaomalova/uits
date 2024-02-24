@@ -16,8 +16,8 @@
     <div class="date">
       {{ post.author.firstName }} {{ post.author.lastName }}
     </div>
-    <div class="more" style="z-index: 50">
-      <a [routerLink]="getReturnURL()">{{ 'NAV.RETURN' | translate }}</a>
+    <div class="more" style="z-index: 50" *ngIf="returnTo">
+      <a [routerLink]="returnTo">{{ 'NAV.RETURN' | translate }}</a>
     </div>
   </div>
 </div>

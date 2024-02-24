@@ -9,7 +9,7 @@ from .serializers import PostSerializer, CreatePostSerializer, ListPostSerialize
 
 # Create your views here.
 class PostAPIViewSet(ModelViewSet):
-    queryset = Post.objects.filter(display=True).order_by('-created_at')
+    queryset = Post.objects.filter(display=True, post_type=Post.PostType.NEWS).order_by('-created_at')
     serializer_class = PostSerializer
     permission_classes = [IsModerator]
 
@@ -30,3 +30,7 @@ class PostAPIViewSet(ModelViewSet):
                 return CreatePostSerializer
             case _:
                 return self.serializer_class
+
+
+class AnnouncementAPIViewSet(PostAPIViewSet):
+    queryset = Post.objects.filter(display=True, post_type=Post.PostType.ANNOUNCEMENT).order_by('-created_at')
