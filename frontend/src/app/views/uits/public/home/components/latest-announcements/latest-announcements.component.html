@@ -2,13 +2,14 @@
 <div class="mb-3">
   <ng-container [ngTemplateOutlet]="titlePage"></ng-container>
 </div>
-<ng-container *ngIf="!isMobile">
-  <ng-container *ngTemplateOutlet="desktop"></ng-container>
+<ng-container *ngIf="(posts$ | async).length !== 0; else empty">
+  <ng-container *ngIf="!isMobile">
+    <ng-container *ngTemplateOutlet="desktop"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="isMobile">
+    <ng-container *ngTemplateOutlet="mobile"></ng-container>
+  </ng-container>
 </ng-container>
-<ng-container *ngIf="isMobile">
-  <ng-container *ngTemplateOutlet="mobile"></ng-container>
-</ng-container>
-
 <!--CONTENT END-->
 
 
@@ -58,3 +59,8 @@
   </div>
 </ng-template>
 
+<ng-template #empty>
+  <div class="d-flex justify-content-center">
+    <span>{{ 'HOME.LATEST_ANNOUNCEMENTS.EMPTY' | translate }}</span>
+  </div>
+</ng-template>
