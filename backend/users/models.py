@@ -3,6 +3,7 @@ from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 
+
 class User(AbstractUser):
     avatar = ProcessedImageField(
         verbose_name="Аватар пользователя",
@@ -12,7 +13,7 @@ class User(AbstractUser):
         options={'quality': 90},
         null=True,
         blank=True,
-        default=True
+        default=None
     )
     is_moderator = models.BooleanField(default=False)
 
