@@ -1,4 +1,5 @@
-from rest_framework import status
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -12,11 +13,13 @@ class TeacherAPIViewSet(ModelViewSet):
     queryset = Teacher.objects.all().order_by('last_name', 'first_name', 'patronymic')
     serializer_class = TeacherSerializer
 
-    # Permission
+    @action(detail=True, methods=['POST'], url_path='schedule')
+    def import_schedule(self, request, *args, **kwargs):
+        employee: Teacher = self.get_object()
+        file: InMemoryUploadedFile = request.FILES['file']
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        print(employee, file)
+        print(request.data)
+        employee.import_schedule(file)
+        # return Response(employee.import_schedule(file))
+        return Response(status=200)

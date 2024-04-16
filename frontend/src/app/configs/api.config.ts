@@ -11,7 +11,13 @@ export const ApiConfig = {
       announcements: 'api/department/news/announcements/'
     },
     employee: {
-      teacher: 'api/department/employee/teachers/'
+      teacher: {
+        info: 'api/department/employee/teachers/',
+        schedule: {
+          import: (id: number) => `api/department/employee/teachers/${id}/schedule/import`,
+          retrieve: (id: number) => `api/department/employee/teachers/${id}/schedule`,
+        }
+      }
     }
   }
 };

@@ -3,9 +3,11 @@ import {EmployeeService} from "@app/views/uits/public/about/employee/employee.se
 import {IEmployee} from "@app/shared/types/models/employee";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {ModalDirection} from "@app/shared/types/modal-direction";
-import {string} from "@amcharts/amcharts4/core";
-import {FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ErrorMessage} from "ng-bootstrap-form-validation";
+import {TeacherRank} from "@app/views/uits/public/about/employee/teachers/teachers.models";
+import {Router} from "@angular/router";
+import {PagesConfig} from "@app/configs/pages.config";
 
 @Component({
   selector: 'app-teachers',
@@ -50,7 +52,8 @@ export class TeachersComponent implements OnInit {
 
   constructor(private employeeService: EmployeeService,
               private modalService: BsModalService,
-              private formBuilder: UntypedFormBuilder) {
+              private formBuilder: UntypedFormBuilder,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -68,10 +71,6 @@ export class TeachersComponent implements OnInit {
 
   teacher(id: number) {
     return this.teacher$.getValue().find(p => p.id === id);
-  }
-
-  printInfo(employee: IEmployee) {
-    console.log(employee);
   }
 
   onCreateTeacher() {
@@ -129,5 +128,13 @@ export class TeachersComponent implements OnInit {
   closeForm() {
     this.onReset();
     this.modalRef.hide();
+  }
+
+  basePositions: TeacherRank[] = [
+    TeacherRank.Assistant, TeacherRank.Teacher, TeacherRank.HighTeacher, TeacherRank.Reader, TeacherRank.Proffesor
+  ];
+
+  moveToEmployee(id: number) {
+    this.router.navigate([PagesConfig.about.employee.teachers, id]);
   }
 }

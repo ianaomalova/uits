@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 
 import {AboutRoutingModule} from './about-routing.module';
 import {PostActionsComponent} from './news/post-actions/post-actions.component';
@@ -16,35 +16,59 @@ import {modules} from '@app/configs/quill.config';
 import {SharedModule} from '@app/shared/shared.module';
 import {NgBootstrapFormValidationModule} from 'ng-bootstrap-form-validation';
 import {CrudActionModule} from "@app/shared/components/crud-action/crud-action.module";
-import { PostComponent } from './news/post/post.component';
-import {DateFormatter} from "@amcharts/amcharts4/core";
+import {PostComponent} from './news/post/post.component';
 import {DateFnsModule} from "ngx-date-fns";
-import { PostContentComponent } from './news/post/components/post-content/post-content.component';
-import { PostInfoComponent } from './news/post/components/post-info/post-info.component';
-import { AnnouncementsComponent } from './announcements/announcements.component';
-import { AnnouncementPostComponent } from './announcements/announcement-post/announcement-post.component';
+import {PostContentComponent} from './news/post/components/post-content/post-content.component';
+import {PostInfoComponent} from './news/post/components/post-info/post-info.component';
+import {AnnouncementsComponent} from './announcements/announcements.component';
+import {AnnouncementPostComponent} from './announcements/announcement-post/announcement-post.component';
+import {NgSelectModule} from "@ng-select/ng-select";
+import {TeacherComponent} from './employee/teachers/teacher/teacher.component';
+import {
+  CalendarDateFormatter,
+  CalendarModule,
+  CalendarNativeDateFormatter,
+  DateAdapter,
+  DateFormatterParams
+} from "angular-calendar";
+import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
+import {ScheduleComponent} from './employee/teachers/teacher/components/schedule/schedule.component';
 
+class CustomDateFormatter extends CalendarNativeDateFormatter {
+
+  public dayViewHour({date, locale}: DateFormatterParams): string {
+    // change this to return a different date format
+    return new Intl.DateTimeFormat(locale).format(date);
+  }
+
+  // public weekViewTitle({date, locale, weekStartsOn, excludeDays, daysInWeek,}: DateFormatterParams): string {
+  //   );
+  // }
+
+}
 
 @NgModule({
-    declarations: [
-        ContactsComponent,
-        DepartmentComponent,
-        UniversityComponent,
-        PostActionsComponent,
-        NewsComponent,
-        FieldsOfStudyComponent,
-        TeachersComponent,
-        UVPComponent,
-        PostComponent,
-        PostContentComponent,
-        PostInfoComponent,
-        AnnouncementsComponent,
-        AnnouncementPostComponent,
-    ],
-    exports: [
-        PostActionsComponent,
-        NewsComponent,
-    ],
+  declarations: [
+    ContactsComponent,
+    DepartmentComponent,
+    UniversityComponent,
+    PostActionsComponent,
+    NewsComponent,
+    FieldsOfStudyComponent,
+    TeachersComponent,
+    UVPComponent,
+    PostComponent,
+    PostContentComponent,
+    PostInfoComponent,
+    AnnouncementsComponent,
+    AnnouncementPostComponent,
+    TeacherComponent,
+    ScheduleComponent,
+  ],
+  exports: [
+    PostActionsComponent,
+    NewsComponent,
+  ],
   imports: [
     CommonModule,
     AboutRoutingModule,
@@ -57,7 +81,16 @@ import { AnnouncementPostComponent } from './announcements/announcement-post/ann
     SharedModule,
     NgBootstrapFormValidationModule,
     CrudActionModule,
-    DateFnsModule
+    DateFnsModule,
+    NgSelectModule,
+    NgOptimizedImage,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
+  ],
+  providers: [
+    {provide: CalendarDateFormatter, useClass: CustomDateFormatter}
   ]
 })
 export class AboutModule {

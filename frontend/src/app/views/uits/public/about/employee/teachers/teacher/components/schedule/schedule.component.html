@@ -1,0 +1,32 @@
+<ng-container *ngIf="teacher">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-container>
+
+
+<ng-template #content>
+  <h2 class="mb-3">Расписание</h2>
+  <div class="mb-3">
+    <ng-container *ngTemplateOutlet="actionPanel"></ng-container>
+  </div>
+  <div>
+
+    <mwl-calendar-week-view
+      [viewDate]="getViewDate()"
+      [events]="getEvents()"
+      locale="ru"
+      weekStartsOn="1"
+      dayStartHour="8"
+      dayEndHour="23"
+    >
+
+    </mwl-calendar-week-view>
+  </div>
+</ng-template>
+
+
+<ng-template #actionPanel>
+  <input #inputSchedulePDF type="file" accept="application/pdf" (change)="onScheduleFileSelected($event); inputSchedulePDF.value = ''" hidden>
+  <button class="btn btn-info" (click)="inputSchedulePDF.click();">
+    Импорт расписания
+  </button>
+</ng-template>

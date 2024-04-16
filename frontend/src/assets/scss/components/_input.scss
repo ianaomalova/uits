@@ -1,13 +1,19 @@
 @use "sass:math";
 .form-control {
 	font-weight: 500;
-	
+
 	&.no-validation-icon {
 		&.is-invalid,
 		&.is-valid {
 			background-image: none;
 		}
 	}
+
+  &.no-success-icon-validation {
+    &.is-valid {
+      background-image: none;
+    }
+  }
 
 	&.no-success-validation {
 		&.is-valid {
@@ -29,15 +35,15 @@
 .input-group {
 
     > .dropdown {
-        &:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu), 
+        &:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu),
         &.dropdown-toggle:nth-last-child(n+3) {
-                
+
             >.btn {
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
             }
         }
-    } 
+    }
 }
 
 .input-affix {
@@ -53,7 +59,7 @@
 		z-index: 1;
 		line-height: $line-height-base;
 		color: $input-placeholder-color;
-		
+
 		@include transform(translateY(-50%));
 	}
 

@@ -12,6 +12,7 @@ import {
   AnnouncementPostComponent
 } from "@app/views/uits/public/about/announcements/announcement-post/announcement-post.component";
 import {AnnouncementsComponent} from "@app/views/uits/public/about/announcements/announcements.component";
+import {TeacherComponent} from "@app/views/uits/public/about/employee/teachers/teacher/teacher.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,9 @@ const routes: Routes = [
   },
   {
     path: 'employee/teachers', component: TeachersComponent
+  },
+  {
+    path: 'employee/teachers/:id', component: TeacherComponent
   },
   {
     path: 'employee/uvp', component: UVPComponent

@@ -1,0 +1,16 @@
+<ng-container *ngIf="teacher$ | async as teacher; else loading">
+  <h2>Персональная информация</h2>
+  <div>
+    <img [ngSrc]="teacher.avatar"
+         class="card-img rounded-circle"
+         alt="{{teacher.last_name + ' ' + teacher.first_name + ' ' + teacher.patronymic}}">
+    <p><b>Полное имя</b>: {{teacher.last_name}} {{teacher.first_name}} {{teacher.patronymic}}</p>
+    <p><b>Должность</b>: {{teacher.position}}</p>
+    <p><b>Ученая степень</b>: {{teacher.degree}}</p>
+    <p><b>Ученая звание</b>: {{teacher.rank}}</p>
+  </div>
+<app-schedule [teacher]="teacher"></app-schedule>
+</ng-container>
+<ng-template #loading>
+
+</ng-template>

@@ -11,5 +11,8 @@ urlpatterns = [
         'get': 'retrieve',
         'delete': 'destroy',
         'patch': 'partial_update'
+    })),
+    path('teachers/<int:pk>/schedule/import', TeacherAPIViewSet.as_view({
+        'post': 'import_schedule'
     }))
 ]
