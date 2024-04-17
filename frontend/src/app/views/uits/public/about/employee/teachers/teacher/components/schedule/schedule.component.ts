@@ -2,6 +2,8 @@ import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {IEmployee} from "@app/shared/types/models/employee";
 import {CalendarEvent} from "angular-calendar";
 import {EmployeeService} from "@app/views/uits/public/about/employee/employee.service";
+import {BehaviorSubject} from "rxjs";
+import {Schedule} from "@app/shared/types/models/schedule";
 
 @Component({
   selector: 'app-schedule',
@@ -14,19 +16,34 @@ export class ScheduleComponent implements OnInit {
 
   selectedScheduleFile: File = null;
 
-  constructor(private employeeService: EmployeeService) { }
+  schedule: BehaviorSubject<Schedule>;
 
-  ngOnInit(): void {
+  viewDate: Date;
+
+  constructor(private employeeService: EmployeeService) {
+    this.schedule = new BehaviorSubject<Schedule>(null);
+
+    this.setViewDate();
   }
 
-  getViewDate() {
-    const now = new Date();
+  ngOnInit(): void {
+    this.employeeService.retrieveSchedule(this.teacher.id).subscribe(schedule => {
+      console.log(schedule.days)
+      this.schedule.next(schedule);
+    })
+  }
 
-    return now;
+  setViewDate() {
+    this.viewDate = new Date();
   }
 
   getEvents(): CalendarEvent[] {
-    return [];
+    const schedule = this.schedule.getValue();
+    if (!schedule) return [];
+
+    const events = schedule.toCalendarEvents();
+    console.log("CalendarEvents", events)
+    return events;
   }
 
   onScheduleFileSelected($event: Event) {
@@ -36,7 +53,7 @@ export class ScheduleComponent implements OnInit {
 
     this.employeeService.importSchedule(this.teacher.id, this.selectedScheduleFile).subscribe(
       response => {
-        console.log(response)
+        // console.log(response)
       }
     )
 

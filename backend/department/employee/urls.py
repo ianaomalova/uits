@@ -14,5 +14,8 @@ urlpatterns = [
     })),
     path('teachers/<int:pk>/schedule/import', TeacherAPIViewSet.as_view({
         'post': 'import_schedule'
+    })),
+    path('teachers/<int:pk>/schedule', TeacherAPIViewSet.as_view({
+        'get': 'retrieve_schedule',
     }))
 ]

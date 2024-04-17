@@ -2,8 +2,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
-
-from .schedule.import_schedule import parse_schedule
+from department.employee.schedule.models import Schedule
 
 
 # Create your models here.
@@ -32,4 +31,5 @@ class Teacher(models.Model):
         return self.first_name + " " + self.last_name + " " + self.patronymic
 
     def import_schedule(self, file: InMemoryUploadedFile):
-        data = parse_schedule(file)
+        Schedule.objects.import_from_file(self.id, file)
+

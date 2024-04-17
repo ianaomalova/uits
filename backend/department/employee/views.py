@@ -1,9 +1,11 @@
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Teacher
+from .schedule.serializers import ScheduleSerializer
 from .serializers import TeacherSerializer
 
 
@@ -15,11 +17,18 @@ class TeacherAPIViewSet(ModelViewSet):
 
     @action(detail=True, methods=['POST'], url_path='schedule')
     def import_schedule(self, request, *args, **kwargs):
-        employee: Teacher = self.get_object()
+        teacher: Teacher = self.get_object()
         file: InMemoryUploadedFile = request.FILES['file']
 
-        print(employee, file)
+        print(teacher, file)
         print(request.data)
-        employee.import_schedule(file)
+        teacher.import_schedule(file)
         # return Response(employee.import_schedule(file))
         return Response(status=200)
+
+    @action(detail=True, methods=['get'], url_path='schedule')
+    def retrieve_schedule(self, request, *args, **kwargs):
+        teacher: Teacher = self.get_object()
+        serializer = ScheduleSerializer(teacher.schedule)
+        return Response(serializer.data)
+

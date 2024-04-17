@@ -1,66 +1,9 @@
-from enum import IntEnum
 from typing import Optional, List
 
 import pdfplumber
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-
-class LessonTimes(IntEnum):
-    FIRST = 1
-    SECOND = 2
-    THIRD = 3
-    FOURTH = 4
-    FIFTH = 5
-    SIXTH = 6
-    SEVENTH = 7
-    EIGHTH = 8
-
-    @staticmethod
-    def from_name(name: str) -> 'LessonTimes':
-        name = name.lower()
-        match name:
-            case '8:30 - 10:10':
-                return LessonTimes.FIRST
-            case '10:20 - 12:00':
-                return LessonTimes.SECOND
-            case '12:20 - 14:00':
-                return LessonTimes.THIRD
-            case '14:10 - 15:50':
-                return LessonTimes.FOURTH
-            case '16:00 - 17:40':
-                return LessonTimes.FIFTH
-            case '18:00 - 19:30':
-                return LessonTimes.SIXTH
-            case '19:40 - 21:10':
-                return LessonTimes.SEVENTH
-            case '21:20 - 22:50':
-                return LessonTimes.EIGHTH
-
-
-class LessonWeekNumbers(IntEnum):
-    MONDAY = 1
-    TUESDAY = 2
-    WEDNESDAY = 3
-    THURSDAY = 4
-    FRIDAY = 5
-    SATURDAY = 6
-
-    @staticmethod
-    def from_name(name: str) -> 'LessonWeekNumbers':
-        name = name.lower()
-        match name:
-            case 'понедельник':
-                return LessonWeekNumbers.MONDAY
-            case 'вторник':
-                return LessonWeekNumbers.TUESDAY
-            case 'среда':
-                return LessonWeekNumbers.WEDNESDAY
-            case 'четверг':
-                return LessonWeekNumbers.THURSDAY
-            case 'пятница':
-                return LessonWeekNumbers.FRIDAY
-            case 'суббота':
-                return LessonWeekNumbers.SATURDAY
+from department.employee.schedule.pydantic_models import LessonTimes, LessonWeekNumbers
 
 
 def parse_schedule(in_memory: InMemoryUploadedFile):
@@ -170,14 +113,14 @@ def __parse_date(raw_date: str):
     dates = []
     for date in date_list:
         period = False
-        every_two_weeks = False
+        alternatively = False
         period_value = None
         if "к.н." in date:
             period = True
             period_value = "к.н."
         elif "ч.н." in date:
             period = True
-            every_two_weeks = True
+            alternatively = True
             period_value = "ч.н."
         if period:
             date = date.replace(period_value, '').strip()
@@ -185,7 +128,7 @@ def __parse_date(raw_date: str):
             date = {
                 "start": start,
                 "end": end,
-                "odd": every_two_weeks
+                "alternatively": alternatively
             }
         dates.append(date)
     return dates

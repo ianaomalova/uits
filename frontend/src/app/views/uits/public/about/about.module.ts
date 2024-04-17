@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule, formatDate, NgOptimizedImage} from '@angular/common';
 
 import {AboutRoutingModule} from './about-routing.module';
 import {PostActionsComponent} from './news/post-actions/post-actions.component';
@@ -33,17 +33,23 @@ import {
 } from "angular-calendar";
 import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 import {ScheduleComponent} from './employee/teachers/teacher/components/schedule/schedule.component';
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu);
+
 
 class CustomDateFormatter extends CalendarNativeDateFormatter {
 
   public dayViewHour({date, locale}: DateFormatterParams): string {
     // change this to return a different date format
-    return new Intl.DateTimeFormat(locale).format(date);
+    // return new Intl.DateTimeFormat(locale).format(date);
+    return formatDate(date, 'HH:mm', locale);
   }
 
-  // public weekViewTitle({date, locale, weekStartsOn, excludeDays, daysInWeek,}: DateFormatterParams): string {
-  //   );
-  // }
+  public weekViewHour({ date, locale }: DateFormatterParams): string {
+    return this.dayViewHour({ date, locale });
+  }
 
 }
 

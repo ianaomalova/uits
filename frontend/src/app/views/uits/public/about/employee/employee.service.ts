@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {ApiConfig} from "@app/configs/api.config";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {IEmployee} from "@app/shared/types/models/employee";
+import {Schedule} from "@app/shared/types/models/schedule";
 
 @Injectable({
   providedIn:'root'
@@ -42,5 +43,13 @@ export class EmployeeService {
     formData.append('file', scheduleFile, scheduleFile.name);
 
     return this.http.post(ApiConfig.department.employee.teacher.schedule.import(id), formData);
+  }
+
+
+  retrieveSchedule(id: number): Observable<Schedule> {
+    return this.http.get<Schedule>(ApiConfig.department.employee.teacher.schedule.retrieve(id))
+      .pipe(
+        map(rawSchedule => Schedule.fromResponse(rawSchedule))
+      )
   }
 }
