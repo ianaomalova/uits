@@ -1,0 +1,25 @@
+.cal-time-secondary {
+  font-weight: 400;
+}
+
+.cal-event-description {
+  color: #000;
+  font-size: 10px;
+  line-height: 20px;
+  white-space: normal;
+  flex: 1;
+}
+
+
+.cal-event-title-lesson {
+  line-height: 20px;
+  white-space: normal; /* позволяет тексту переходить на новую строку */
+  height: 2em; /* задаем высоту блока в две строки текста */
+  overflow: hidden;
+  max-height: 3em;
+  flex: 1;
+}
+
+.pre-line {
+  white-space: pre-line;
+}

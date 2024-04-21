@@ -1,4 +1,5 @@
 import {CalendarEvent} from "angular-calendar";
+import {addWeeks} from "date-fns";
 
 export enum WeekNumbers {
   MONDAY = 1,
@@ -147,23 +148,60 @@ export class Schedule {
       for (const classTime of day.classTimes) {
         for (const lesson of classTime.lessons) {
           for (const date of lesson.dates) {
-            let event: CalendarEvent;
 
             const startMonth = parseInt(date.startDate.split('.')[1])
             const startDay = parseInt(date.startDate.split('.')[0])
 
             if (date.isPeriod) {
+              const endMonth = parseInt(date.endDate.split('.')[1])
+              const endDay = parseInt(date.endDate.split('.')[0])
+
+              const startPeriodDate = new Date(now.getFullYear(), startMonth - 1, startDay)
+              const endPeriodDate = new Date(now.getFullYear(), endMonth - 1, endDay)
+              let iterFromStart = startPeriodDate;
+              console.log("----------", lesson.name)
+              console.log("start", startPeriodDate)
+              console.log("end", endPeriodDate)
+              while (iterFromStart <= endPeriodDate) {
+                console.log("iterFromStart", iterFromStart, iterFromStart.getMonth(), iterFromStart.getDate());
+                const id = `${day.id}_${classTime.id}_${lesson.id}_${date.id}_period_${iterFromStart.getMonth()}.${iterFromStart.getDate()}`;
+
+                events.push({
+                  id: id,
+                  title: lesson.name,
+                  start: new Date(now.getFullYear(), iterFromStart.getMonth(), iterFromStart.getDate(), classTime.getHourStart(), classTime.getMinuteStart(), 0),
+                  end: new Date(now.getFullYear(), iterFromStart.getMonth(), iterFromStart.getDate(), classTime.getHourEnd(), classTime.getMinuteEnd(), 0),
+                  color: {
+                    primary: "#11a1fd",
+                    secondary: "#e8e4f5"
+                  },
+                  meta: {
+                    id: lesson.id,
+                    group: lesson.group,
+                    cabinet: lesson.cabinet,
+                    type: lesson.type,
+                    subgroup: lesson.subgroup
+                  }
+                })
+
+                iterFromStart = addWeeks(iterFromStart, (date.alternativelyPeriod) ? 2 : 1);
+              }
 
             } else {
-              event = {
+              events.push({
                 id: `${day.id}_${classTime.id}_${lesson.id}_${date.id}`,
                 title: lesson.name,
                 start: new Date(now.getFullYear(), startMonth - 1, startDay, classTime.getHourStart(), classTime.getMinuteStart(), 0),
                 end: new Date(now.getFullYear(), startMonth - 1, startDay, classTime.getHourEnd(), classTime.getMinuteEnd(), 0),
-
-              }
+                meta: {
+                  id: lesson.id,
+                  group: lesson.group,
+                  cabinet: lesson.cabinet,
+                  type: lesson.type,
+                  subgroup: lesson.subgroup
+                }
+              })
             }
-            if (event) events.push(event);
           }
         }
       }

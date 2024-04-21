@@ -29,15 +29,6 @@ class ScheduleManager(models.Manager):
             all_class_times.extend(class_times)
         ScheduleClassTime.objects.bulk_create(all_class_times)
 
-        # all_class_times_parts = []
-        # for day in days.all():
-        #     parsed_day = parsed_data[day.week_number]
-        #     for class_time in day.class_times.all():
-        #         parsed_class_time = parsed_day[class_time.class_number]
-        #         time_parts = class_time.time_part_for_bulk_save(time_parts_count=len(parsed_class_time))
-        #         all_class_times_parts.extend(time_parts)
-        # ScheduleClassTimePart.objects.bulk_create(all_class_times_parts)
-
         all_lessons_with_dates = []
 
         all_lessons_dates = []
@@ -62,7 +53,6 @@ class ScheduleManager(models.Manager):
         lessons: List[ScheduleLesson] = ScheduleLesson.objects.bulk_create(
             list(map(lambda o: o[0], all_lessons_with_dates)))
 
-        print(lessons)
 
         for i in range(len(all_lessons_with_dates)):
             lesson = lessons[i]
@@ -81,5 +71,6 @@ class ScheduleManager(models.Manager):
                         alternatively_period=parsed_date["alternatively"] if period else False
                     )
                 )
+
 
         ScheduleLessonDate.objects.bulk_create(all_lessons_dates)

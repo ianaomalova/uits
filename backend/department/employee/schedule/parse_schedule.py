@@ -100,7 +100,7 @@ def __parse_extra(raw_extra):
     extra = {}
     for item in raw_extra:
         item = item.replace('.', '').strip()
-        if "(" in item and ")" in item:
+        if "(" in item and ")" in item and item[item.index("(") + 1].isupper():
             extra['subgroup'] = item
             continue
         else:
@@ -109,21 +109,20 @@ def __parse_extra(raw_extra):
 
 
 def __parse_date(raw_date: str):
-    date_list = [elem.strip() for elem in raw_date.split(',')]
+    date_list: List[str] = [elem.strip() for elem in raw_date.split(',')]
     dates = []
     for date in date_list:
+        date = (date.encode("utf-8", errors="replace").decode("utf-8", errors="replace")
+                .replace("\x00", ""))
         period = False
         alternatively = False
-        period_value = None
-        if "к.н." in date:
+        if "к" in date and "н" in date:
             period = True
-            period_value = "к.н."
-        elif "ч.н." in date:
+        elif "ч" in date and "н" in date:
             period = True
             alternatively = True
-            period_value = "ч.н."
         if period:
-            date = date.replace(period_value, '').strip()
+            date = date.split(" ")[0]
             start, end = date.split('-')
             date = {
                 "start": start,

@@ -10,7 +10,7 @@ class ScheduleLessonDateSerializer(serializers.ModelSerializer):
 
 
 class ScheduleLessonSerializer(serializers.ModelSerializer):
-    dates = ScheduleLessonDateSerializer(many=True, read_only=True)
+    dates = ScheduleLessonDateSerializer(many=True)
 
     class Meta:
         model = ScheduleLesson
@@ -18,7 +18,7 @@ class ScheduleLessonSerializer(serializers.ModelSerializer):
 
 
 class ScheduleClassTimeSerializer(serializers.ModelSerializer):
-    lessons = ScheduleLessonSerializer(many=True, read_only=True)
+    lessons = ScheduleLessonSerializer(many=True)
 
     class Meta:
         model = ScheduleClassTime
@@ -26,7 +26,7 @@ class ScheduleClassTimeSerializer(serializers.ModelSerializer):
 
 
 class ScheduleDaySerializer(serializers.ModelSerializer):
-    class_times = ScheduleClassTimeSerializer(many=True, read_only=True)
+    class_times = ScheduleClassTimeSerializer(many=True)
 
     class Meta:
         model = ScheduleDay
@@ -34,7 +34,7 @@ class ScheduleDaySerializer(serializers.ModelSerializer):
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
-    days = ScheduleDaySerializer(many=True, read_only=True)
+    days = ScheduleDaySerializer(many=True)
 
     class Meta:
         model = Schedule

@@ -1,4 +1,4 @@
-<ng-container *ngIf="schedule | async">
+<ng-container>
   <ng-container *ngTemplateOutlet="content"></ng-container>
 </ng-container>
 
@@ -8,7 +8,7 @@
   <div class="mb-3">
     <ng-container *ngTemplateOutlet="actionPanel"></ng-container>
   </div>
-  <div>
+  <div *ngIf="schedule | async">
 
     <mwl-calendar-week-view
       #view
@@ -16,22 +16,89 @@
       [events]="getEvents()"
       locale="ru"
       weekStartsOn="1"
+      [excludeDays]="[0,7]"
       dayStartHour="8"
-      dayStartMinute="30"
-      dayEndHour="23"
-      [hourSegments]="2"
+      dayEndHour="22"
+      [eventTitleTemplate]="eventTitleTemplate"
+      dayEndMinute="50"
+      [hourSegments]="3"
       [hourSegmentTemplate]="weekViewHourSegment"
     >
     </mwl-calendar-week-view>
   </div>
 </ng-template>
 
-
-<ng-template #tooltipEvent>
-  <div>
+<ng-template
+  #eventTemplate
+  let-weekEvent="weekEvent"
+  let-tooltipPlacement="tooltipPlacement"
+  let-eventClicked="eventClicked"
+  let-tooltipTemplate="tooltipTemplate"
+  let-tooltipAppendToBody="tooltipAppendToBody"
+  let-tooltipDisabled="tooltipDisabled"
+  let-tooltipDelay="tooltipDelay"
+  let-column="column"
+  let-daysInWeek="daysInWeek"
+>
+  <div
+    class="cal-event"
+    [ngStyle]="{
+          color: weekEvent.event.color?.secondaryText,
+          backgroundColor: weekEvent.event.color?.secondary,
+          borderColor: weekEvent.event.color?.primary
+        }"
+    [mwlCalendarTooltip]="
+          !tooltipDisabled
+            ? (weekEvent.event.title
+              | calendarEventTitle
+                : 'weekTooltip'
+                : weekEvent.tempEvent || weekEvent.event)
+            : ''
+        "
+    [tooltipPlacement]="tooltipPlacement"
+    [tooltipEvent]="weekEvent.tempEvent || weekEvent.event"
+    [tooltipTemplate]="tooltipTemplate"
+    [tooltipAppendToBody]="tooltipAppendToBody"
+    [tooltipDelay]="tooltipDelay"
+    (mwlClick)="eventClicked.emit({ sourceEvent: $event })"
+    (mwlKeydownEnter)="eventClicked.emit({ sourceEvent: $event })"
+    tabindex="0"
+    role="application"
+    [attr.aria-label]="
+          { event: weekEvent.tempEvent || weekEvent.event, locale: 'ru' }
+            | calendarA11y : 'eventDescription'
+        "
+  >
+    <mwl-calendar-event-title
+      [event]="weekEvent.tempEvent || weekEvent.event"
+      [customTemplate]="eventTitleTemplate"
+      [view]="daysInWeek === 1 ? 'day' : 'week'"
+    >
+    </mwl-calendar-event-title>
 
   </div>
 </ng-template>
+
+
+<ng-template #eventTitleTemplate let-event="event" let-view="view">
+  <div class="d-flex flex-column">
+    <div
+      class="cal-event-title cal-event-title-lesson"
+      [innerHTML]="event.title | calendarEventTitle : view : event"
+      [attr.aria-hidden]="{} | calendarA11y : 'hideEventTitle'"
+    >
+    </div>
+
+    <div class="cal-event-description">
+      <p>
+        Группа: {{ event.meta.group }} {{ event.meta.subgroup }} <br>
+        Кабинет: {{ event.meta.cabinet }}
+      </p>
+
+    </div>
+  </div>
+</ng-template>
+
 
 <ng-template
   #weekViewHourSegment
@@ -44,46 +111,72 @@
     class="cal-hour-segment"
     [style.height.px]="segmentHeight"
     [class.cal-hour-start]="segment.isStart"
-    [class.cal-after-hour-start]="!segment.isStart"
+
     [ngClass]="segment.cssClass"
   >
-    <div class="cal-time" *ngIf="isTimeLabel">
+    <div class="cal-time" *ngIf="isTimeLabel" [ngClass]="{
+        'cal-time-secondary' : !(segment.date | calendarDate: 'weekViewHour').endsWith('00')
+    }">
       {{ segment.date | calendarDate: 'weekViewHour':locale }}
     </div>
   </div>
 </ng-template>
 <ng-template #actionPanel>
-  <div>
-  <input #inputSchedulePDF type="file" accept="application/pdf"
-         (change)="onScheduleFileSelected($event); inputSchedulePDF.value = ''" hidden>
-  <button class="btn btn-info" (click)="inputSchedulePDF.click();">
-    Импорт расписания
-  </button>
-  </div>
+  <div class="d-flex flex-column gap-3">
 
-  <div class="btn-group">
-    <div
-      class="btn btn-primary"
-      mwlCalendarPreviousView
-      view="week"
-      [(viewDate)]="viewDate"
-    >
-      Previous
+    <div class="d-flex flex-column gap-1">
+
+      <div class="fw-semibold">
+        Администрирование
+      </div>
+
+      <div class="d-flex gap-3">
+        <button class="btn btn-primary">Редактировать</button>
+
+        <div>
+          <input #inputSchedulePDF type="file" accept="application/pdf"
+                 (change)="onScheduleFileSelected($event); inputSchedulePDF.value = ''" hidden>
+          <button class="btn btn-info" (click)="inputSchedulePDF.click();">
+            Импорт расписания
+          </button>
+        </div>
+      </div>
     </div>
-    <div
-      class="btn btn-outline-secondary"
-      mwlCalendarToday
-      [(viewDate)]="viewDate"
-    >
-      Today
-    </div>
-    <div
-      class="btn btn-primary"
-      mwlCalendarNextView
-      view="week"
-      [(viewDate)]="viewDate"
-    >
-      Next
+
+    <div class="d-flex flex-column gap-1"
+         [ngStyle]="{
+            'max-width': '300px'
+         }"
+         *ngIf="schedule | async">
+      <div class="fw-semibold">
+        Выбор недели
+      </div>
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+
+          view="week"
+          [(viewDate)]="viewDate"
+        >
+          Предыдущая
+        </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          Сейчас
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          view="week"
+          [(viewDate)]="viewDate"
+        >
+          Следующая
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>
