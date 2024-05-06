@@ -51,4 +51,12 @@ export class AuthService {
       })
     );
   }
+
+
+  canEdit(): Observable<boolean> {
+    return this.profile$.pipe(map(profile => {
+      console.log('This user can edit - ', profile.isModerator || profile.isSuperuser)
+      return profile.isModerator || profile.isSuperuser
+    }));
+  }
 }

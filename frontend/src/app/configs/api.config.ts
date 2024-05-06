@@ -13,11 +13,12 @@ export const ApiConfig = {
     employee: {
       teacher: {
         info: 'api/department/employee/teachers/',
+        uvp: "api/department/employee/teachers/uvp/",
         schedule: {
           import: (id: number) => `api/department/employee/teachers/${id}/schedule/import`,
           retrieve: (id: number) => `api/department/employee/teachers/${id}/schedule`,
         }
-      }
+      },
     }
   }
 };

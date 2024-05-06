@@ -1,12 +1,17 @@
 from django.urls import path
 
-from .views import TeacherAPIViewSet
+from .views import TeacherAPIViewSet, HelpersEmployeeViewSet
 
 urlpatterns = [
     path('teachers/', TeacherAPIViewSet.as_view({
         'get': 'list',
         'post': 'create'
     })),
+    path('teachers/uvp/', HelpersEmployeeViewSet.as_view({
+        'get': 'list',
+        'post': 'create'
+    })),
+
     path('teachers/<int:pk>', TeacherAPIViewSet.as_view({
         'get': 'retrieve',
         'delete': 'destroy',

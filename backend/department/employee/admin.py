@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from department.employee.models import Teacher
+from department.employee.models import Teacher, HelpersEmployee
 
 
 # Register your models here.
@@ -8,4 +8,9 @@ from department.employee.models import Teacher
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(HelpersEmployee)
+class HelpersEmployeeAdmin(admin.ModelAdmin):
     pass

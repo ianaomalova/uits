@@ -1,37 +1,39 @@
-<h1>Преподавательский состав кафедры</h1>
+<h1 class="mb-4">Преподавательский состав кафедры</h1>
 
-<div class="btn-add__item font-size-lg" (click)="onCreateTeacher()">
+<div *ngIf="authService.canEdit() | async" class="btn-add__item font-size-lg mb-4" (click)="onCreateTeacher()">
   <i class="feather icon-plus-square"></i>
 </div>
 <div *ngIf="(teacher$ | async).length !== 0; else loading">
-  <div class="row">
-    <div *ngFor="let employee of teacher$ | async" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-4">
-      <div class="card position-relative" style="width: 18rem;">
-        <img
-          [ngSrc]="(!employee.avatar)?'https://mesto56.ru/oc-content/plugins/avatar_free/avatar/180_avatar.png' : employee.avatar"
-          class="card-img-top mx-auto mt-4 mx-5 rounded-circle"
-          alt="...">
-        <div class="card-body">
-          <h4
-            class="card-title text-center">{{ employee.last_name }} {{ employee.first_name }} {{ employee.patronymic }}</h4>
-          <p
-            class="card-text text-center">{{ employee.degree ? employee.position + ',' : employee.position }} {{ employee.rank ? employee.degree + ',' : employee.degree }} {{ employee.rank }}</p>
-        </div>
-        <div class="overlay">
+  <div class="row align-center-start gap-5 flex-row">
+    <div *ngFor="let employee of teacher$ | async" class="card" style="width: 18rem; min-height: 100%">
+      <img
+        [src]="(!employee.avatar)?AVATAR_DEFAULT_URL : employee.avatar"
+        class="card-img-top mx-auto mt-4 mx-5 rounded-circle"
+        alt="...">
+      <div class="card-body">
+        <h4
+          class="card-title text-center">{{ employee.last_name }} {{ employee.first_name }} {{ employee.patronymic }}</h4>
+        <p
+          class="card-text text-center">{{ employee.degree ? employee.position + ',' : employee.position }} {{ employee.rank ? employee.degree + ',' : employee.degree }} {{ employee.rank }}</p>
+      </div>
+      <div class="overlay">
+        <div>
           <app-crud-action
             [item]="employee"
-            (edit)="onEditPost($event)"
+            [permission]="Permission.MODERATOR"
+            (edit)="onEditTeacher($event)"
             (delete)="onDeleteTeacher($event)"
           ></app-crud-action>
-          <div class="overlay-content">
-            <img ngSrc="https://mesto56.ru/oc-content/plugins/avatar_free/avatar/180_avatar.png"
-                 class="card-img-top mx-auto mx-5 rounded-circle"
-                 alt="...">
-            <!-- Здесь размещаете дополнительную информацию о сотруднике -->
-            <p>Дополнительная информация о сотруднике
-              <br><b>{{ employee.last_name }} {{ employee.first_name }} {{ employee.patronymic }}</b></p>
-            <button class="btn btn-info" (click)="moveToEmployee(employee.id)">Подробнее</button>
-          </div>
+        </div>
+        <div class="overlay-content">
+          <img
+            [src]="(!employee.avatar)?AVATAR_DEFAULT_URL: employee.avatar"
+            class="card-img-top mx-auto mx-5 rounded-circle"
+            alt="...">
+          <!-- Здесь размещаете дополнительную информацию о сотруднике -->
+          <p>Дополнительная информация о сотруднике
+            <br><b>{{ employee.last_name }} {{ employee.first_name }} {{ employee.patronymic }}</b></p>
+          <button class="btn btn-info" (click)="moveToEmployee(employee.id)">Подробнее</button>
         </div>
       </div>
     </div>
@@ -96,7 +98,8 @@
                       formControlName="bio"></textarea>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-info" type="submit">Добавить</button>
+            <button *ngIf="editFormMode === 'CREATE'" class="btn btn-info" type="submit">Добавить</button>
+            <button *ngIf="editFormMode === 'EDIT'" class="btn btn-info" type="submit">Изменить</button>
             <button class="btn btn-outline-secondary" (click)="closeForm()">Отменить</button>
           </div>
         </form>

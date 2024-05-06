@@ -3,7 +3,7 @@
 </div>
 <form [formGroup]="formGroup" (ngSubmit)="login()">
     <div class="form-group mb-3">
-        <label class="form-label">Username</label>
+        <label class="form-label">Имя пользователя</label>
         <input
             type="text"
             class="form-control no-validation-icon no-success-validation"
@@ -12,11 +12,11 @@
     </div>
     <div class="mb-3 ">
         <label class="form-label d-flex justify-content-between">
-            <span>Password</span>
-            <a class="text-primary font" href="">Forget Password?</a>
+            <span>Пароль</span>
+<!--            <a class="text-primary font" href="">Forget Password?</a>-->
         </label>
         <div class="form-group input-affix flex-column">
-            <label class="d-none">Password</label>
+            <label class="d-none">Пароль</label>
             <input
                 [type]="showPassword ? 'text' : 'password'"
                 class="form-control no-validation-icon no-success-validation"
@@ -24,11 +24,11 @@
             >
             <i
                 class="suffix-icon feather cursor-pointer text-dark"
-                [ngClass]="showPassword ? 'icon-eye-off' : 'icon-eye'"
+                [ngClass]="showPassword ? 'icon-eye' : 'icon-eye-off'"
                 (click)="onShowPasswordClick()"
             >
             </i>
         </div>
     </div>
-    <button class="btn btn-primary w-100" type="submit">Log In</button>
+    <button class="btn btn-primary w-100" type="submit">Войти</button>
 </form>

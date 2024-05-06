@@ -4,9 +4,9 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Teacher
+from .models import Teacher, HelpersEmployee
 from .schedule.serializers import ScheduleSerializer
-from .serializers import TeacherSerializer
+from .serializers import TeacherSerializer, HelpersEmployeeSerializer
 
 
 # Create your views here.
@@ -50,3 +50,8 @@ class TeacherAPIViewSet(ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         kwargs['partial'] = True
         return self.update(request, *args, **kwargs)
+
+
+class HelpersEmployeeViewSet(ModelViewSet):
+    queryset = HelpersEmployee.objects.all().order_by('last_name', 'first_name', 'patronymic')
+    serializer_class = HelpersEmployeeSerializer

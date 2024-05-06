@@ -8,6 +8,9 @@ import {ErrorMessage} from "ng-bootstrap-form-validation";
 import {TeacherRank} from "@app/views/uits/public/about/employee/teachers/teachers.models";
 import {Router} from "@angular/router";
 import {PagesConfig} from "@app/configs/pages.config";
+import {AuthService} from "@app/shared/services/auth.service";
+import {Permission} from "@app/shared/types/permission.enum";
+import {AVATAR_DEFAULT_URL} from "@app/configs/app.config";
 
 @Component({
   selector: 'app-teachers',
@@ -27,8 +30,11 @@ export class TeachersComponent implements OnInit {
   createTeacherForm: UntypedFormGroup
   modalRef: BsModalRef;
   chosenTeacher: IEmployee;
+  chosenIdTeacher: number;
   @ViewChild('createTeacherModal') createTeacherModal;
   @ViewChild('deleteTeacherModal') deleteTeacherModal;
+
+  editFormMode = 'CREATE';
 
   customLastNameMessages: ErrorMessage[] = [
     {
@@ -53,7 +59,8 @@ export class TeachersComponent implements OnInit {
   constructor(private employeeService: EmployeeService,
               private modalService: BsModalService,
               private formBuilder: UntypedFormBuilder,
-              private router: Router) {
+              private router: Router,
+              public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -74,11 +81,26 @@ export class TeachersComponent implements OnInit {
   }
 
   onCreateTeacher() {
+    this.editFormMode = 'CREATE';
+    this.createTeacherForm.reset();
     this.openModal(this.createTeacherModal);
   }
 
-  onEditPost(id: any) {
+  onEditTeacher(id: any) {
     console.log('On Edit Emit', id);
+    const teacher = this.teacher(id);
+    this.editFormMode = 'EDIT'
+    this.chosenIdTeacher = id;
+    this.createTeacherForm.setValue({
+      first_name: teacher.first_name,
+      last_name: teacher.last_name,
+      patronymic: teacher.patronymic,
+      position: teacher.position,
+      degree: teacher.degree,
+      rank: teacher.rank,
+      bio: teacher.bio
+    })
+    this.openModal(this.createTeacherModal)
   }
 
   onDeleteTeacher(id: number) {
@@ -111,14 +133,22 @@ export class TeachersComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.createTeacherForm.valid) {
-      const formData = this.createTeacherForm.value;
+    if (!this.createTeacherForm.valid) {
+      return;
+    }
+    const formData = this.createTeacherForm.value;
+
+    if (this.editFormMode === 'CREATE') {
       this.employeeService.createTeacher(formData).subscribe(res => {
         this.getAllTeachers();
       });
+    } else if (this.editFormMode === 'EDIT') {
+      this.employeeService.updateTeacher(this.chosenIdTeacher, formData).subscribe(res => {
+        this.getAllTeachers();
+      })
     }
     this.createTeacherForm.reset();
-    this.modalRef.hide();
+    this.closeForm();
   }
 
   onReset() {
@@ -137,4 +167,7 @@ export class TeachersComponent implements OnInit {
   moveToEmployee(id: number) {
     this.router.navigate([PagesConfig.about.employee.teachers, id]);
   }
+
+  protected readonly Permission = Permission;
+  protected readonly AVATAR_DEFAULT_URL = AVATAR_DEFAULT_URL;
 }

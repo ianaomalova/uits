@@ -6,12 +6,16 @@ import {IEmployee} from "@app/shared/types/models/employee";
 import {Schedule} from "@app/shared/types/models/schedule";
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
 export class EmployeeService {
   teacher$: BehaviorSubject<IEmployee[]>;
+  uvp$: BehaviorSubject<IEmployee[]>;
+
+
   constructor(private http: HttpClient) {
     this.teacher$ = new BehaviorSubject<IEmployee[]>([]);
+    this.uvp$ = new BehaviorSubject<IEmployee[]>([]);
   }
 
   getAllTeachers() {
@@ -19,22 +23,40 @@ export class EmployeeService {
     return this.http.get<IEmployee[]>(ApiConfig.department.employee.teacher.info)
       .pipe(
         map(teachers => {
-            this.teacher$.next(teachers);
-            return teachers;
+          this.teacher$.next(teachers);
+          return teachers;
         })
       )
   }
+
+  getAllEmployees(): Observable<IEmployee[]> {
+    return this.http.get<IEmployee[]>(ApiConfig.department.employee.teacher.uvp)
+      .pipe(
+        map(uvp => {
+          this.uvp$.next(uvp);
+          return uvp;
+        })
+      )
+  }
+
   createTeacher(teacher: Object) {
     return this.http.post(ApiConfig.department.employee.teacher.info, {
       ...teacher
     })
   }
 
-  deleteTeacher(id:number) {
+
+  updateTeacher(id: number, formData: any) {
+    return this.http.patch(ApiConfig.department.employee.teacher.info + id, {
+      ...formData
+    })
+  }
+
+  deleteTeacher(id: number) {
     return this.http.delete(`${ApiConfig.department.employee.teacher.info}/${id}`)
   }
 
-  retrieveTeacher(id:number): Observable<IEmployee> {
+  retrieveTeacher(id: number): Observable<IEmployee> {
     return this.http.get<IEmployee>(`${ApiConfig.department.employee.teacher.info}/${id}`);
   }
 
@@ -52,4 +74,5 @@ export class EmployeeService {
         map(rawSchedule => Schedule.fromResponse(rawSchedule))
       )
   }
+
 }

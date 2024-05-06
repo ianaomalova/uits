@@ -4,6 +4,7 @@ import {CalendarEvent} from "angular-calendar";
 import {EmployeeService} from "@app/views/uits/public/about/employee/employee.service";
 import {BehaviorSubject} from "rxjs";
 import {Schedule} from "@app/shared/types/models/schedule";
+import {AuthService} from "@app/shared/services/auth.service";
 
 @Component({
   selector: 'app-schedule',
@@ -20,7 +21,11 @@ export class ScheduleComponent implements OnInit {
 
   viewDate: Date;
 
-  constructor(private employeeService: EmployeeService) {
+  get profile() {
+    return this.authService.profile$
+  }
+
+  constructor(private employeeService: EmployeeService, private authService: AuthService) {
     this.schedule = new BehaviorSubject<Schedule>(null);
 
     this.setViewDate();
