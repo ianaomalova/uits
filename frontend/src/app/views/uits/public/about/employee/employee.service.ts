@@ -57,7 +57,7 @@ export class EmployeeService {
   }
 
   retrieveTeacher(id: number): Observable<IEmployee> {
-    return this.http.get<IEmployee>(`${ApiConfig.department.employee.teacher.info}/${id}`);
+    return this.http.get<IEmployee>(`${ApiConfig.department.employee.teacher.info}${id}`);
   }
 
   importSchedule(id: number, scheduleFile: File): Observable<any> {
