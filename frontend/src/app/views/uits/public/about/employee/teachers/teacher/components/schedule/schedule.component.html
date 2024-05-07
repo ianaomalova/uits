@@ -92,7 +92,8 @@
     <div class="cal-event-description">
       <p>
         Группа: {{ event.meta.group }} {{ event.meta.subgroup }} <br>
-        Кабинет: {{ event.meta.cabinet }}
+        Кабинет: {{ event.meta.cabinet }} <br>
+        Время: {{event.start | date: 'HH:mm' }} - {{event.end | date: 'HH:mm'}}
       </p>
 
     </div>
