@@ -48,7 +48,9 @@ LOCAL_INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'department.news.apps.NewsConfig',
     'department.employee',
-    'department.employee.schedule'
+    'department.employee.schedule',
+    'editable_pages.apps.EditablePagesConfig',
+    'events.apps.EventsConfig',
 ]
 
 # Application definition
@@ -201,3 +203,24 @@ QUILL_CONFIGS = {
         }
     }
 }
+
+# ONLY NEED FOR MIGRATION ON FIRST RUN python manage.py migrate
+# DO NOT CHANGE IT IF U DONT KNOW WHAT IT IS
+DEFAULT_EDITABLE_PAGES = [
+    'fields-of-study',
+    'contacts',
+    'documents-department',
+    'documents-university',
+    'bachelor-edu-plans',
+    'bachelor-graduate',
+    'bachelor-practices',
+    'master-edu-plans',
+    'master-graduate',
+    'master-practices',
+    'scientific-activities-conferences',
+    'scientific-activities-postgraduate-dissertations',
+    'scientific-activities-postgraduate-practices',
+    'scientific-activities-postgraduate-specialties',
+    'scientific-activities-publications',
+    'scientific-activities-scientificWork'
+]

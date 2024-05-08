@@ -35,6 +35,9 @@ import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 import {ScheduleComponent} from './employee/teachers/teacher/components/schedule/schedule.component';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import {AngularMarkdownEditorModule} from "angular-markdown-editor";
+import {MarkdownModule} from "ngx-markdown";
+import {LayoutModule} from "@app/layout/layout.module";
 
 registerLocaleData(localeRu);
 
@@ -93,7 +96,10 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    AngularMarkdownEditorModule.forRoot({iconlibrary: 'fa'}),
+    MarkdownModule.forRoot(),
+    LayoutModule,
   ],
   providers: [
     {provide: CalendarDateFormatter, useClass: CustomDateFormatter}

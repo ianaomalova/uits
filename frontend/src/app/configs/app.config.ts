@@ -14,3 +14,5 @@ export const AppConfiguration: AppConfig = {
 export const API_ENDPOINT = '/api';
 
 export const AVATAR_DEFAULT_URL = 'assets/images/avatars/avatar_default.jpg';
+
+export const UNSAVED_WARN_MESSAGE = "Внимание: Вы имеете несохраненные данные. Нажмите Отменить, чтобы вернуться и сохранить изменения, или OK чтобы уйти со страницы и потерять изменения.";

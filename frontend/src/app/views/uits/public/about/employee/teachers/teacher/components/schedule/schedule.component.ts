@@ -6,6 +6,7 @@ import {BehaviorSubject} from "rxjs";
 import {Schedule} from "@app/shared/types/models/schedule";
 import {AuthService} from "@app/shared/services/auth.service";
 
+
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',

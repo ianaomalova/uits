@@ -1,0 +1,162 @@
+<ng-container *ngTemplateOutlet="header"></ng-container>
+<ng-container *ngTemplateOutlet="content"></ng-container>
+
+
+<!--Templates-->
+
+<ng-template #header>
+  <div class="mb-4 d-md-flex align-items-center justify-content-between">
+    <div>
+      <h4>Календарь событий</h4>
+      <p>Здесь можно создать события, с последующими уведомлениями участникам</p>
+    </div>
+
+    <button class="btn btn-primary mb-3" (click)="openAddEventModal(eventModal)">
+      <i class="feather icon-plus"></i>
+      <span>Создать событие</span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #content>
+  <div class="row">
+    <tabset [justified]="true">
+      <tab heading="Календарь">
+        <div class="py-3">
+          <ng-container *ngTemplateOutlet="calendar"></ng-container>
+        </div>
+      </tab>
+      <tab heading="Список">
+        <div class="py-3">
+          <ng-container *ngTemplateOutlet="eventList"></ng-container>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</ng-template>
+
+
+<ng-template #calendar>
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <div class="d-flex align-items-center">
+        <h4 class="mb-3">{{ viewDate | calendarDate:(view + 'ViewTitle'):'ru' }}</h4>
+        <div class="btn-group mx-3 mb-3">
+          <div class="btn btn-outline-secondary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+            <i class="feather icon-chevron-left"></i>
+          </div>
+          <div class="btn btn-outline-secondary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+            <i class="feather icon-chevron-right"></i>
+          </div>
+        </div>
+        <div class="btn btn-outline-secondary mb-3" mwlCalendarToday [(viewDate)]="viewDate">
+          Сегодня
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 text-md-end">
+      <div class="btn-group me-md-3 mb-3">
+        <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Month)"
+             [class.active]="view === CalendarView.Month">
+          Месяц
+        </div>
+        <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Week)"
+             [class.active]="view === CalendarView.Week">
+          Неделя
+        </div>
+        <div class="btn btn-outline-secondary" (click)="setView(CalendarView.Day)"
+             [class.active]="view === CalendarView.Day">
+          День
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [ngSwitch]="view">
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      locale="ru"
+    ></mwl-calendar-day-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      locale="ru"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      locale="ru"
+    >
+    </mwl-calendar-month-view>
+  </div>
+</ng-template>
+<ng-template #eventList></ng-template>
+
+
+<ng-template #eventModal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ modalMode === 'add' ? 'Создать' : 'Изменить' }} событие</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formGroup" (validSubmit)="modalMode === 'add' ? addEvent() : editEvent()">
+      <div class="form-group mb-3">
+        <label class="form-label">Название события</label>
+        <input type="text" class="form-control no-success-validation no-success-icon-validation" formControlName="title">
+      </div>
+      <div class="row">
+        <div class="form-group mb-3 col-md-6">
+          <label class="form-label">Начало и конец</label>
+          <input
+            class="form-control no-success-validation no-success-icon-validation"
+            #datepickerYMD="bsDatepicker"
+            bsDatepicker
+            formControlName="start"
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+          >
+          <timepicker formControlName="startTime" showMeridian="false"></timepicker>
+        </div>
+        <div class="form-group mb-3 col-md-6">
+          <label class="form-label mt-3"></label>
+          <input
+            class="form-control no-success-validation no-success-icon-validation"
+            #datepickerYMD="bsDatepicker"
+            bsDatepicker
+            formControlName="end"
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+          >
+          <timepicker formControlName="endTime" showMeridian="false"></timepicker>
+        </div>
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label">Категория</label>
+        <ng-select
+          [items]="colorsSelection"
+          formControlName="color"
+        >
+          <ng-template ng-label-tmp let-item="item">
+            <span class="badge-dot" [ngStyle]="{'background-color': getColorDetail(item).primary}"></span>
+            {{ item }}
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+            <span class="badge-dot" [ngStyle]="{'background-color': getColorDetail(item).primary}"></span>
+            {{ item }}
+          </ng-template>
+        </ng-select>
+      </div>
+      <div class="form-group mb-3">
+        <label class="form-label">Описание</label>
+        <textarea class="form-control no-success-validation no-success-icon-validation" formControlName="description"></textarea>
+      </div>
+      <div class="text-end" *ngIf="modalMode === 'add'">
+        <button class="btn btn-primary" type="submit">Создать</button>
+      </div>
+      <div class="text-end" *ngIf="modalMode === 'edit'">
+        <button class="btn btn-primary" type="submit">Изменить</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

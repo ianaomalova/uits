@@ -1,10 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from '@app/views/uits/public/home/home.component';
-import {
-  PracticesComponent
-} from '@app/views/uits/public/scientific-activity/post-graduate/practices/practices.component';
-import {AuthGuard} from '@app/shared/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -15,7 +11,18 @@ const routes: Routes = [
     path: 'about', loadChildren: () => import('@app/views/uits/public/about/about.module').then(m => m.AboutModule),
   },
   {
-    path: 'scientific-activities/post-graduate/practices', component: PracticesComponent
+    path: 'educational-activities',
+    loadChildren: () => import('@app/views/uits/public/educational-activities/educational-activities.module')
+      .then(m => m.EducationalActivitiesModule),
+  },
+  {
+    path: 'scientific-activities',
+    loadChildren: () => import('@app/views/uits/public/scientific-activities/scientific-activities.module')
+      .then(m => m.ScientificActivitiesModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('@app/views/uits/private/profile/profile.module').then(m => m.ProfileModule)
   }
 ];
 

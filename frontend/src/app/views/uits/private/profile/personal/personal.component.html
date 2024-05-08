@@ -1,0 +1,40 @@
+<div class="mb-4 d-md-flex align-items-center justify-content-between">
+    <div>
+        <h4>{{'Информация об аккаунте' | translate}}</h4>
+        <p>{{'Здесь находится информация об авторизованном пользователе' | translate}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col" style="max-width: 200px;">
+        <div>
+            <div class="mb-3">
+                <img class="img-fluid w-100 rounded" [src]="(authService.profile$ | async)?.avatar ?? defaultAvatar" alt="avater">
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md">
+
+        <table class="table" *ngIf="(authService.profile$ | async) as person">
+            <tbody>
+                <tr>
+                    <th class="py-4">Имя пользователя</th>
+                    <td class="py-4">{{person.username}}</td>
+                </tr>
+                <tr>
+                    <th class="py-4">Электронная почта</th>
+                    <td class="py-4">{{person.email}}</td>
+                </tr>
+                <tr>
+                    <th class="py-4">Фамилия Имя</th>
+                    <td class="py-4">{{person.lastName}} {{person.firstName}}</td>
+                </tr>
+                <tr *ngIf="person.isModerator || person.isSuperuser">
+                    <th class="py-4">Уровень доступа</th>
+                    <td class="py-4" *ngIf="person.isModerator && !person.isSuperuser">Модератор</td>
+                    <td class="py-4" *ngIf="person.isSuperuser">Суперпользователь</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -4,6 +4,7 @@ import {getDefaultUserAvatarPath, Profile} from '@app/shared/types/models/auth';
 import {PagesConfig} from '@app/configs/pages.config';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {AVATAR_DEFAULT_URL} from "@app/configs/app.config";
 
 const emptyUser: Partial<Profile> = {
   username: 'Loading...',
@@ -31,7 +32,7 @@ export class NavProfileComponent implements OnInit {
 
   profileMenuList: ProfileMenu[];
   protected readonly PagesConfig = PagesConfig;
-  defaultAvatar: string = getDefaultUserAvatarPath();
+  defaultAvatar: string = AVATAR_DEFAULT_URL;
 
   constructor(public authService: AuthService,
               public router: Router) {
@@ -44,7 +45,7 @@ export class NavProfileComponent implements OnInit {
           if (profile == null || profile.isAnonymous) return;
           this.profileMenuList = [
             {
-              path: '',
+              path: PagesConfig.profile,
               icon: 'feather icon-user',
               item: 'NAV.PROFILE.PROFILE',
               external: false

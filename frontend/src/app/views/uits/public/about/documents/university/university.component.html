@@ -1,1 +1,14 @@
-<p>university works!</p>
+<div class="mb-4">
+  <ng-container [ngTemplateOutlet]="titlePage"></ng-container>
+  <app-editable-content
+    page="documents-university"
+  ></app-editable-content>
+
+</div>
+
+
+<!-- templates -->
+
+<ng-template #titlePage>
+  <h1 class="mb-3">Нормативные документы - Университета</h1>
+</ng-template>

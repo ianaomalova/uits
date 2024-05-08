@@ -1,4 +1,5 @@
 import {NavMenu} from '@app/shared/types/nav-menu.interface';
+import {PagesConfig} from "@app/configs/pages.config";
 
 const main: NavMenu[] = [
   {
@@ -20,7 +21,7 @@ const about: NavMenu[] = [
     translateKey: 'NAV.ABOUT',
     type: 'title',
     iconType: 'feather',
-    icon: 'icon-search',
+    icon: 'icon-info',
     key: 'about',
     submenu: [
       {
@@ -131,12 +132,12 @@ const about: NavMenu[] = [
 
 const educationActivities: NavMenu[] = [
   {
-    path: '/educationActivities',
+    path: '/educational-activities',
     title: 'EducationActivities',
     translateKey: 'NAV.EDUCATION_ACTIVITIES.TITLE',
     type: 'title',
     iconType: 'feather',
-    icon: 'icon-align-left',
+    icon: 'icon-book',
     key: 'educationActivities',
     submenu: [
       {
@@ -149,7 +150,7 @@ const educationActivities: NavMenu[] = [
         key: 'bachelor',
         submenu: [
           {
-            path: '/studyPlan',
+            path: PagesConfig.educationalActivities.bachelor.eduPlans,
             title: 'StudyPlan',
             translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.STUDY_PLAN',
             type: 'item',
@@ -159,17 +160,7 @@ const educationActivities: NavMenu[] = [
             submenu: []
           },
           {
-            path: '/schedule',
-            title: 'Schedule',
-            translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.SCHEDULE.TITLE',
-            type: 'item',
-            iconType: 'feather',
-            icon: 'icon-file',
-            key: 'schedule',
-            submenu: []
-          },
-          {
-            path: '/graduation',
+            path: PagesConfig.educationalActivities.bachelor.graduate,
             title: 'Graduation',
             translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.GRADUATION.TITLE',
             type: 'item',
@@ -179,7 +170,7 @@ const educationActivities: NavMenu[] = [
             submenu: []
           },
           {
-            path: '/practices',
+            path: PagesConfig.educationalActivities.bachelor.practices,
             title: 'Practices',
             translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.PRACTICES.TITLE',
             type: 'item',
@@ -191,7 +182,7 @@ const educationActivities: NavMenu[] = [
         ],
       },
       {
-        path: '/magistracy',
+        path: '/master',
         title: 'Magistracy',
         translateKey: 'NAV.EDUCATION_ACTIVITIES.MAGISTRACY.TITLE',
         type: 'item',
@@ -200,7 +191,7 @@ const educationActivities: NavMenu[] = [
         key: 'magistracy',
         submenu: [
           {
-            path: '/studyPlan',
+            path: PagesConfig.educationalActivities.master.eduPlans,
             title: 'StudyPlan',
             translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.STUDY_PLAN',
             type: 'item',
@@ -210,17 +201,7 @@ const educationActivities: NavMenu[] = [
             submenu: []
           },
           {
-            path: '/schedule',
-            title: 'Schedule',
-            translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.SCHEDULE.TITLE',
-            type: 'item',
-            iconType: 'feather',
-            icon: 'icon-file',
-            key: 'schedule',
-            submenu: []
-          },
-          {
-            path: '/graduation',
+            path: PagesConfig.educationalActivities.master.graduate,
             title: 'Graduation',
             translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.GRADUATION.TITLE',
             type: 'item',
@@ -230,7 +211,7 @@ const educationActivities: NavMenu[] = [
             submenu: []
           },
           {
-            path: '/practices',
+            path: PagesConfig.educationalActivities.master.practices,
             title: 'Practices',
             translateKey: 'NAV.EDUCATION_ACTIVITIES.BACHELOR.PRACTICES.TITLE',
             type: 'item',
@@ -251,7 +232,7 @@ const scientificActivity: NavMenu[] = [
     translateKey: 'NAV.SCIENTIFIC_ACTIVITY.TITLE',
     type: 'title',
     iconType: 'feather',
-    icon: 'icon-home',
+    icon: 'icon-search',
     key: 'scientificActivity',
     submenu: [
       {
@@ -264,7 +245,7 @@ const scientificActivity: NavMenu[] = [
         key: 'scientificActivity/postGraduate',
         submenu: [
           {
-            path: '/scientificActivity/postGraduate/practices',
+            path: PagesConfig.scientificActivities.postgraduate.practices,
             title: 'scientificActivity/postGraduate/Practices',
             translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.PRACTICES',
             type: 'title',
@@ -274,7 +255,7 @@ const scientificActivity: NavMenu[] = [
             submenu: []
           },
           {
-            path: '/specialities',
+            path: PagesConfig.scientificActivities.postgraduate.specialties,
             title: 'Specialities',
             translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.SPECIALITIES',
             type: 'title',
@@ -284,7 +265,7 @@ const scientificActivity: NavMenu[] = [
             submenu: []
           },
           {
-            path: '/dissertations',
+            path: PagesConfig.scientificActivities.postgraduate.dissertations,
             title: 'Dissertations',
             translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.DISSERTATIONS.TITLE',
             type: 'title',
@@ -296,7 +277,7 @@ const scientificActivity: NavMenu[] = [
         ]
       },
       {
-        path: '/scientificPublications',
+        path: PagesConfig.scientificActivities.publications,
         title: 'ScientificPublications',
         translateKey: 'NAV.SCIENTIFIC_ACTIVITY.SCIENTIFIC_PUBLICATIONS',
         type: 'item',
@@ -306,7 +287,7 @@ const scientificActivity: NavMenu[] = [
         submenu: []
       },
       {
-        path: '/scientificWork',
+        path: PagesConfig.scientificActivities.scientificWork,
         title: 'ScientificWork',
         translateKey: 'NAV.SCIENTIFIC_ACTIVITY.SCIENTIFIC_WORK',
         type: 'item',
@@ -316,7 +297,7 @@ const scientificActivity: NavMenu[] = [
         submenu: []
       },
       {
-        path: '/conferences',
+        path: PagesConfig.scientificActivities.conferences,
         title: 'Conferences',
         translateKey: 'NAV.SCIENTIFIC_ACTIVITY.CONFERENCES',
         type: 'item',

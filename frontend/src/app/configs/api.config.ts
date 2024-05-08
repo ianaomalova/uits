@@ -20,5 +20,6 @@ export const ApiConfig = {
         }
       },
     }
-  }
+  },
+  editableContentPage: 'api/editable-pages/'
 };

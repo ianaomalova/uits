@@ -1,0 +1,41 @@
+<ng-container *ngIf="authService.canEdit() | async">
+  <ng-container [ngTemplateOutlet]="editBtn"></ng-container>
+</ng-container>
+
+<ng-container [ngSwitch]="editMode">
+  <ng-container *ngSwitchCase="true" [ngTemplateOutlet]="editContent"></ng-container>
+  <ng-container *ngSwitchCase="false" [ngTemplateOutlet]="content"></ng-container>
+</ng-container>
+
+
+<!-- templates -->
+
+<ng-template #editBtn>
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary me-3" (click)="(editMode)?onSave():editMode = !editMode">
+        {{ (editMode) ? 'Сохранить' : 'Редактировать' }}
+      </button>
+      <button *ngIf="editMode" class="btn btn-outline-secondary" (click)="onCancel()">Отмена</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #content>
+  <markdown
+    [data]="content$ | async"
+  >
+  </markdown>
+</ng-template>
+
+
+<ng-template #editContent>
+  <angular-markdown-editor
+    textareaId="editor1" rows="12"
+    [locale]='locale'
+    [ngModel]="content$ | async"
+    (ngModelChange)="content$.next($event)"
+    [options]="editorOptions"
+  >
+  </angular-markdown-editor>
+</ng-template>

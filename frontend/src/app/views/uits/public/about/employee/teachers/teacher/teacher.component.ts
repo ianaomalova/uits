@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {IEmployee} from "@app/shared/types/models/employee";
 import {BehaviorSubject} from "rxjs";
 import {EmployeeService} from "@app/views/uits/public/about/employee/employee.service";
+import {AVATAR_DEFAULT_URL} from "@app/configs/app.config";
 
 @Component({
   selector: 'app-teacher',
@@ -25,4 +26,6 @@ export class TeacherComponent implements OnInit {
       })
     })
   }
+
+  protected readonly AVATAR_DEFAULT_URL = AVATAR_DEFAULT_URL;
 }

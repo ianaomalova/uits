@@ -54,7 +54,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+
+              "node_modules/bootstrap-markdown/css/bootstrap-markdown.min.css",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -63,7 +66,9 @@
             },
             "scripts": [
               "src/assets/js/prettify.min.js",
-              "node_modules/apexcharts/dist/apexcharts.min.js"
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap-markdown/js/bootstrap-markdown.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

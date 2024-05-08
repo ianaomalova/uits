@@ -1,12 +1,57 @@
 <ng-container>
+  <ng-container *ngIf="schedule | async">
+    <ng-container *ngTemplateOutlet="title"></ng-container>
+  </ng-container>
   <ng-container *ngTemplateOutlet="content"></ng-container>
 </ng-container>
 
 
-<ng-template #content>
+<!--Templates-->
+
+<ng-template #title>
   <h2 class="mb-3">Расписание</h2>
+</ng-template>
+
+<ng-template #content>
   <div class="mb-3">
     <ng-container *ngTemplateOutlet="actionPanel"></ng-container>
+    <div class="d-flex flex-column gap-1"
+         [ngStyle]="{
+            'max-width': '300px'
+         }"
+         *ngIf="schedule | async">
+      <div class="fw-semibold">
+        Выбор недели
+      </div>
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+
+          view="week"
+          [(viewDate)]="viewDate"
+        >
+          Предыдущая
+        </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          Сейчас
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          view="week"
+          [(viewDate)]="viewDate"
+        >
+          Следующая
+        </div>
+      </div>
+    </div>
+
+
   </div>
   <div *ngIf="schedule | async">
 
@@ -93,7 +138,7 @@
       <p>
         Группа: {{ event.meta.group }} {{ event.meta.subgroup }} <br>
         Кабинет: {{ event.meta.cabinet }} <br>
-        Время: {{event.start | date: 'HH:mm' }} - {{event.end | date: 'HH:mm'}}
+        Время: {{ event.start | date: 'HH:mm' }} - {{ event.end | date: 'HH:mm' }}
       </p>
 
     </div>
@@ -145,40 +190,5 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column gap-1"
-         [ngStyle]="{
-            'max-width': '300px'
-         }"
-         *ngIf="schedule | async">
-      <div class="fw-semibold">
-        Выбор недели
-      </div>
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          mwlCalendarPreviousView
-
-          view="week"
-          [(viewDate)]="viewDate"
-        >
-          Предыдущая
-        </div>
-        <div
-          class="btn btn-outline-secondary"
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
-        >
-          Сейчас
-        </div>
-        <div
-          class="btn btn-primary"
-          mwlCalendarNextView
-          view="week"
-          [(viewDate)]="viewDate"
-        >
-          Следующая
-        </div>
-      </div>
-    </div>
   </div>
 </ng-template>

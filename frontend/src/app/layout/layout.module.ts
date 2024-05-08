@@ -29,6 +29,10 @@ import { ThemeConfiguratorComponent } from './components/theme-configurator/them
 import { VerticalMenuContentComponent } from './components/vertical-menu-content/vertical-menu-content.component';
 import { MobileNavComponent } from './components/mobile-nav/mobile-nav.component';
 import { NavAuthLinkComponent } from './components/nav-auth-link/nav-auth-link.component';
+import { EditableContentComponent } from './components/editable-content/editable-content.component';
+import {AngularMarkdownEditorModule} from "angular-markdown-editor";
+import {MarkdownModule} from "ngx-markdown";
+
 
 const mandatoryComponents = [
     AppLayoutComponent,
@@ -59,24 +63,29 @@ const optionalComponents = [
     declarations: [
         ...mandatoryComponents,
         ...optionalComponents,
-        NavAuthLinkComponent
+        NavAuthLinkComponent,
+        EditableContentComponent
     ],
-    imports: [
-        SharedModule,
-        RouterModule,
-        LogoModule,
-        NavMenuModule,
-        AvatarModule,
-        ModalModule.forRoot(),
-        ButtonsModule.forRoot(),
-        SwitchModule,
-        DropdownModule,
-        PerfectScrollbarModule,
+  imports: [
+    SharedModule,
+    RouterModule,
+    LogoModule,
+    NavMenuModule,
+    AvatarModule,
+    ModalModule.forRoot(),
+    ButtonsModule.forRoot(),
+    SwitchModule,
+    DropdownModule,
+    PerfectScrollbarModule,
+    AngularMarkdownEditorModule.forRoot({iconlibrary: 'fa'}),
+    MarkdownModule.forRoot(),
+  ],
+  exports: [
+    AppLayoutComponent,
+    AuthLayoutComponent,
+    EditableContentComponent
+  ],
+    providers: [
     ],
-    exports: [
-        AppLayoutComponent,
-        AuthLayoutComponent
-    ],
-    providers: [],
 })
 export class LayoutModule {}

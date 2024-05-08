@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="container-fluid">
+    <div class="row content-min-height">
+      <column-panel [isMobileActive]="isMobile && isMobilePanelOpen" [borderRight]="true" class="p-0">
+        <h4 class="mb-3 ms-3 mt-3">Панель управления</h4>
+        <div class="columns-panel-item-group">
+          <a
+            href="javascript:void(0)"
+            class="columns-panel-item columns-panel-item-link"
+            [class.active]="currentPanel === item.title"
+            *ngFor="let item of panelMenu"
+            (click)="onPanelChange(item.title)"
+          >
+            <div class="d-flex align-items-center">
+              <i class="feather font-size-lg" [ngClass]="item.icon"></i>
+              <span class="ms-3">{{item.key | translate}}</span>
+            </div>
+          </a>
+        </div>
+      </column-panel>
+      <div class="col">
+        <div *ngIf="isMobile" style="padding: 0.75rem 1.5rem">
+          <div class="nav nav-tabs card-header-tabs">
+            <div
+              *ngFor="let item of panelMenu"
+              (click)="onPanelChange(item.title)"
+              [class.active]="currentPanel === item.title"
+              class="nav-link nav-item cursor-pointer">
+              <div class="d-flex align-items-center">
+                <i class="feather font-size-lg" [ngClass]="item.icon"></i>
+                <span class="ms-3">{{item.key | translate}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <profile-personal *ngIf="currentPanel === 'Personal'"></profile-personal>
+          <profile-events *ngIf="currentPanel === 'Events'"></profile-events>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
