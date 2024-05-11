@@ -5,11 +5,15 @@ import {EditableContentService} from "@app/layout/components/editable-content/ed
 import {BehaviorSubject, Observable} from "rxjs";
 import {EditorLocale} from "angular-markdown-editor";
 import {UNSAVED_WARN_MESSAGE} from "@app/configs/app.config";
+import {fadeInOut} from "@app/shared/animations/fadeInOut.animation";
 
 @Component({
   selector: 'app-editable-content',
   templateUrl: './editable-content.component.html',
-  styleUrls: ['./editable-content.component.scss']
+  styleUrls: ['./editable-content.component.scss'],
+  animations: [
+    fadeInOut
+  ]
 })
 export class EditableContentComponent implements OnInit {
   locale: EditorLocale = {
@@ -83,7 +87,7 @@ export class EditableContentComponent implements OnInit {
       },
       error: err => {
         console.error("HTTP ERR ", err.status);
-        if (err.status){
+        if (err.status) {
           console.error('Такой страницы не существует');
         } else {
           console.error('Непредвиденная ошибка сервера. Не удалось получить контент страницы');

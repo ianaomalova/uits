@@ -1,0 +1,34 @@
+$btn-editable-font-size: 1rem;
+$btn-editable-gap: 1rem;
+$btn-editable-top: 1rem;
+$btn-editable-right: 3rem;
+
+.edit-buttons {
+  margin-left: -60px;
+}
+
+.btn-editable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: $btn-editable-gap;
+  height: $btn-editable-font-size * 2.5;
+  width: $btn-editable-font-size * 2.5;
+  background-color: white;
+  z-index: 1005 !important;
+
+  i {
+    z-index: 1005;
+  }
+
+  box-shadow: 0 1px 8px rgba(121, 149, 167, 0.4);
+
+  border-radius: 50% !important;
+  font-size: $btn-editable-font-size;
+
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 1px 8px rgba(121, 149, 167, 0.8);
+  }
+}

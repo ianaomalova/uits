@@ -11,12 +11,15 @@
 <!-- templates -->
 
 <ng-template #editBtn>
-  <div class="row mb-3">
-    <div class="col">
-      <button class="btn btn-primary me-3" (click)="(editMode)?onSave():editMode = !editMode">
-        {{ (editMode) ? 'Сохранить' : 'Редактировать' }}
-      </button>
-      <button *ngIf="editMode" class="btn btn-outline-secondary" (click)="onCancel()">Отмена</button>
+  <div class="position-absolute edit-buttons">
+    <div
+      class="btn-editable font-size-lg"
+      (click)="(editMode)?onSave():editMode = !editMode"
+    >
+      <i class="feather {{ (editMode) ? 'icon-save' : 'icon-edit' }}"></i>
+    </div>
+    <div @fadeInOut *ngIf="editMode" class="btn-editable font-size-lg" (click)="onCancel()">
+      <i class="feather icon-x"></i>
     </div>
   </div>
 </ng-template>
