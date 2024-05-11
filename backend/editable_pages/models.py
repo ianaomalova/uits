@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class EditablePage(models.Model):
-    text = models.TextField(verbose_name='Контент Markdown')
+    text = models.TextField(verbose_name='Контент Markdown', blank=True)
     page = models.SlugField(max_length=100, verbose_name='Идентификатор страницы', unique=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     modified_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')

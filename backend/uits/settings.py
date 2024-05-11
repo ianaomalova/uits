@@ -222,5 +222,7 @@ DEFAULT_EDITABLE_PAGES = [
     'scientific-activities-postgraduate-practices',
     'scientific-activities-postgraduate-specialties',
     'scientific-activities-publications',
-    'scientific-activities-scientificWork'
+    'scientific-activities-scientificWork',
+    'home-before',
+    'home-after'
 ]
