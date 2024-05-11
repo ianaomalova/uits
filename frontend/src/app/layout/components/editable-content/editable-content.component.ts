@@ -84,9 +84,9 @@ export class EditableContentComponent implements OnInit {
       error: err => {
         console.error("HTTP ERR ", err.status);
         if (err.status){
-          alert('Такой страницы не существует');
+          console.error('Такой страницы не существует');
         } else {
-          alert('Непредвиденная ошибка сервера. Не удалось получить контент страницы');
+          console.error('Непредвиденная ошибка сервера. Не удалось получить контент страницы');
         }
       }
     })
