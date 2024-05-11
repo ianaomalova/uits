@@ -9,6 +9,7 @@ import {ModalModule} from "ngx-bootstrap/modal";
 import {QuillEditorComponent} from "ngx-quill";
 import {SharedModule} from "@app/shared/shared.module";
 import { LatestAnnouncementsComponent } from './public/home/components/latest-announcements/latest-announcements.component';
+import {LayoutModule} from "@app/layout/layout.module";
 
 
 @NgModule({
@@ -17,15 +18,16 @@ import { LatestAnnouncementsComponent } from './public/home/components/latest-an
     LatestNewsComponent,
     LatestAnnouncementsComponent,
   ],
-    imports: [
-        CommonModule,
-        UitsRoutingModule,
-        AboutModule,
-        NgBootstrapFormValidationModule.forRoot(),
-        ModalModule,
-        QuillEditorComponent,
-        SharedModule
-    ],
+  imports: [
+    CommonModule,
+    UitsRoutingModule,
+    AboutModule,
+    NgBootstrapFormValidationModule.forRoot(),
+    ModalModule,
+    QuillEditorComponent,
+    SharedModule,
+    LayoutModule
+  ],
   exports: [
 
   ]

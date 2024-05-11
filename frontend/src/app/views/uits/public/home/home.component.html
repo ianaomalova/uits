@@ -1,3 +1,15 @@
+<ng-container *ngTemplateOutlet="editableContentBefore"></ng-container>
 <home-latest-news></home-latest-news>
 <hr>
-<home-latest-announcements></home-latest-announcements>
+<div class="mb-3">
+  <home-latest-announcements></home-latest-announcements>
+</div>
+<ng-container *ngTemplateOutlet="editableContentAfter"></ng-container>
+
+<!--templates-->
+<ng-template #editableContentBefore>
+  <app-editable-content page="home-before"></app-editable-content>
+</ng-template>
+<ng-template #editableContentAfter>
+  <app-editable-content page="home-after"></app-editable-content>
+</ng-template>

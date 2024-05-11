@@ -2,12 +2,15 @@
   <ng-container [ngTemplateOutlet]="titlePage"></ng-container>
 </div>
 
+
 <ng-container *ngIf="!isMobile">
   <ng-container *ngTemplateOutlet="gridDesktop"></ng-container>
 </ng-container>
 <ng-container *ngIf="isMobile">
   <ng-container *ngTemplateOutlet="gridMobile"></ng-container>
 </ng-container>
+
+
 
 
 <!-- templates -->
