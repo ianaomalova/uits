@@ -1,0 +1,14 @@
+<ng-container *ngIf="(slug$ | async) as slug; else loading">
+  <app-editable-content [page]="slug"></app-editable-content>
+</ng-container>
+
+
+<!--templates-->
+<ng-template #loading>
+  Загрузка...
+</ng-template>
+<ng-template>
+  <p class="text-danger">
+    Ошибка! Страница не указана
+  </p>
+</ng-template>

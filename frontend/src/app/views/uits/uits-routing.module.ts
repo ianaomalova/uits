@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from '@app/views/uits/public/home/home.component';
+import {CustomPageComponent} from "@app/views/uits/public/custom-page/custom-page.component";
 
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('@app/views/uits/private/profile/profile.module').then(m => m.ProfileModule)
+  },
+  {
+    path: 'page/:slug',
+    component: CustomPageComponent
   }
 ];
 

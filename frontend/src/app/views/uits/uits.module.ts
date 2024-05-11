@@ -10,6 +10,7 @@ import {QuillEditorComponent} from "ngx-quill";
 import {SharedModule} from "@app/shared/shared.module";
 import { LatestAnnouncementsComponent } from './public/home/components/latest-announcements/latest-announcements.component';
 import {LayoutModule} from "@app/layout/layout.module";
+import { CustomPageComponent } from './public/custom-page/custom-page.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {LayoutModule} from "@app/layout/layout.module";
     HomeComponent,
     LatestNewsComponent,
     LatestAnnouncementsComponent,
+    CustomPageComponent,
   ],
   imports: [
     CommonModule,
