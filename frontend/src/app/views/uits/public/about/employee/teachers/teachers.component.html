@@ -6,10 +6,14 @@
 <div *ngIf="(teacher$ | async).length !== 0; else loading">
   <div class="row align-center-start gap-5 flex-row">
     <div *ngFor="let employee of teacher$ | async" class="card" style="width: 18rem; min-height: 100%">
-      <img
+      <div
+        class="d-flex justify-content-center"
+        style="min-height: 183px"
+      ><img
         [src]="(!employee.avatar)?AVATAR_DEFAULT_URL : employee.avatar"
         class="card-img-top mx-auto mt-4 mx-5 rounded-circle"
         alt="...">
+      </div>
       <div class="card-body">
         <h4
           class="card-title text-center">{{ employee.last_name }} {{ employee.first_name }} {{ employee.patronymic }}</h4>
@@ -29,7 +33,8 @@
           <img
             [src]="(!employee.avatar)?AVATAR_DEFAULT_URL: employee.avatar"
             class="card-img-top mx-auto mx-5 rounded-circle"
-            alt="...">
+            alt="..."
+          >
           <!-- Здесь размещаете дополнительную информацию о сотруднике -->
           <p>Дополнительная информация о сотруднике
             <br><b>{{ employee.last_name }} {{ employee.first_name }} {{ employee.patronymic }}</b></p>
