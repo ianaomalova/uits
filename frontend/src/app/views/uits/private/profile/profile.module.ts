@@ -20,6 +20,8 @@ import {CalendarModule} from "angular-calendar";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {TimepickerModule} from "ngx-bootstrap/timepicker";
 import {ModalModule} from "ngx-bootstrap/modal";
+import {TooltipModule} from "ngx-bootstrap/tooltip";
+import {NgOptimizedImage} from "@angular/common";
 
 
 @NgModule({
@@ -29,22 +31,24 @@ import {ModalModule} from "ngx-bootstrap/modal";
         RowContentComponent,
         EventsComponent
     ],
-    imports: [
-        SharedModule,
-        ColumnPanelModule,
-        RadioModule,
-        BsDatepickerModule.forRoot(),
-        UploadModule.forRoot(),
-        SwitchModule,
-        ToastrModule.forRoot(),
-        NgBootstrapFormValidationModule.forRoot(),
-        RouterModule.forChild(routes),
-        TabsModule,
-        CalendarModule,
-        NgSelectModule,
-        TimepickerModule,
-        ModalModule
-    ],
+  imports: [
+    SharedModule,
+    ColumnPanelModule,
+    RadioModule,
+    BsDatepickerModule.forRoot(),
+    UploadModule.forRoot(),
+    SwitchModule,
+    ToastrModule.forRoot(),
+    NgBootstrapFormValidationModule.forRoot(),
+    RouterModule.forChild(routes),
+    TabsModule,
+    CalendarModule,
+    NgSelectModule,
+    TimepickerModule,
+    ModalModule,
+    TooltipModule,
+    NgOptimizedImage
+  ],
     exports: [],
     providers: [
       AuthGuard

@@ -67,8 +67,8 @@
                  (click)="openModal(deleteIntegrationConfirmModal)"
               ></i>
             </div>
-            <div *ngIf="person.telegramUser === null">
-              Для привязки профиля к телеграм пришлите боту код выше: <a href="https://t.me/uits_notify_bot">@uits_notify_bot</a>
+            <div *ngIf="person.telegramUser === null" >
+              <img class="me-1" ngSrc="assets/images/telegram_16px.png" alt="telegram" width="16" height="16"> <a href="https://t.me/uits_notify_bot" tooltip="Для привязки профиля к телеграм пришлите этому боту код">@uits_notify_bot</a>
             </div>
           </div>
         </td>
