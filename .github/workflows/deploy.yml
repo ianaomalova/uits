@@ -6,6 +6,8 @@ on:
 
 jobs:
   build-django:
+    env:
+      DB_ENVIRONMENT_FILE: db.prod.env
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
