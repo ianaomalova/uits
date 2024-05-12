@@ -19,7 +19,7 @@ class User(AbstractUser):
     )
     is_moderator = models.BooleanField(default=False)
 
-    telegram_code = models.CharField(default=generate_telegram_code, editable=False, max_length=12, unique=True)
+    telegram_code = models.CharField(editable=False, max_length=12, unique=True)
 
     def __str__(self):
         if self.first_name and self.last_name:
@@ -30,3 +30,7 @@ class User(AbstractUser):
     def regenerate_telegram_code(self):
         self.telegram_code = generate_telegram_code()
         self.save()
+
+    def save(self, *args, **kwargs):
+        self.telegram_code = generate_telegram_code()
+        super().save(*args, **kwargs)
