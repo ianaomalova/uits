@@ -10,3 +10,7 @@ services:
       - ./backend/db.local.env
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/
+  redis:
+    image: "redis:7.2.4-alpine"
+    ports:
+      - "6379:6379"

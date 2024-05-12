@@ -1,40 +1,93 @@
 <div class="mb-4 d-md-flex align-items-center justify-content-between">
-    <div>
-        <h4>{{'Информация об аккаунте' | translate}}</h4>
-        <p>{{'Здесь находится информация об авторизованном пользователе' | translate}}</p>
-    </div>
+  <div>
+    <h4>{{ 'Информация об аккаунте' | translate }}</h4>
+    <p>{{ 'Здесь находится информация об авторизованном пользователе' | translate }}</p>
+  </div>
 </div>
 <div class="row">
-    <div class="col" style="max-width: 200px;">
-        <div>
-            <div class="mb-3">
-                <img class="img-fluid w-100 rounded" [src]="(authService.profile$ | async)?.avatar ?? defaultAvatar" alt="avater">
+  <div class="col" style="max-width: 200px;">
+    <div>
+      <div class="mb-3">
+        <img class="img-fluid w-100 rounded" [src]="(authService.profile$ | async)?.avatar ?? defaultAvatar"
+             alt="avater">
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md">
+
+    <table class="table" *ngIf="(authService.profile$ | async) as person">
+      <tbody>
+      <tr>
+        <th class="py-4">Имя пользователя</th>
+        <td class="py-4">{{ person.username }}</td>
+      </tr>
+      <tr>
+        <th class="py-4">Электронная почта</th>
+        <td class="py-4">{{ person.email }}</td>
+      </tr>
+      <tr>
+        <th class="py-4">Фамилия Имя</th>
+        <td class="py-4">{{ person.lastName }} {{ person.firstName }}</td>
+      </tr>
+      <tr *ngIf="person.isModerator || person.isSuperuser">
+        <th class="py-4">Уровень доступа</th>
+        <td class="py-4" *ngIf="person.isModerator && !person.isSuperuser">Модератор</td>
+        <td class="py-4" *ngIf="person.isSuperuser">Суперпользователь</td>
+      </tr>
+      <tr>
+        <th class="py-4">Интеграция</th>
+        <td class="py-4 d-flex flex-column gap-3" [ngSwitch]="hideIntegrationCode">
+          <div [ngSwitch]="hideIntegrationCode">
+          <span *ngSwitchCase="false">
+          {{ person.telegramCode }}
+          </span>
+            <span *ngSwitchCase="true" class="user-select-none">
+            ************
+          </span>
+            <i class="feather icon-copy cursor-pointer"
+               (click)="copyCode(person.telegramCode)"
+            ></i>
+            <i
+              class="feather ms-1 cursor-pointer"
+              [ngClass]="{
+          'icon-eye': !hideIntegrationCode,
+          'icon-eye-off': hideIntegrationCode
+          }"
+
+              (click)="toggleViewIntegrationCode()"
+            ></i>
+          </div>
+          <div>
+            <div *ngIf="person.telegramUser">
+              <span class="user-select-none">Привязан к: </span><a
+              href="https://t.me/{{person.telegramUser.username}}">@{{ person.telegramUser.username }}</a>
+              <i class="feather icon-x cursor-pointer font-size-lg ms-2"
+                 style="color: red;"
+                 (click)="openModal(deleteIntegrationConfirmModal)"
+              ></i>
             </div>
-
-        </div>
-    </div>
-    <div class="col-md">
-
-        <table class="table" *ngIf="(authService.profile$ | async) as person">
-            <tbody>
-                <tr>
-                    <th class="py-4">Имя пользователя</th>
-                    <td class="py-4">{{person.username}}</td>
-                </tr>
-                <tr>
-                    <th class="py-4">Электронная почта</th>
-                    <td class="py-4">{{person.email}}</td>
-                </tr>
-                <tr>
-                    <th class="py-4">Фамилия Имя</th>
-                    <td class="py-4">{{person.lastName}} {{person.firstName}}</td>
-                </tr>
-                <tr *ngIf="person.isModerator || person.isSuperuser">
-                    <th class="py-4">Уровень доступа</th>
-                    <td class="py-4" *ngIf="person.isModerator && !person.isSuperuser">Модератор</td>
-                    <td class="py-4" *ngIf="person.isSuperuser">Суперпользователь</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+            <div *ngIf="person.telegramUser === null">
+              Для привязки профиля к телеграм пришлите боту код выше: <a href="https://t.me/uits_notify_bot">@uits_notify_bot</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+
+<ng-template
+  bsModal
+  #deleteIntegrationConfirmModal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Хотите удалить интеграцию с телеграм?</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Отмена</button>
+    <button type="button" class="btn btn-danger" (click)="deleteIntegration()">Удалить</button>
+  </div>
+</ng-template>

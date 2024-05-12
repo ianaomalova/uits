@@ -19,6 +19,7 @@ import {TabsModule} from "ngx-bootstrap/tabs";
 import {CalendarModule} from "angular-calendar";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {TimepickerModule} from "ngx-bootstrap/timepicker";
+import {ModalModule} from "ngx-bootstrap/modal";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {TimepickerModule} from "ngx-bootstrap/timepicker";
         TabsModule,
         CalendarModule,
         NgSelectModule,
-        TimepickerModule
+        TimepickerModule,
+        ModalModule
     ],
     exports: [],
     providers: [

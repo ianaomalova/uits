@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-95rc)10zgr)+px@hl=h_5*3h3ab6rmt3esf@p#gw(ez^+7m9%*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Third party apps
 
@@ -39,7 +39,7 @@ THIRD_INSTALLED_APPS = [
     'rest_framework.authtoken',
     'dj_rest_auth',
     'imagekit',
-    'django_quill'
+    'django_quill',
 ]
 
 # Local application definition
@@ -50,7 +50,8 @@ LOCAL_INSTALLED_APPS = [
     'department.employee',
     'department.employee.schedule',
     'editable_pages.apps.EditablePagesConfig',
-    'events.apps.EventsConfig',
+    'events',
+    'tg_bot'
 ]
 
 # Application definition
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'celery',
     *THIRD_INSTALLED_APPS,
     *LOCAL_INSTALLED_APPS
 ]
@@ -226,3 +228,23 @@ DEFAULT_EDITABLE_PAGES = [
     'home-before',
     'home-after'
 ]
+
+# CELERY SETTINGS
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
+CELERY_TIMEZONE = "Europe/Moscow"
+CELERY_BEAT_SCHEDULE = {
+    'schedule-notify-bot': {
+        'task': 'events.tasks.schedule_notify_bot',
+        'schedule': 30.0,
+        'options': {
+            'expires': 15.0,
+        },
+    },
+}
+
+TELEGRAM_BOT = {
+    'TOKEN': env('TG_BOT_TOKEN'),
+    'WEBHOOK_URL': env('TG_WEBHOOK_HOST') + 'api/telegram/webhook',
+    'WEBHOOK_SECRET': env('TG_SECRET_TOKEN')
+}

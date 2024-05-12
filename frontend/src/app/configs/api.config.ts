@@ -1,5 +1,8 @@
 // Слеш в конце каждого api url обязателен
 export const ApiConfig = {
+  telegram: {
+    user: "api/telegram/user"
+  },
   auth: {
     user: 'api/users/auth/user/',
     login: 'api/users/auth/login/',

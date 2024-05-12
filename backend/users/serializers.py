@@ -24,6 +24,12 @@ class UserDetailsSerializer(DefaultUserDetailsSerializer):
             extra_fields.append('is_anonymous')
         if hasattr(UserModel, 'avatar'):
             extra_fields.append('avatar')
+        if hasattr(UserModel, 'telegram_code'):
+            extra_fields.append('telegram_code')
+        if hasattr(UserModel, 'telegram_user'):
+            extra_fields.append('telegram_user')
         model = UserModel
         fields = ('pk', *extra_fields)
         read_only_fields = ('email', 'is_moderator', 'is_superuser')
+
+        depth = 1
