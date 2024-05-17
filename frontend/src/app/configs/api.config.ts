@@ -24,5 +24,9 @@ export const ApiConfig = {
       },
     }
   },
-  editableContentPage: 'api/editable-pages/'
+  editableContentPage: 'api/editable-pages/',
+  events: {
+    read: 'api/users/events/',
+    write: (id: number) => 'api/users/events/' + id
+  }
 };

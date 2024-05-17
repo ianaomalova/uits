@@ -4,7 +4,8 @@ import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {endOfDay, startOfDay} from "date-fns";
 import {GenerateUid} from "@app/shared/utils/GenerateUid";
-import {combineLatest} from "rxjs";
+import {BehaviorSubject, combineLatest} from "rxjs";
+import {EventsService} from "@app/views/uits/private/profile/events/events.service";
 
 interface CalendarUserEventMeta {
   description?: string
@@ -50,6 +51,7 @@ export class EventsComponent implements OnInit {
   modalMode: 'add' | 'edit' = 'add'
   formGroup: UntypedFormGroup;
   events: CalendarEvent<CalendarUserEventMeta>[] = []
+  events$: BehaviorSubject<CalendarEvent[]> = new BehaviorSubject([]);
 
   colorsSelection: string[] = []
 
@@ -57,7 +59,8 @@ export class EventsComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private cdr: ChangeDetectorRef,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private eventService: EventsService
   ) {
   }
 
@@ -77,6 +80,18 @@ export class EventsComponent implements OnInit {
       color: [this.colorsSelection[0], Validators.required],
       description: [''],
     });
+
+    this.eventService.read().subscribe((events: any[]) => {
+      this.events$.next(events.map(ev => {
+        return {
+          id: ev.id,
+          start: new Date(ev.startedAt),
+          end: new Date(ev.endedAt),
+          title: ev.name,
+          allDay: ev.allDay
+        }
+      }));
+    })
   }
 
 
@@ -96,11 +111,11 @@ export class EventsComponent implements OnInit {
     this.modalMode = 'edit'
     this.modalRef = this.modalService.show(template);
     let data = this.events.filter(elm => elm.id === id)[0]
-    let color : string
+    let color: string
     for (const key in colors) {
       if (Object.prototype.hasOwnProperty.call(colors, key)) {
         const element = colors[key];
-        if(element.primary === data.color.primary) {
+        if (element.primary === data.color.primary) {
           color = key
         }
       }
