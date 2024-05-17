@@ -1,5 +1,6 @@
 export enum Permission {
-  ALL,
   USERS,
-  MODERATOR
+  MODERATOR,
+  TEACHER,
+  SUPERUSER
 }

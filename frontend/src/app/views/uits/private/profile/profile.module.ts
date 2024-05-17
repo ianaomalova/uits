@@ -22,6 +22,10 @@ import {TimepickerModule} from "ngx-bootstrap/timepicker";
 import {ModalModule} from "ngx-bootstrap/modal";
 import {TooltipModule} from "ngx-bootstrap/tooltip";
 import {NgOptimizedImage} from "@angular/common";
+import {PopoverModule} from "ngx-bootstrap/popover";
+import {FormatPipeModule} from "ngx-date-fns";
+import {AccordionModule} from "ngx-bootstrap/accordion";
+import {CollapseModule} from "ngx-bootstrap/collapse";
 
 
 @NgModule({
@@ -47,7 +51,11 @@ import {NgOptimizedImage} from "@angular/common";
     TimepickerModule,
     ModalModule,
     TooltipModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    PopoverModule,
+    FormatPipeModule,
+    AccordionModule,
+    CollapseModule
   ],
     exports: [],
     providers: [

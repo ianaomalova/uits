@@ -4,6 +4,7 @@ export const ApiConfig = {
     user: "api/telegram/user"
   },
   auth: {
+    users: 'api/users/',
     user: 'api/users/auth/user/',
     login: 'api/users/auth/login/',
     logout: 'api/users/auth/logout/'

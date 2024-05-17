@@ -8,12 +8,12 @@
             href="javascript:void(0)"
             class="columns-panel-item columns-panel-item-link"
             [class.active]="currentPanel === item.title"
-            *ngFor="let item of panelMenu"
+            *ngFor="let item of onlyAccessible() | async"
             (click)="onPanelChange(item.title)"
           >
             <div class="d-flex align-items-center">
               <i class="feather font-size-lg" [ngClass]="item.icon"></i>
-              <span class="ms-3">{{item.key | translate}}</span>
+              <span class="ms-3">{{ item.key | translate }}</span>
             </div>
           </a>
         </div>
@@ -28,14 +28,14 @@
               class="nav-link nav-item cursor-pointer">
               <div class="d-flex align-items-center">
                 <i class="feather font-size-lg" [ngClass]="item.icon"></i>
-                <span class="ms-3">{{item.key | translate}}</span>
+                <span class="ms-3">{{ item.key | translate }}</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <profile-personal *ngIf="currentPanel === 'Personal'"></profile-personal>
-          <profile-events *ngIf="currentPanel === 'Events'"></profile-events>
+        <div class="card-body" [ngSwitch]="currentPanel">
+          <div *ngSwitchCase="'Personal'" @fadeIn><profile-personal></profile-personal></div>
+          <div *ngSwitchCase="'Events'" @fadeIn><profile-events></profile-events></div>
         </div>
       </div>
     </div>

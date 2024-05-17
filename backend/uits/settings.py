@@ -40,6 +40,7 @@ THIRD_INSTALLED_APPS = [
     'dj_rest_auth',
     'imagekit',
     'django_quill',
+    'django_filters'
 ]
 
 # Local application definition

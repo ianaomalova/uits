@@ -9,7 +9,7 @@ from users import permissions
 # Create your views here.
 class EditablePageAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = EditablePageSerializer
-    permission_classes = [permissions.IsModerator]
+    permission_classes = [permissions.IsModeratorOrReadOnly]
     lookup_field = 'page'
     lookup_url_kwarg = 'page'
 

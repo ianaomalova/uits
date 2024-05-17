@@ -20,11 +20,15 @@ class UserModelAdmin(UserAdmin):
                 "fields": (
                     "is_active",
                     "is_staff",
-                    "is_superuser",
                     "groups",
                     "user_permissions",
                 ),
             },
         ),
+        (_("Роли"), {"fields": (
+            "is_superuser",
+            "is_moderator",
+            "is_teacher"
+        )}),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )

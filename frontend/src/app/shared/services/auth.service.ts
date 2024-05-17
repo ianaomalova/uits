@@ -10,6 +10,11 @@ import {BehaviorSubject, catchError, Observable, of, throwError} from 'rxjs';
 
 const Anonymous: Profile = createAnonymousProfile();
 
+type ListUsersParams = {
+  is_moderator?: boolean;
+  is_teacher?: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -53,10 +58,24 @@ export class AuthService {
   }
 
 
+  listUsers(params: ListUsersParams): Observable<Profile[]> {
+    return this.http.get<Profile[]>(ApiConfig.auth.users, {
+      params
+    }).pipe(map(users => users.map(SnakeObjectToCamelCase)))
+  }
+
+
   canEdit(): Observable<boolean> {
     return this.profile$.pipe(map(profile => {
       console.log('This user can edit - ', profile.isModerator || profile.isSuperuser)
-      return profile.isModerator || profile.isSuperuser
+      return (profile.isModerator || profile.isSuperuser) && !profile.isAnonymous
+    }));
+  }
+
+  isTeacher(): Observable<boolean> {
+    return this.profile$.pipe(map(profile => {
+      console.log('This user is teacher - ', profile.isTeacher || profile.isSuperuser)
+      return (profile.isTeacher || profile.isSuperuser) && !profile.isAnonymous
     }));
   }
 }

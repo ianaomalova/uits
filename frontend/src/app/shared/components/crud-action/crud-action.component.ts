@@ -24,7 +24,7 @@ type Action = {
 export class CrudActionComponent<T extends Identifiable> implements OnInit {
   disabled: boolean;
   @Input() item: T;
-  @Input() permission: Permission = Permission.ALL;
+  @Input() permission: Permission = Permission.USERS;
   @Output() edit: EventEmitter<number> = new EventEmitter<number>();
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
 
@@ -44,8 +44,6 @@ export class CrudActionComponent<T extends Identifiable> implements OnInit {
 
   ngOnInit(): void {
     switch (this.permission) {
-      case Permission.ALL:
-        break;
       case Permission.USERS:
         if (this.authService.profile$.getValue().isAnonymous) {
           this.disableActions();

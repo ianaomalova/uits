@@ -16,6 +16,8 @@ class UserDetailsSerializer(DefaultUserDetailsSerializer):
             extra_fields.append('first_name')
         if hasattr(UserModel, 'last_name'):
             extra_fields.append('last_name')
+        if hasattr(UserModel, 'is_teacher'):
+            extra_fields.append('is_teacher')
         if hasattr(UserModel, 'is_moderator'):
             extra_fields.append('is_moderator')
         if hasattr(UserModel, 'is_superuser'):
@@ -30,6 +32,6 @@ class UserDetailsSerializer(DefaultUserDetailsSerializer):
             extra_fields.append('telegram_user')
         model = UserModel
         fields = ('pk', *extra_fields)
-        read_only_fields = ('email', 'is_moderator', 'is_superuser')
+        read_only_fields = ('email', 'is_moderator', 'is_superuser', 'is_teacher')
 
         depth = 1

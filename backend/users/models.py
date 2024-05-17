@@ -17,7 +17,8 @@ class User(AbstractUser):
         blank=True,
         default=None
     )
-    is_moderator = models.BooleanField(default=False)
+    is_moderator = models.BooleanField(default=False, verbose_name="Статус модератора", help_text="Указывает, что пользователь имеет права модератора.")
+    is_teacher = models.BooleanField(default=False, verbose_name="Статус преподавателя", help_text="Указывает, что пользователь имеет права преподавателя.")
 
     telegram_code = models.CharField(editable=False, max_length=12, unique=True)
 

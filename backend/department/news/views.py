@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from users.permissions import IsModerator
+from users.permissions import IsModeratorOrReadOnly
 from .models import Post
 from .serializers import PostSerializer, CreatePostSerializer, ListPostSerializer
 
@@ -11,7 +11,7 @@ from .serializers import PostSerializer, CreatePostSerializer, ListPostSerialize
 class PostAPIViewSet(ModelViewSet):
     queryset = Post.objects.filter(display=True, post_type=Post.PostType.NEWS).order_by('-created_at')
     serializer_class = PostSerializer
-    permission_classes = [IsModerator]
+    permission_classes = [IsModeratorOrReadOnly]
 
     def create(self, request, *args, **kwargs):
         request.data['author'] = request.user.id
