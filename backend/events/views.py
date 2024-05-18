@@ -24,6 +24,6 @@ class EventModelViewSet(viewsets.ModelViewSet):
         save_params = {
             'user': user,
         }
-        if user.is_teacher:
+        if user.is_teacher and not user.is_superuser:
             save_params['assigned_users'] = [user.id]
         serializer.save(**save_params)
