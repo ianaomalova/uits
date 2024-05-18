@@ -4,9 +4,10 @@ export const startTimeBeforeEndTimeValidator: ValidatorFn = (control: AbstractCo
   const dateStartEnd = control.get('dateStartEnd')?.value;
   const startTime = control.get('startTime')?.value;
   const endTime = control.get('endTime')?.value;
+  const allDay: boolean = control.get('allDay')?.value;
 
-  if (!dateStartEnd || !startTime || !endTime) {
-    return null; // Skip validation if any field is missing
+  if (!dateStartEnd || !startTime || !endTime || allDay) {
+    return null; // Skip validation if any field is missing or allDay is enabled
   }
 
   const [startDate, endDate] = dateStartEnd;

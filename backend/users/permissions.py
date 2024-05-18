@@ -17,3 +17,12 @@ class IsModeratorOrReadOnly(IsModerator):
             return True
         else:
             return super().has_permission(request, view)
+
+
+class IsTeacher(BasePermission):
+    def has_permission(self, request, view):
+        return bool(
+            request.user and
+            not isinstance(request.user, AnonymousUser) and
+            (request.user.is_superuser or request.user.is_teacher)
+        )

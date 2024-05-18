@@ -5,6 +5,7 @@ import {EmployeeService} from "@app/views/uits/public/about/employee/employee.se
 import {BehaviorSubject} from "rxjs";
 import {Schedule} from "@app/shared/types/models/schedule";
 import {AuthService} from "@app/shared/services/auth.service";
+import {AlertService} from "@app/shared/services/alert.service";
 
 
 @Component({
@@ -26,13 +27,17 @@ export class ScheduleComponent implements OnInit {
     return this.authService.profile$
   }
 
-  constructor(private employeeService: EmployeeService, private authService: AuthService) {
+  constructor(private employeeService: EmployeeService, private authService: AuthService, private alertService: AlertService) {
     this.schedule = new BehaviorSubject<Schedule>(null);
 
     this.setViewDate();
   }
 
   ngOnInit(): void {
+    this.refreshSchedule();
+  }
+
+  refreshSchedule() {
     this.employeeService.retrieveSchedule(this.teacher.id).subscribe(schedule => {
       console.log(schedule.days)
       this.schedule.next(schedule);
@@ -59,7 +64,12 @@ export class ScheduleComponent implements OnInit {
 
     this.employeeService.importSchedule(this.teacher.id, this.selectedScheduleFile).subscribe(
       response => {
-        // console.log(response)
+        console.log(response)
+        this.alertService.add("Расписание успешно импортировано");
+        this.refreshSchedule()
+      }, error => {
+        console.log(error)
+        this.alertService.add("Ошибка. Возможно неверный формат файла.", 'danger')
       }
     )
 

@@ -1,5 +1,12 @@
 <main class="main">
 <!--    <page-header *ngIf="pageHeader"></page-header>-->
+  <div class="layout-alerts" *ngIf="!hideAlerts">
+    <div class="layout-alert" *ngFor="let alert of alertService.alerts$ | async">
+      <alert @fadeInOut [type]="alert.type" [dismissOnTimeout]="alert.timeout"
+             (onClosed)="alertService.onClosed(alert)">{{ alert.msg }}
+      </alert>
+    </div>
+  </div>
     <router-outlet></router-outlet>
 </main>
 <app-footer></app-footer>

@@ -28,6 +28,8 @@ jobs:
           pip3.10 install -r requirements.txt
           python3.10 manage.py migrate
           systemctl restart uits
+          systemctl restart uits-celery
+          systemctl restart uits-celery-beat
   build-angular:
       runs-on: ubuntu-latest
 

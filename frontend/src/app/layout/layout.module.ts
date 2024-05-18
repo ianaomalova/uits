@@ -32,6 +32,7 @@ import { NavAuthLinkComponent } from './components/nav-auth-link/nav-auth-link.c
 import { EditableContentComponent } from './components/editable-content/editable-content.component';
 import {AngularMarkdownEditorModule} from "angular-markdown-editor";
 import {MarkdownModule} from "ngx-markdown";
+import {AlertModule} from "ngx-bootstrap/alert";
 
 
 const mandatoryComponents = [
@@ -66,20 +67,21 @@ const optionalComponents = [
         NavAuthLinkComponent,
         EditableContentComponent
     ],
-  imports: [
-    SharedModule,
-    RouterModule,
-    LogoModule,
-    NavMenuModule,
-    AvatarModule,
-    ModalModule.forRoot(),
-    ButtonsModule.forRoot(),
-    SwitchModule,
-    DropdownModule,
-    PerfectScrollbarModule,
-    AngularMarkdownEditorModule.forRoot({iconlibrary: 'fa'}),
-    MarkdownModule.forRoot(),
-  ],
+    imports: [
+        SharedModule,
+        RouterModule,
+        LogoModule,
+        NavMenuModule,
+        AvatarModule,
+        ModalModule.forRoot(),
+        ButtonsModule.forRoot(),
+        SwitchModule,
+        DropdownModule,
+        PerfectScrollbarModule,
+        AngularMarkdownEditorModule.forRoot({iconlibrary: 'fa'}),
+        MarkdownModule.forRoot(),
+        AlertModule,
+    ],
   exports: [
     AppLayoutComponent,
     AuthLayoutComponent,

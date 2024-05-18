@@ -26,7 +26,10 @@ import {PopoverModule} from "ngx-bootstrap/popover";
 import {FormatPipeModule} from "ngx-date-fns";
 import {AccordionModule} from "ngx-bootstrap/accordion";
 import {CollapseModule} from "ngx-bootstrap/collapse";
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ruLocale } from 'ngx-bootstrap/locale';
 
+defineLocale('ru', ruLocale);
 
 @NgModule({
     declarations: [

@@ -1,0 +1,11 @@
+.layout-alerts {
+  display: flex;
+  justify-content: flex-end;
+
+  .layout-alert {
+    position: fixed;
+    max-width: 30%;
+    right: 40px;
+    z-index: 1000;
+  }
+}

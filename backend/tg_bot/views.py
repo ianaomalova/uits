@@ -8,14 +8,17 @@ from django.http import JsonResponse, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from rest_framework import permissions
+from rest_framework.response import Response
 from telebot.types import Update
 from rest_framework.exceptions import PermissionDenied
 
+from events.models import UserEvent
 from tg_bot.client import bot
-from rest_framework.generics import DestroyAPIView
+from rest_framework.generics import DestroyAPIView, GenericAPIView
 
 from tg_bot.models import TelegramUser
 from tg_bot.serializers import TelegramUserSerializer
+from users.permissions import IsTeacher
 
 User = get_user_model()
 
@@ -42,16 +45,16 @@ def telegram_webhook(request):
     if request.method == 'POST':
         secret_token = request.headers.get('X-Telegram-Bot-Api-Secret-Token', None)
         if secret_token != settings.TELEGRAM_BOT.get('WEBHOOK_SECRET'):
+            print(secret_token, settings.TELEGRAM_BOT.get('WEBHOOK_SECRET'))
             return HttpResponseForbidden()
         update_json_string = request.body.decode('utf-8')
         update = telebot.types.Update.de_json(update_json_string)
         threading.Thread(target=telegram_webhook_service, args=(update,)).start()
-        print('Поток обработки обновления бота запущен')
         return JsonResponse({"status": "ok"})
     return JsonResponse({'status': 'error'})
 
 
-class TelegramUserAPIView(DestroyAPIView):
+class TelegramUserDestroyAPIView(DestroyAPIView):
     queryset = TelegramUser.objects.all()
     serializer_class = TelegramUserSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -61,3 +64,15 @@ class TelegramUserAPIView(DestroyAPIView):
         if user.id != instance.assigned_user_id:
             raise PermissionDenied()
         instance.delete()
+
+
+class UserEventsNotificationsAPIView(GenericAPIView):
+    permission_classes = [IsTeacher]
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        user = request.user
+        event_pk = request.data['id']
+        user_event = UserEvent.objects.get(pk=event_pk)
+        user_event.notify(f"Напоминание от {user.last_name} {user.first_name}")
+        return Response(200)
