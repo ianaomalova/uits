@@ -81,26 +81,28 @@ export class TeachersComponent implements OnInit {
   }
 
   onCreateTeacher() {
-    this.editFormMode = 'CREATE';
-    this.createTeacherForm.reset();
-    this.openModal(this.createTeacherModal);
+    window.open(`/admin/employee/teacher/add/`)
+    // this.editFormMode = 'CREATE';
+    // this.createTeacherForm.reset();
+    // this.openModal(this.createTeacherModal);
   }
 
   onEditTeacher(id: any) {
     console.log('On Edit Emit', id);
-    const teacher = this.teacher(id);
-    this.editFormMode = 'EDIT'
-    this.chosenIdTeacher = id;
-    this.createTeacherForm.setValue({
-      first_name: teacher.first_name,
-      last_name: teacher.last_name,
-      patronymic: teacher.patronymic,
-      position: teacher.position,
-      degree: teacher.degree,
-      rank: teacher.rank,
-      bio: teacher.bio
-    })
-    this.openModal(this.createTeacherModal)
+    window.open(`/admin/employee/teacher/${id}/change/`)
+    // const teacher = this.teacher(id);
+    // this.editFormMode = 'EDIT'
+    // this.chosenIdTeacher = id;
+    // this.createTeacherForm.setValue({
+    //   first_name: teacher.first_name,
+    //   last_name: teacher.last_name,
+    //   patronymic: teacher.patronymic,
+    //   position: teacher.position,
+    //   degree: teacher.degree,
+    //   rank: teacher.rank,
+    //   bio: teacher.bio
+    // })
+    // this.openModal(this.createTeacherModal)
   }
 
   onDeleteTeacher(id: number) {

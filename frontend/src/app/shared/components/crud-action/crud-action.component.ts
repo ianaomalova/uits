@@ -28,7 +28,7 @@ export class CrudActionComponent<T extends Identifiable> implements OnInit {
   @Output() edit: EventEmitter<number> = new EventEmitter<number>();
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
 
-  actions: Action[] = [
+  @Input() actions: Action[] = [
     {
       icon: 'feather icon-edit',
       type: ActionType.EDIT

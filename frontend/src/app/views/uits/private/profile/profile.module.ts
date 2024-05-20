@@ -28,6 +28,7 @@ import {AccordionModule} from "ngx-bootstrap/accordion";
 import {CollapseModule} from "ngx-bootstrap/collapse";
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ruLocale } from 'ngx-bootstrap/locale';
+import {CheckboxModule} from "@app/shared/components/checkbox/checkbox.module";
 
 defineLocale('ru', ruLocale);
 
@@ -38,28 +39,29 @@ defineLocale('ru', ruLocale);
         RowContentComponent,
         EventsComponent
     ],
-  imports: [
-    SharedModule,
-    ColumnPanelModule,
-    RadioModule,
-    BsDatepickerModule.forRoot(),
-    UploadModule.forRoot(),
-    SwitchModule,
-    ToastrModule.forRoot(),
-    NgBootstrapFormValidationModule.forRoot(),
-    RouterModule.forChild(routes),
-    TabsModule,
-    CalendarModule,
-    NgSelectModule,
-    TimepickerModule,
-    ModalModule,
-    TooltipModule,
-    NgOptimizedImage,
-    PopoverModule,
-    FormatPipeModule,
-    AccordionModule,
-    CollapseModule
-  ],
+    imports: [
+        SharedModule,
+        ColumnPanelModule,
+        RadioModule,
+        BsDatepickerModule.forRoot(),
+        UploadModule.forRoot(),
+        SwitchModule,
+        ToastrModule.forRoot(),
+        NgBootstrapFormValidationModule.forRoot(),
+        RouterModule.forChild(routes),
+        TabsModule,
+        CalendarModule,
+        NgSelectModule,
+        TimepickerModule,
+        ModalModule,
+        TooltipModule,
+        NgOptimizedImage,
+        PopoverModule,
+        FormatPipeModule,
+        AccordionModule,
+        CollapseModule,
+        CheckboxModule
+    ],
     exports: [],
     providers: [
       AuthGuard

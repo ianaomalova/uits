@@ -46,30 +46,3 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
-
-$add-action-font-size: 1rem;
-$add-actions-gap: 1rem;
-$add-actions-top: 1rem;
-$add-actions-right: 3rem;
-
-.btn-add__item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: $add-action-font-size * 2.5;
-  width: $add-action-font-size * 2.5;
-  background-color: white;
-  box-shadow: 0 1px 8px rgba(121, 149, 167, 0.4);
-  border-radius: 50% !important;
-  font-size: $add-action-font-size;
-  cursor: pointer;
-  transition: circles-show-up 200ms ease-in-out;
-
-  i {
-    z-index: 2;
-  }
-}
-
-.btn-add__item:hover {
-  box-shadow: 0 1px 8px rgba(121, 149, 167, 0.8);
-}

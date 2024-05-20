@@ -34,7 +34,7 @@
   </div>
 </ng-template>
 
-
+<!-- calendar tab -->
 <ng-template #calendar>
   <div class="row align-items-center">
     <div class="col-md-6">
@@ -85,6 +85,7 @@
       [events]="_events"
       [tooltipTemplate]="tooltipTemplate"
       (eventClicked)="eventClicked($event)"
+      weekStartsOn="1"
       locale="ru"
     >
     </mwl-calendar-week-view>
@@ -93,6 +94,7 @@
       [viewDate]="viewDate"
       [events]="_events"
       locale="ru"
+      weekStartsOn="1"
       (eventClicked)="eventClicked($event)"
       [tooltipTemplate]="tooltipTemplate"
     >
@@ -100,40 +102,37 @@
   </div>
 </ng-template>
 
-<ng-template
-  #tooltipTemplate
-  let-contents="contents"
-  let-placement="placement"
-  let-event="event"
->
-  <div class="cal-tooltip" [ngClass]="'cal-tooltip-' + placement">
-    <div class="cal-tooltip-arrow"></div>
-    <div class="cal-tooltip-inner">
-      <div class="d-flex">
-        <div>
-          <div class="d-flex">
-            <span class="badge-dot" [ngStyle]="{'background-color': event.color.primary, 'margin-top': '7px'}"></span>
-            <div class="ms-2">
-              <h5 class="mb-1">{{ event.title }}</h5>
-              <div class="text-muted" *ngIf="!event.allDay">
-                <span>{{ event.start | dfnsFormat: 'd MMMM yyyy, HH:mm' :{locale} }}</span>
-                <span class="mx-1" *ngIf="event.end">~</span>
-                <span *ngIf="event.end">{{ event.end | dfnsFormat: 'd MMMM yyyy, HH:mm' :{locale} }}</span>
-              </div>
-              <div class="text-muted" *ngIf="event.allDay">
-                <span>Весь день: с {{ event.start | dfnsFormat: 'd MMMM yyyy':{locale} }}
-                  по {{ event.end | dfnsFormat: 'd MMMM yyyy':{locale} }}</span>
-              </div>
-              <p class="mt-3 mb-0">{{ event.meta.description }}</p>
-              <p class="mt-3 mb-0">Назначено на: {{ convertAssignedUsers(event.meta.assigned) }}</p>
+<!-- list tab -->
+<ng-template #eventList>
+  <accordion [isAnimated]="true" [closeOthers]="true">
+    <div *ngFor="let eventsDay of groupedEvents | async;">
+      <accordion-group
+        [heading]="eventsDay.day"
+      >
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-action" *ngFor="let event of eventsDay.events"
+              (click)="eventClicked({event: {id: event.id}, sourceEvent: $event})">
+            <div class="mb-3">
+              <span class="badge-dot me-3"
+                    [ngStyle]="{'background-color': event.color.primary, 'margin-top': '7px'}"></span>
+              <b>{{ event.title }}</b>
             </div>
-          </div>
-        </div>
-      </div>
+            <p>
+              Начало: {{ event.start | dfnsFormat: (event.allDay) ? 'dd MMMM yyyy' : 'dd MMMM yyyy HH:MM': {locale} }}</p>
+            <p>Конец: {{ event.end | dfnsFormat: (event.allDay) ? 'dd MMMM yyyy' : 'dd MMMM yyyy HH:MM': {locale} }}</p>
+            <p *ngIf="event.allDay">Весь день</p>
+            <p>Назначено: {{ convertAssignedUsers(event.meta.assigned) }}</p>
+            <div>Описание:
+              {{ event.meta.description }}
+            </div>
+          </li>
+        </ul>
+      </accordion-group>
     </div>
-  </div>
+  </accordion>
 </ng-template>
 
+<!-- create/edit form modal -->
 <ng-template #eventModal>
   <div class="modal-header">
     <h4 class="modal-title">{{ modalMode === 'add' ? 'Создать' : 'Изменить' }} событие</h4>
@@ -184,7 +183,7 @@
       </div>
 
       <div class="form-group mb-3">
-        <switch formControlName="allDay" (onChange)="onSwitchAllDay($event)">Весь день?</switch>
+        <switch formControlName="allDay" (onChange)="onSwitchAllDayControl($event)">Весь день?</switch>
       </div>
 
       <div class="form-group mb-3">
@@ -202,6 +201,9 @@
             {{ (item.lastName) ? item.lastName + " " + item.firstName + " (" + item.username + ")" : item.username }}
           </ng-template>
         </ng-select>
+      </div>
+      <div class="form-group mb-3">
+        <checkbox formControlName="assignedUsersSelectAll">Выбрать всех</checkbox>
       </div>
       <div class="form-group mb-3">
         <label class="form-label">Описание</label>
@@ -225,6 +227,7 @@
   </div>
 </ng-template>
 
+<!-- notification confirm modal -->
 <ng-template #notificationConfirm>
   <div class="modal-header">
     <h4 class="modal-title">Подтверджение отправки уведомления</h4>
@@ -239,31 +242,38 @@
   </div>
 </ng-template>
 
-<ng-template #eventList>
-  <accordion [isAnimated]="true" [closeOthers]="true">
-    <div *ngFor="let eventsDay of groupedEvents | async;">
-      <accordion-group
-        [heading]="eventsDay.day"
-      >
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-action" *ngFor="let event of eventsDay.events"
-              (click)="eventClicked({event: {id: event.id}, sourceEvent: $event})">
-            <div class="mb-3">
-              <span class="badge-dot me-3"
-                    [ngStyle]="{'background-color': event.color.primary, 'margin-top': '7px'}"></span>
-              <b>{{ event.title }}</b>
+<!-- calendar tooltip template -->
+<ng-template
+  #tooltipTemplate
+  let-contents="contents"
+  let-placement="placement"
+  let-event="event"
+>
+  <div class="cal-tooltip" [ngClass]="'cal-tooltip-' + placement">
+    <div class="cal-tooltip-arrow"></div>
+    <div class="cal-tooltip-inner">
+      <div class="d-flex">
+        <div>
+          <div class="d-flex">
+            <span class="badge-dot" [ngStyle]="{'background-color': event.color.primary, 'margin-top': '7px'}"></span>
+            <div class="ms-2">
+              <h5 class="mb-1">{{ event.title }}</h5>
+              <div class="text-muted" *ngIf="!event.allDay">
+                <span>{{ event.start | dfnsFormat: 'd MMMM yyyy, HH:mm' :{locale} }}</span>
+                <span class="mx-1" *ngIf="event.end">~</span>
+                <span *ngIf="event.end">{{ event.end | dfnsFormat: 'd MMMM yyyy, HH:mm' :{locale} }}</span>
+              </div>
+              <div class="text-muted" *ngIf="event.allDay">
+                <span>Весь день: с {{ event.start | dfnsFormat: 'd MMMM yyyy':{locale} }}
+                  по {{ event.end | dfnsFormat: 'd MMMM yyyy':{locale} }}</span>
+              </div>
+              <p class="mt-3 mb-0">{{ event.meta.description }}</p>
+              <p class="mt-3 mb-0">Назначено на: {{ convertAssignedUsers(event.meta.assigned) }}</p>
             </div>
-            <p>
-              Начало: {{ event.start | dfnsFormat: (event.allDay) ? 'dd MMMM yyyy' : 'dd MMMM yyyy HH:MM': {locale} }}</p>
-            <p>Конец: {{ event.end | dfnsFormat: (event.allDay) ? 'dd MMMM yyyy' : 'dd MMMM yyyy HH:MM': {locale} }}</p>
-            <p *ngIf="event.allDay">Весь день</p>
-            <p>Назначено: {{ convertAssignedUsers(event.meta.assigned) }}</p>
-            <div>Описание:
-              {{ event.meta.description }}
-            </div>
-          </li>
-        </ul>
-      </accordion-group>
+          </div>
+        </div>
+      </div>
     </div>
-  </accordion>
+  </div>
 </ng-template>
+

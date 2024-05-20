@@ -1,7 +1,7 @@
 <h1 class="mb-4">Учебно-вспомогательный состав кафедры</h1>
 
-<div class="mb-4" *ngIf="authService.canEdit() | async">
-  <button class="btn btn-primary" (click)="onEdit()">Редактировать</button>
+<div *ngIf="authService.canEdit() | async" class="btn-add__item font-size-lg mb-4" (click)="onEdit()">
+  <i class="feather icon-plus-square"></i>
 </div>
 
 <div class="row flex-column gap-3">

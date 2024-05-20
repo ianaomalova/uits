@@ -52,16 +52,9 @@ class ScheduleClassTime(models.Model):
     class_number = models.IntegerField(choices=ClassTime.choices)
     day = models.ForeignKey(ScheduleDay, on_delete=models.CASCADE, related_name='class_times')
 
-    # def time_part_for_bulk_save(self, time_parts_count=None) -> List['ScheduleClassTimePart']:
-    #     return [ScheduleClassTimePart(class_time=self) for _ in range(time_parts_count)]
-
-
-#
-# class ScheduleClassTimePart(models.Model):
-#     class_time = models.ForeignKey(ScheduleClassTime, on_delete=models.CASCADE, related_name='parts')
-
-
 class ScheduleLesson(models.Model):
+
+
     class_time = models.ForeignKey(ScheduleClassTime, on_delete=models.CASCADE, related_name='lessons')
 
     group = models.CharField(max_length=128)

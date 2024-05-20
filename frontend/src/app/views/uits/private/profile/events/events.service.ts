@@ -3,7 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {ApiConfig} from "@app/configs/api.config";
 import {map, Observable} from "rxjs";
 import {convertKeysToSnakeCase, SnakeObjectToCamelCase} from "@app/shared/utils/SnakeToCamelCase";
-import {IEvent} from "@app/views/uits/private/profile/events/events.model";
+import {CalendarUserEventMeta, IEvent} from "@app/views/uits/private/profile/events/events.model";
+import {CalendarEvent} from "angular-calendar";
+import {eachDayOfInterval, format, parseISO} from "date-fns";
 
 
 
@@ -32,5 +34,35 @@ export class EventsService {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(ApiConfig.events.write(id));
+  }
+
+
+  groupEventsByDate(events: CalendarEvent<CalendarUserEventMeta>[], locale): { day: string, events: CalendarEvent[] }[] {
+
+    const eventsByDay: { [key: string]: CalendarEvent[] } = {};
+
+    events.forEach(event => {
+      const days = eachDayOfInterval({
+        start: event.start,
+        end: event.end || event.start
+      });
+
+      days.forEach(day => {
+        const dayKey = day.toISOString();
+        if (!eventsByDay[dayKey]) {
+          eventsByDay[dayKey] = [];
+        }
+        eventsByDay[dayKey].push(event);
+      });
+    });
+
+    return Object.keys(eventsByDay).map(day => ({
+      day,
+      events: eventsByDay[day]
+    })).sort((a, b) => {
+      const dateA = parseISO(a.day);
+      const dateB = parseISO(b.day);
+      return dateA.getTime() - dateB.getTime();
+    }).map(obj => ({day: format(parseISO(obj.day), "dd MMMM yyyy", {locale: locale}), events: obj.events}));
   }
 }

@@ -23,6 +23,10 @@
       <div class="overlay">
         <div>
           <app-crud-action
+            [actions]="[{
+      icon: 'feather icon-edit',
+      type: 0
+    }]"
             [item]="employee"
             [permission]="Permission.MODERATOR"
             (edit)="onEditTeacher($event)"
