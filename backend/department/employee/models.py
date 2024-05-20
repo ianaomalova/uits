@@ -2,11 +2,25 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
+
 from department.employee.schedule.models import Schedule
 
 
 # Create your models here.
 class Teacher(models.Model):
+    class TeacherRank(models.TextChoices):
+        READER = "Доцент",
+        PROFESSOR = "Профессор",
+
+    class TeacherDegree(models.TextChoices):
+        DOCTOR_TECH = "Доктор технических наук"
+        CANDIDATE_TECH = "Кандидат технических наук"
+        CANDIDATE_PED = "Кандидат педагогических наук"
+        DOCTOR_PHYS_MATH = "Доктор физико-математических наук"
+        CANDIDATE_PHYS_MATH = "Кандидат физико-математических наук"
+        DOCTOR_ECONOM = "Доктор экономических наук"
+        CANDIDATE_ECONOM = "Кандидат экономических наук"
+
     avatar = ProcessedImageField(upload_to='avatars/%Y/%m/%d',
                                  default=None,
                                  blank=True,
@@ -15,17 +29,18 @@ class Teacher(models.Model):
                                  options={'quality': 80},
                                  null=True)
     # Основная информация
-    last_name = models.CharField(max_length=50)
-    first_name = models.CharField(max_length=50)
-    patronymic = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, verbose_name="Фамилия")
+    first_name = models.CharField(max_length=50, verbose_name="Имя")
+    patronymic = models.CharField(max_length=50, blank=True, null=True, verbose_name="Отчество")
 
     # Степень, звание, должность
-    degree = models.CharField(max_length=100, blank=True, null=True)
-    rank = models.CharField(max_length=100, blank=True, null=True)
-    position = models.CharField(max_length=100)
+    degree = models.CharField(max_length=100, choices=TeacherDegree.choices, blank=True, null=True,
+                              verbose_name="Степень")
+    rank = models.CharField(max_length=100, choices=TeacherRank.choices, blank=True, null=True, verbose_name="Звание")
+    position = models.CharField(max_length=100, verbose_name="Должность")
 
     # Общая информация
-    bio = models.TextField(blank=True, null=True)
+    bio = models.TextField(blank=True, null=True, verbose_name="Биография")
 
     def __str__(self):
         return (self.first_name or '') + " " + (self.last_name or '') + " " + (self.patronymic or '')

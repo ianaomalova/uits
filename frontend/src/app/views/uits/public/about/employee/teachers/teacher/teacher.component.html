@@ -9,6 +9,7 @@
     <p><b>Должность</b>: {{ teacher.position }}</p>
     <p><b>Ученая степень</b>: {{ teacher.degree }}</p>
     <p><b>Ученое звание</b>: {{ teacher.rank }}</p>
+    <p *ngIf="teacher.bio"><b>Биография</b>: {{ teacher.bio }}</p>
   </div>
   <app-schedule [teacher]="teacher"></app-schedule>
 </ng-container>
