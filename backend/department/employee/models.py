@@ -9,17 +9,17 @@ from department.employee.schedule.models import Schedule
 # Create your models here.
 class Teacher(models.Model):
     class TeacherRank(models.TextChoices):
-        READER = "Доцент",
-        PROFESSOR = "Профессор",
+        READER = "READER", "Доцент",
+        PROFESSOR = "PROFESSOR", "Профессор",
 
     class TeacherDegree(models.TextChoices):
-        DOCTOR_TECH = "Доктор технических наук"
-        CANDIDATE_TECH = "Кандидат технических наук"
-        CANDIDATE_PED = "Кандидат педагогических наук"
-        DOCTOR_PHYS_MATH = "Доктор физико-математических наук"
-        CANDIDATE_PHYS_MATH = "Кандидат физико-математических наук"
-        DOCTOR_ECONOM = "Доктор экономических наук"
-        CANDIDATE_ECONOM = "Кандидат экономических наук"
+        DOCTOR_TECH = "DOCTOR_TECH", "Доктор технических наук"
+        CANDIDATE_TECH = "CANDIDATE_TECH", "Кандидат технических наук"
+        CANDIDATE_PED = "CANDIDATE_PED", "Кандидат педагогических наук"
+        DOCTOR_PHYS_MATH = "DOCTOR_PHYS_MATH", "Доктор физико-математических наук"
+        CANDIDATE_PHYS_MATH = "CANDIDATE_PHYS_MATH", "Кандидат физико-математических наук"
+        DOCTOR_ECONOM = "DOCTOR_ECONOM", "Доктор экономических наук"
+        CANDIDATE_ECONOM = "CANDIDATE_ECONOM", "Кандидат экономических наук"
 
     avatar = ProcessedImageField(upload_to='avatars/%Y/%m/%d',
                                  default=None,
