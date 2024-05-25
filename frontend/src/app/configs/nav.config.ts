@@ -236,46 +236,17 @@ const scientificActivity: NavMenu[] = [
     key: 'scientificActivity',
     submenu: [
       {
-        path: '/scientificActivity/postGraduate',
+        path: PagesConfig.editable('scientific-activity-postgraduate'),
         title: 'ScientificActivity/PostGraduate',
         translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.TITLE',
         type: 'item',
         iconType: 'feather',
         icon: 'icon-align-left',
         key: 'scientificActivity/postGraduate',
-        submenu: [
-          {
-            path: PagesConfig.editable('scientific-activities-postgraduate-general-info'),
-            title: 'General information',
-            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.GENERAL_INFORMATION',
-            type: 'title',
-            iconType: 'feather',
-            icon: 'icon-align-left',
-            key: 'scientificActivity/postGraduate/practices',
-            submenu: []
-          },
-          {
-            path: PagesConfig.editable('scientific-activities-postgraduate-reporting'),
-            title: 'Reporting',
-            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.REPORTING',
-            type: 'title',
-            iconType: 'feather',
-            icon: 'icon-align-left',
-            key: 'specialities',
-            submenu: []
-          },
-          {
-            path: PagesConfig.editable('scientific-activities-postgraduate-students'),
-            title: 'List of students',
-            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.STUDENTS',
-            type: 'title',
-            iconType: 'feather',
-            icon: 'icon-align-left',
-            key: 'dissertations',
-            submenu: []
-          }
-        ]
+        submenu: []
       },
+      ]
+    }
       // {
       //   path: PagesConfig.scientificActivities.publications,
       //   title: 'ScientificPublications',
@@ -306,8 +277,6 @@ const scientificActivity: NavMenu[] = [
       //   key: 'conferences',
       //   submenu: []
       // }
-    ]
-  },
 ];
 
 
