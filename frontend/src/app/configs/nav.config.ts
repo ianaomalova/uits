@@ -245,9 +245,9 @@ const scientificActivity: NavMenu[] = [
         key: 'scientificActivity/postGraduate',
         submenu: [
           {
-            path: PagesConfig.scientificActivities.postgraduate.practices,
-            title: 'scientificActivity/postGraduate/Practices',
-            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.PRACTICES',
+            path: PagesConfig.editable('scientific-activities-postgraduate-general-info'),
+            title: 'General information',
+            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.GENERAL_INFORMATION',
             type: 'title',
             iconType: 'feather',
             icon: 'icon-align-left',
@@ -255,9 +255,9 @@ const scientificActivity: NavMenu[] = [
             submenu: []
           },
           {
-            path: PagesConfig.scientificActivities.postgraduate.specialties,
-            title: 'Specialities',
-            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.SPECIALITIES',
+            path: PagesConfig.editable('scientific-activities-postgraduate-reporting'),
+            title: 'Reporting',
+            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.REPORTING',
             type: 'title',
             iconType: 'feather',
             icon: 'icon-align-left',
@@ -265,9 +265,9 @@ const scientificActivity: NavMenu[] = [
             submenu: []
           },
           {
-            path: PagesConfig.scientificActivities.postgraduate.dissertations,
-            title: 'Dissertations',
-            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.DISSERTATIONS.TITLE',
+            path: PagesConfig.editable('scientific-activities-postgraduate-students'),
+            title: 'List of students',
+            translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.STUDENTS',
             type: 'title',
             iconType: 'feather',
             icon: 'icon-align-left',
@@ -276,36 +276,36 @@ const scientificActivity: NavMenu[] = [
           }
         ]
       },
-      {
-        path: PagesConfig.scientificActivities.publications,
-        title: 'ScientificPublications',
-        translateKey: 'NAV.SCIENTIFIC_ACTIVITY.SCIENTIFIC_PUBLICATIONS',
-        type: 'item',
-        iconType: 'feather',
-        icon: 'icon-align-left',
-        key: 'scientificPublications',
-        submenu: []
-      },
-      {
-        path: PagesConfig.scientificActivities.scientificWork,
-        title: 'ScientificWork',
-        translateKey: 'NAV.SCIENTIFIC_ACTIVITY.SCIENTIFIC_WORK',
-        type: 'item',
-        iconType: 'feather',
-        icon: 'icon-align-left',
-        key: 'scientificWork',
-        submenu: []
-      },
-      {
-        path: PagesConfig.scientificActivities.conferences,
-        title: 'Conferences',
-        translateKey: 'NAV.SCIENTIFIC_ACTIVITY.CONFERENCES',
-        type: 'item',
-        iconType: 'feather',
-        icon: 'icon-align-left',
-        key: 'conferences',
-        submenu: []
-      }
+      // {
+      //   path: PagesConfig.scientificActivities.publications,
+      //   title: 'ScientificPublications',
+      //   translateKey: 'NAV.SCIENTIFIC_ACTIVITY.SCIENTIFIC_PUBLICATIONS',
+      //   type: 'item',
+      //   iconType: 'feather',
+      //   icon: 'icon-align-left',
+      //   key: 'scientificPublications',
+      //   submenu: []
+      // },
+      // {
+      //   path: PagesConfig.scientificActivities.scientificWork,
+      //   title: 'ScientificWork',
+      //   translateKey: 'NAV.SCIENTIFIC_ACTIVITY.SCIENTIFIC_WORK',
+      //   type: 'item',
+      //   iconType: 'feather',
+      //   icon: 'icon-align-left',
+      //   key: 'scientificWork',
+      //   submenu: []
+      // },
+      // {
+      //   path: PagesConfig.scientificActivities.conferences,
+      //   title: 'Conferences',
+      //   translateKey: 'NAV.SCIENTIFIC_ACTIVITY.CONFERENCES',
+      //   type: 'item',
+      //   iconType: 'feather',
+      //   icon: 'icon-align-left',
+      //   key: 'conferences',
+      //   submenu: []
+      // }
     ]
   },
 ];

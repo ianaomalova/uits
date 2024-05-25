@@ -72,9 +72,12 @@ export const nav = {
     SCIENTIFIC_ACTIVITY:{
       TITLE:'Научная деятельность',
       POST_GRADUATE: {
-        TITLE: 'Аспирантура и докторантура',
+        TITLE: 'Аспирантура',
         PRACTICES:'Практики',
         SPECIALITIES:'Специальности',
+        GENERAL_INFORMATION: 'Общая информация',
+        REPORTING: 'Отчетность',
+        STUDENTS: 'Список аспирантов',
         DISSERTATIONS: {
           TITLE:'Диссертации',
           PHD:'Кандидатские',

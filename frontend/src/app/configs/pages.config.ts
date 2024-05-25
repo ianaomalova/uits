@@ -37,5 +37,6 @@ export const PagesConfig = {
     conferences: sciActivitiesPrefix + '/conferences',
     publications: sciActivitiesPrefix + '/publications',
     scientificWork: sciActivitiesPrefix + '/scientific-work',
-  }
+  },
+  editable: (slug: string) => `/page/${slug}`
 };
