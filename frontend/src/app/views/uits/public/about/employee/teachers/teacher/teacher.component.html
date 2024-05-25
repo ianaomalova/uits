@@ -1,14 +1,14 @@
 <ng-container *ngIf="teacher$ | async as teacher; else loading">
   <ng-container *ngTemplateOutlet="title;context:{teacher}"></ng-container>
   <div>
-    <img [src]="(!teacher.avatar) ? AVATAR_DEFAULT_URL : teacher.avatar"
+    <img [src]="avatar"
          class="avatar mb-3"
          style="width: 10rem; height: 10rem"
-         alt="{{teacher.last_name + ' ' + teacher.first_name + ' ' + teacher.patronymic}}">
-    <p><b>Полное имя</b>: {{ teacher.last_name }} {{ teacher.first_name }} {{ teacher.patronymic }}</p>
-    <p><b>Должность</b>: {{ teacher.position }}</p>
-    <p><b>Ученая степень</b>: {{ teacher.degree }}</p>
-    <p><b>Ученое звание</b>: {{ teacher.rank }}</p>
+         alt="{{fullName}}">
+    <p><b>Полное имя</b>: {{fullName}}</p>
+    <p><b>Должность</b>: {{position}}</p>
+    <p><b>Ученая степень</b>: {{degree}}</p>
+    <p><b>Ученое звание</b>: {{rank}}</p>
     <p *ngIf="teacher.bio"><b>Биография</b>: {{ teacher.bio }}</p>
   </div>
   <app-schedule [teacher]="teacher"></app-schedule>
@@ -20,6 +20,5 @@
 
 <ng-template #title
              let-teacher="teacher">
-  <h2 class="mb-3">{{ teacher.last_name }} {{ teacher.first_name[0] }}.
-    {{ teacher.patronymic[0] }}{{ (teacher.patronymic) ? '.' : '' }}</h2>
+  <h2 class="mb-3">{{shortName}}</h2>
 </ng-template>

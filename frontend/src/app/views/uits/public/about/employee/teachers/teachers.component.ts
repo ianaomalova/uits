@@ -5,7 +5,7 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {ModalDirection} from "@app/shared/types/modal-direction";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ErrorMessage} from "ng-bootstrap-form-validation";
-import {TeacherRank} from "@app/views/uits/public/about/employee/teachers/teachers.models";
+import {TeacherDegree, TeacherRank} from "@app/views/uits/public/about/employee/teachers/teachers.models";
 import {Router} from "@angular/router";
 import {PagesConfig} from "@app/configs/pages.config";
 import {AuthService} from "@app/shared/services/auth.service";
@@ -172,4 +172,10 @@ export class TeachersComponent implements OnInit {
 
   protected readonly Permission = Permission;
   protected readonly AVATAR_DEFAULT_URL = AVATAR_DEFAULT_URL;
+
+  getEmployeePositions(employee: IEmployee): string {
+    // return {{ employee.degree ? employee.position + ',' : employee.position }} {{ employee.rank ? employee.degree + ',' : employee.degree }} {{ employee.rank }};
+    const positions = [employee.position, employee.degree ? TeacherDegree[employee.degree] : undefined, employee.rank ? TeacherRank[employee.rank] : undefined].filter(item => item) // without undefined
+    return positions.join(', ')
+  }
 }

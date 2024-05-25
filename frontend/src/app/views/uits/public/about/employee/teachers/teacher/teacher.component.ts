@@ -4,6 +4,7 @@ import {IEmployee} from "@app/shared/types/models/employee";
 import {BehaviorSubject} from "rxjs";
 import {EmployeeService} from "@app/views/uits/public/about/employee/employee.service";
 import {AVATAR_DEFAULT_URL} from "@app/configs/app.config";
+import {TeacherDegree, TeacherRank} from "@app/views/uits/public/about/employee/teachers/teachers.models";
 
 @Component({
   selector: 'app-teacher',
@@ -13,6 +14,38 @@ import {AVATAR_DEFAULT_URL} from "@app/configs/app.config";
 export class TeacherComponent implements OnInit {
   id: number;
   teacher$: BehaviorSubject<IEmployee>;
+
+  get avatar() {
+    const teacher = this.teacher$.getValue();
+    return (!teacher.avatar) ? AVATAR_DEFAULT_URL : teacher.avatar;
+  }
+
+  get fullName() {
+    const teacher = this.teacher$.getValue();
+    return `${teacher.last_name} ${teacher.first_name} ${teacher.patronymic}`
+  }
+
+  get shortName() {
+    const teacher = this.teacher$.getValue();
+
+    return `${teacher.last_name} ${teacher.first_name[0]}. ${teacher.patronymic ? teacher.patronymic[0] + '.' : ''}`
+  }
+
+  get position() {
+    return this.teacher$.getValue().position;
+  }
+
+  get degree() {
+    return TeacherDegree[this.teacher$.getValue().degree]
+  }
+
+  get rank() {
+    return TeacherRank[this.teacher$.getValue().rank]
+  }
+
+  get bio(){
+    return this.teacher$.getValue().bio;
+  }
 
   constructor(private route: ActivatedRoute, private employeeService: EmployeeService) {
     this.teacher$ = new BehaviorSubject(null);

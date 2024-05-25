@@ -18,7 +18,7 @@
         <h4
           class="card-title text-center">{{ employee.last_name }} {{ employee.first_name }} {{ employee.patronymic }}</h4>
         <p
-          class="card-text text-center">{{ employee.degree ? employee.position + ',' : employee.position }} {{ employee.rank ? employee.degree + ',' : employee.degree }} {{ employee.rank }}</p>
+          class="card-text text-center">{{getEmployeePositions(employee)}}</p>
       </div>
       <div class="overlay">
         <div>
