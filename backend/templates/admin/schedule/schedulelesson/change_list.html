@@ -1,0 +1,15 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block content %}
+    {% if description %}
+        <h3>Описание:</h3>
+        <ul class="description">
+            {% for item in description %}
+                <li>{{ item }}</li>
+            {% endfor %}
+            <li style="color: {{ chosen_color_info }}">{{ info }}</li>
+        </ul>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}
