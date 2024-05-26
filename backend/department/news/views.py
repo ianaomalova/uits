@@ -1,4 +1,5 @@
 from rest_framework import status
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -7,11 +8,17 @@ from .models import Post
 from .serializers import PostSerializer, CreatePostSerializer, ListPostSerializer
 
 
+class PostLimitOffsetPagination(LimitOffsetPagination):
+    default_limit = 10  # Количество элементов на странице по умолчанию
+    max_limit = 100  # Максимальное количество элементов на странице
+
+
 # Create your views here.
 class PostAPIViewSet(ModelViewSet):
     queryset = Post.objects.filter(display=True, post_type=Post.PostType.NEWS).order_by('-created_at')
     serializer_class = PostSerializer
     permission_classes = [IsModeratorOrReadOnly]
+    pagination_class = PostLimitOffsetPagination
 
     def create(self, request, *args, **kwargs):
         request.data['author'] = request.user.id

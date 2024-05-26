@@ -39,6 +39,7 @@ import {AngularMarkdownEditorModule} from "angular-markdown-editor";
 import {MarkdownModule} from "ngx-markdown";
 import {LayoutModule} from "@app/layout/layout.module";
 import {CreateButtonComponent} from "@app/shared/components/create-button/create-button.component";
+import {PaginationModule} from "ngx-bootstrap/pagination";
 
 registerLocaleData(localeRu);
 
@@ -102,6 +103,7 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
         MarkdownModule.forRoot(),
         LayoutModule,
         CreateButtonComponent,
+        PaginationModule,
     ],
   providers: [
     {provide: CalendarDateFormatter, useClass: CustomDateFormatter}

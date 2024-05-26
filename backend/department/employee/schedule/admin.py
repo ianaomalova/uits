@@ -23,10 +23,10 @@ class ScheduleAdmin(admin.ModelAdmin):
 # Регистрация модели ScheduleLesson с настройками админ-панели
 @admin.register(ScheduleLesson)
 class ScheduleLessonAdmin(admin.ModelAdmin):
-    list_display = ('name', 'group', 'class_time', 'week_number', 'schedule')
+    list_display = ('name', 'type', 'group', 'subgroup', 'class_time', 'week_number', 'schedule')
     search_fields = ('name', 'group', 'schedule__teacher__name')
     list_filter = ('week_number', 'class_time', 'group', 'schedule__teacher')
-    list_editable = ('class_time', 'week_number', 'group')
+    list_editable = ('class_time', 'subgroup', 'week_number', 'group')
     ordering = ('week_number', 'class_time')
     inlines = [ScheduleLessonDateInline]
 

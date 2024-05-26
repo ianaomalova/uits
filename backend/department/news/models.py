@@ -32,7 +32,7 @@ class Post(models.Model):
 
     content = QuillField(verbose_name="Содержание статьи")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    display = models.BooleanField(verbose_name='Отображать?', default=False)
+    display = models.BooleanField(verbose_name='Отображать?', default=True)
     author = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Автор")
 
     def __str__(self):

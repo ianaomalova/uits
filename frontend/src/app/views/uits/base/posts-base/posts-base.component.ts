@@ -6,12 +6,8 @@ import {ListPost} from "@app/shared/types/models/news";
 export abstract class PostsBaseComponent {
   locale = ru;
 
-  abstract get posts$(): BehaviorSubject<ListPost[]>;
   abstract setPosts(): void;
 
-  post(id: number) {
-    return this.posts$.getValue().find(p => p.id === id);
-  }
 
   redirectToCreatePage() {
     window.open(PagesConfig.admin + "/news/post/add/")
