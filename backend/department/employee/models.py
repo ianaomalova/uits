@@ -43,10 +43,20 @@ class Teacher(models.Model):
     bio = models.TextField(blank=True, null=True, verbose_name="Биография")
 
     def __str__(self):
-        return (self.first_name or '') + " " + (self.last_name or '') + " " + (self.patronymic or '')
+        return self.full_name
 
     def import_schedule(self, file: InMemoryUploadedFile):
         Schedule.objects.import_from_file(self.id, file)
+
+    @property
+    def short_name(self):
+        initial_first_name = self.first_name[0] + '.' if self.first_name and len(self.first_name) != 0 else ''
+        initial_patronymic = self.patronymic[0] + '.' if self.patronymic and len(self.patronymic) != 0 else ''
+        return self.last_name + ' ' + initial_first_name + ' ' + initial_patronymic
+
+    @property
+    def full_name(self):
+        return self.last_name + ' ' + (self.first_name if self.first_name else '') + ' ' + (self.patronymic if self.patronymic else '')
 
     class Meta:
         verbose_name = 'преподаватель'

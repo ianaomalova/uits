@@ -1,11 +1,13 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {IEmployee} from "@app/shared/types/models/employee";
 import {CalendarEvent} from "angular-calendar";
 import {EmployeeService} from "@app/views/uits/public/about/employee/employee.service";
-import {BehaviorSubject} from "rxjs";
-import {Schedule} from "@app/shared/types/models/schedule";
+import {BehaviorSubject, Subject, takeUntil} from "rxjs";
+import {CalendarEventMetaLesson, Schedule} from "@app/shared/types/models/schedule";
 import {AuthService} from "@app/shared/services/auth.service";
 import {AlertService} from "@app/shared/services/alert.service";
+import {PagesConfig} from "@app/configs/pages.config";
+import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 
 
 @Component({
@@ -13,7 +15,9 @@ import {AlertService} from "@app/shared/services/alert.service";
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss']
 })
-export class ScheduleComponent implements OnInit {
+export class ScheduleComponent implements OnInit, OnDestroy {
+
+  private destroy$ = new Subject<void>();
 
   @Input() teacher: IEmployee;
 
@@ -23,14 +27,28 @@ export class ScheduleComponent implements OnInit {
 
   viewDate: Date;
 
+  modalRef: BsModalRef;
+  @ViewChild('confirmImportSchedule') confirmImportSchedule: TemplateRef<any>;
+  @ViewChild('confirmRedirectToEditScheduleLesson') confirmRedirectToEditScheduleLesson: TemplateRef<any>;
+
+  chosenEditLessonId: number = null;
+
   get profile() {
     return this.authService.profile$
   }
 
-  constructor(private employeeService: EmployeeService, private authService: AuthService, private alertService: AlertService) {
+  constructor(private employeeService: EmployeeService, private authService: AuthService,
+              private alertService: AlertService,
+              private modalService: BsModalService) {
     this.schedule = new BehaviorSubject<Schedule>(null);
 
     this.setViewDate();
+  }
+
+  ngOnDestroy(): void {
+    console.log('destroy called')
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {
@@ -38,8 +56,9 @@ export class ScheduleComponent implements OnInit {
   }
 
   refreshSchedule() {
-    this.employeeService.retrieveSchedule(this.teacher.id).subscribe(schedule => {
-      console.log(schedule.days)
+    this.employeeService.retrieveSchedule(this.teacher.id)
+      .pipe(takeUntil(this.destroy$)).subscribe(schedule => {
+      console.log(schedule)
       this.schedule.next(schedule);
     })
   }
@@ -48,7 +67,7 @@ export class ScheduleComponent implements OnInit {
     this.viewDate = new Date();
   }
 
-  getEvents(): CalendarEvent[] {
+  getEvents(): CalendarEvent<CalendarEventMetaLesson>[] {
     const schedule = this.schedule.getValue();
     if (!schedule) return [];
 
@@ -62,17 +81,69 @@ export class ScheduleComponent implements OnInit {
     this.selectedScheduleFile = <File>$event.target.files[0];
     console.log(this.selectedScheduleFile)
 
-    this.employeeService.importSchedule(this.teacher.id, this.selectedScheduleFile).subscribe(
-      response => {
+
+    this.openModal(this.confirmImportSchedule);
+    // $event.target.clear()
+  }
+
+  importScheduleFromSelectedFile() {
+    if (this.modalRef) this.modalRef.hide();
+    this.employeeService.importSchedule(this.teacher.id, this.selectedScheduleFile)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe({
+      next: response => {
         console.log(response)
         this.alertService.add("Расписание успешно импортировано");
         this.refreshSchedule()
-      }, error => {
+      },
+      error: error => {
         console.log(error)
         this.alertService.add("Ошибка. Возможно неверный формат файла.", 'danger')
       }
-    )
+    })
+  }
 
-    // $event.target.clear()
+  cancelImportSchedule() {
+    this.modalRef.hide();
+    this.selectedScheduleFile = null;
+  }
+
+  navigateToScheduleEdit() {
+    if (this.schedule.getValue()) {
+      window.open(`${PagesConfig.admin}/schedule/schedulelesson/?schedule__teacher__id__exact=${this.teacher.id}`)
+    } else {
+      window.open()
+    }
+  }
+
+  openModal(template) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  onCalendarEventClick($event: { event: CalendarEvent<CalendarEventMetaLesson>; sourceEvent: any }) {
+    console.log('clicked', $event)
+    this.chosenEditLessonId = $event.event.meta.id
+    this.authService.canEdit().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(
+      ok => {
+        console.log('ok??', ok)
+        if (ok) {
+          this.openModal(this.confirmRedirectToEditScheduleLesson);
+        }
+      },
+    )
+  }
+
+  onConfirmRedirectToEditScheduleLesson() {
+    window.open(`${PagesConfig.admin}/schedule/schedulelesson/${this.chosenEditLessonId}/change/`)
+    this.modalRef.hide()
+  }
+
+  cancelRedirectToEditScheduleLesson() {
+    this.chosenEditLessonId = null;
+    this.modalRef.hide()
   }
 }

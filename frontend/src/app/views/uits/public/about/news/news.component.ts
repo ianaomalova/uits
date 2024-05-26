@@ -8,18 +8,17 @@ import {AuthService} from '@app/shared/services/auth.service';
 import {Profile} from '@app/shared/types/models/auth';
 import {PagesConfig} from '@app/configs/pages.config';
 import {ru} from 'date-fns/locale';
+import {PostsBaseComponent} from "@app/views/uits/base/posts-base/posts-base.component";
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent extends PostsBaseComponent implements OnInit {
   modalRef: BsModalRef;
 
-  title = 'Новости'
 
-  locale = ru;
   createPostTitle = '';
   createPostDescription = '';
   createPostContent = '';
@@ -35,8 +34,8 @@ export class NewsComponent implements OnInit {
 
   constructor(private newsService: NewsService,
               private modalService: BsModalService,
-              private authService: AuthService) {
-
+              public authService: AuthService) {
+    super()
     this.isMobile = window.innerWidth < 992;
   }
 
@@ -56,9 +55,7 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  post(id: number) {
-    return this.posts$.getValue().find(p => p.id === id);
-  }
+
 
   ngOnInit(): void {
     this.setPosts();
@@ -116,4 +113,6 @@ export class NewsComponent implements OnInit {
   getDateFromString(dateISO: string): Date {
     return new Date(dateISO);
   }
+
+
 }

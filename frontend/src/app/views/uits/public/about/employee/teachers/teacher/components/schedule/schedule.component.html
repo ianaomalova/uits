@@ -68,6 +68,7 @@
       dayEndMinute="50"
       [hourSegments]="3"
       [hourSegmentTemplate]="weekViewHourSegment"
+      (eventClicked)="onCalendarEventClick($event)"
     >
     </mwl-calendar-week-view>
   </div>
@@ -170,7 +171,7 @@
 <ng-template #actionPanel>
   <div class="d-flex flex-column gap-3">
 
-    <div class="d-flex flex-column gap-1"
+    <div class="d-flex flex-column gap-1  mb-3"
          *ngIf="(profile | async) && ((profile | async).isModerator || (profile | async).isSuperuser)">
 
       <div class="fw-semibold">
@@ -178,7 +179,7 @@
       </div>
 
       <div class="d-flex gap-3">
-        <button class="btn btn-primary">Редактировать</button>
+        <button class="btn btn-primary" (click)="navigateToScheduleEdit()">Редактировать</button>
 
         <div>
           <input #inputSchedulePDF type="file" accept="application/pdf"
@@ -190,5 +191,38 @@
       </div>
     </div>
 
+  </div>
+</ng-template>
+
+
+<ng-template
+    #confirmImportSchedule
+    bsModal
+>
+  <div class="modal-header">
+    <h4 class="modal-title">Импорт расписания</h4>
+  </div>
+  <div class="modal-body">
+    <p>
+      Уверены что хотите удалить текущее расписание преподавателя и импортировать новое?
+    </p>
+    <button type="button" class="btn btn-primary me-3" (click)="importScheduleFromSelectedFile()">Да</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="cancelImportSchedule()">Нет</button>
+  </div>
+</ng-template>
+
+<ng-template
+  #confirmRedirectToEditScheduleLesson
+  bsModal
+>
+  <div class="modal-header">
+    <h4 class="modal-title">Переход на страницу редактирования пары</h4>
+  </div>
+  <div class="modal-body">
+    <p>
+      Хотите перейти на страницу редактирования этой пары?
+    </p>
+    <button type="button" class="btn btn-primary me-3" (click)="onConfirmRedirectToEditScheduleLesson()">Да</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="cancelRedirectToEditScheduleLesson()">Нет</button>
   </div>
 </ng-template>

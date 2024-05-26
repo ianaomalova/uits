@@ -1,8 +1,6 @@
 <h1 class="mb-4">Преподавательский состав кафедры</h1>
 
-<div *ngIf="authService.canEdit() | async" class="btn-add__item font-size-lg mb-4" (click)="onCreateTeacher()">
-  <i class="feather icon-plus-square"></i>
-</div>
+<app-create-button></app-create-button>
 <div *ngIf="(teacher$ | async).length !== 0; else loading">
   <div class="row align-center-start gap-5 flex-row">
     <div *ngFor="let employee of teacher$ | async" class="card" style="width: 18rem; min-height: 100%">

@@ -1,0 +1,3 @@
+<div *ngIf="authService.canEdit() | async" class="btn-add__item font-size-lg mb-4" (click)="create.emit()">
+  <i class="feather icon-plus-square"></i>
+</div>

@@ -38,6 +38,7 @@ import localeRu from '@angular/common/locales/ru';
 import {AngularMarkdownEditorModule} from "angular-markdown-editor";
 import {MarkdownModule} from "ngx-markdown";
 import {LayoutModule} from "@app/layout/layout.module";
+import {CreateButtonComponent} from "@app/shared/components/create-button/create-button.component";
 
 registerLocaleData(localeRu);
 
@@ -78,29 +79,30 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     PostActionsComponent,
     NewsComponent,
   ],
-  imports: [
-    CommonModule,
-    AboutRoutingModule,
-    QuillViewComponent,
-    ModalModule,
-    QuillEditorComponent,
-    QuillConfigModule.forRoot({
-      modules
-    }),
-    SharedModule,
-    NgBootstrapFormValidationModule,
-    CrudActionModule,
-    DateFnsModule,
-    NgSelectModule,
-    NgOptimizedImage,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
-    AngularMarkdownEditorModule.forRoot({iconlibrary: 'fa'}),
-    MarkdownModule.forRoot(),
-    LayoutModule,
-  ],
+    imports: [
+        CommonModule,
+        AboutRoutingModule,
+        QuillViewComponent,
+        ModalModule,
+        QuillEditorComponent,
+        QuillConfigModule.forRoot({
+            modules
+        }),
+        SharedModule,
+        NgBootstrapFormValidationModule,
+        CrudActionModule,
+        DateFnsModule,
+        NgSelectModule,
+        NgOptimizedImage,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        }),
+        AngularMarkdownEditorModule.forRoot({iconlibrary: 'fa'}),
+        MarkdownModule.forRoot(),
+        LayoutModule,
+        CreateButtonComponent,
+    ],
   providers: [
     {provide: CalendarDateFormatter, useClass: CustomDateFormatter}
   ]

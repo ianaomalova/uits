@@ -7,27 +7,22 @@ import {Profile} from "@app/shared/types/models/auth";
 import {BehaviorSubject} from "rxjs";
 import {ListPost} from "@app/shared/types/models/news";
 import {PagesConfig} from "@app/configs/pages.config";
+import {PostsBaseComponent} from "@app/views/uits/base/posts-base/posts-base.component";
 
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
   styleUrls: ['./announcements.component.css']
 })
-export class AnnouncementsComponent implements OnInit {
-
-  @Input() title = 'Новости'
-  @Input() isEditable: boolean = true
-
-  locale = ru;
+export class AnnouncementsComponent extends PostsBaseComponent implements OnInit {
 
   isMobile: boolean;
 
   selectedImage: File | null = null;
 
   constructor(private announcementService: AnnouncementsService,
-              private modalService: BsModalService,
               private authService: AuthService) {
-
+    super()
     this.isMobile = window.innerWidth < 992;
   }
 
@@ -45,10 +40,6 @@ export class AnnouncementsComponent implements OnInit {
     } else {
       this.isMobile = false;
     }
-  }
-
-  post(id: number) {
-    return this.posts$.getValue().find(p => p.id === id);
   }
 
   ngOnInit(): void {

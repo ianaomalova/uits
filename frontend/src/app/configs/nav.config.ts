@@ -241,7 +241,7 @@ const scientificActivity: NavMenu[] = [
         translateKey: 'NAV.SCIENTIFIC_ACTIVITY.POST_GRADUATE.TITLE',
         type: 'item',
         iconType: 'feather',
-        icon: 'icon-align-left',
+        icon: 'icon-briefcase',
         key: 'scientificActivity/postGraduate',
         submenu: []
       },
