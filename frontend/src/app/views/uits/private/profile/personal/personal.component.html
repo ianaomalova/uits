@@ -22,6 +22,10 @@
         <th class="py-4">Имя пользователя</th>
         <td class="py-4">{{ person.username }}</td>
       </tr>
+      <tr *ngIf="person.isStaff">
+        <th class="py-4">Пароль</th>
+        <td class="py-4"><a class="text-primary" href="/admin/password_change">Изменить пароль</a></td>
+      </tr>
       <tr>
         <th class="py-4">Электронная почта</th>
         <td class="py-4">{{ person.email }}</td>
