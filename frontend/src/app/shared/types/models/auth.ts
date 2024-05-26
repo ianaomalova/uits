@@ -18,6 +18,7 @@ export interface Profile {
   isSuperuser: boolean;
   isModerator: boolean;
   isTeacher: boolean;
+  isStaff: boolean;
   isAnonymous: boolean;
   telegramCode: string;
   telegramUser: TelegramUser | null;
@@ -32,6 +33,7 @@ export const createAnonymousProfile = (): Profile => {
     isModerator: false,
     isTeacher: false,
     isAnonymous: true,
+    isStaff: false,
     email: null,
     lastName: '',
     firstName: '',

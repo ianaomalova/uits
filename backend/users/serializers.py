@@ -30,6 +30,8 @@ class UserDetailsSerializer(DefaultUserDetailsSerializer):
             extra_fields.append('telegram_code')
         if hasattr(UserModel, 'telegram_user'):
             extra_fields.append('telegram_user')
+        if hasattr(UserModel, 'is_staff'):
+            extra_fields.append('is_staff')
         model = UserModel
         fields = ('pk', *extra_fields)
         read_only_fields = ('email', 'is_moderator', 'is_superuser', 'is_teacher')
