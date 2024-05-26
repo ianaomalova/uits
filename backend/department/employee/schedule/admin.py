@@ -33,7 +33,8 @@ class ScheduleLessonAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         # Получить первоначальный queryset
         qs = super().get_queryset(request)
-        if 'change' in request.path:
+        print(request.path)
+        if 'change' in request.path or 'delete' in request.path:
             return qs
         # Получить значение фильтра schedule из GET параметров
         teacher_id = request.GET.get('schedule__teacher__id__exact')
