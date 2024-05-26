@@ -25,7 +25,7 @@ class ScheduleAdmin(admin.ModelAdmin):
 class ScheduleLessonAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'group', 'subgroup', 'class_time', 'week_number', 'schedule')
     search_fields = ('name', 'group', 'schedule__teacher__name')
-    list_filter = ('week_number', 'class_time', 'group', 'schedule__teacher')
+    list_filter = ('week_number', 'class_time', 'group', 'subgroup', 'type', 'schedule__teacher')
     list_editable = ('class_time', 'subgroup', 'week_number', 'group')
     ordering = ('week_number', 'class_time')
     inlines = [ScheduleLessonDateInline]
