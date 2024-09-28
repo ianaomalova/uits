@@ -41,3 +41,18 @@
     </div>
   </div>
 </div>
+
+<div class="profile-container">
+  <button (click)="navigateToHome()">Вернуться к информационной части</button>
+  <div class="panel-menu">
+    <ng-container *ngFor="let panel of panelMenu">
+      <div *ngIf="panel.access.includes(currentUserPermission)" (click)="onPanelChange(panel.key)">
+        <i [ngClass]="panel.icon"></i>
+        <span>{{ panel.title }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="panel-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
