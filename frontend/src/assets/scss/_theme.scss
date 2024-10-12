@@ -13,3 +13,47 @@ app-root {
 :focus {
     outline: none;
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  blockquote {
+    font-style: italic;
+    border-left: 4px solid #ddd; /* Цвет границы цитаты */
+    padding-left: 16px;
+    margin: 20px 0;
+  }
+  
+  blockquote p {
+    margin: 0;
+  }
+  markdown, .markdown-content {
+    font-size: 1.25rem; /* Увеличивает шрифт на 25% */
+    line-height: 1.6; /* Опционально: добавляет больше пространства между строками */
+  }
+  
+  markdown p, markdown li, markdown h1, markdown h2, markdown h3, markdown h4, markdown h5, markdown h6 {
+    font-size: inherit; /* Наследует размер шрифта от родительского элемента */
+  }
+  
+  
+  

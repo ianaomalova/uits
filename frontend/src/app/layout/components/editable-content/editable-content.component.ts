@@ -1,11 +1,17 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
-import {MarkdownService} from "ngx-markdown";
-import {AuthService} from "@app/shared/services/auth.service";
-import {EditableContentService} from "@app/layout/components/editable-content/editable-content.service";
-import {BehaviorSubject, Observable} from "rxjs";
-import {EditorLocale} from "angular-markdown-editor";
-import {UNSAVED_WARN_MESSAGE} from "@app/configs/app.config";
-import {fadeInOut} from "@app/shared/animations/fadeInOut.animation";
+import { Component, HostListener, Input, OnInit, AfterViewChecked } from '@angular/core';
+import { MarkdownService } from 'ngx-markdown';
+import { AuthService } from '@app/shared/services/auth.service';
+import { EditableContentService } from '@app/layout/components/editable-content/editable-content.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { EditorLocale } from 'angular-markdown-editor';
+import { UNSAVED_WARN_MESSAGE } from '@app/configs/app.config';
+import { fadeInOut } from '@app/shared/animations/fadeInOut.animation';
+import * as Prism from 'prismjs';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-javascript'; 
+import 'prismjs/components/prism-css'; 
+
 
 @Component({
   selector: 'app-editable-content',
@@ -15,7 +21,7 @@ import {fadeInOut} from "@app/shared/animations/fadeInOut.animation";
     fadeInOut
   ]
 })
-export class EditableContentComponent implements OnInit {
+export class EditableContentComponent implements OnInit, AfterViewChecked {
   locale: EditorLocale = {
     language: 'ru',
     dictionary: {
@@ -40,7 +46,9 @@ export class EditableContentComponent implements OnInit {
       'enter image description here': 'Введите описание изображения',
       'Insert Image Hyperlink': 'Вставьте ссылку на изображение',
       'enter image title here': 'Введите заголовок изображения',
-      'list text here': 'текст для списка'
+      'list text here': 'текст для списка',
+      '[ ]': 'Чекбокс',
+      '[x]': 'Отмеченный чекбокс'
     }
   };
 
@@ -49,20 +57,33 @@ export class EditableContentComponent implements OnInit {
   editorOptions: any;
   editMode: boolean = false;
 
-
-  constructor(private markdownService: MarkdownService,
-              public authService: AuthService,
-              private editableContentService: EditableContentService) {
+  constructor(
+    private markdownService: MarkdownService,
+    public authService: AuthService,
+    private editableContentService: EditableContentService
+  ) {
     this.content$ = new BehaviorSubject(null);
   }
 
   ngOnInit(): void {
     this.editorOptions = {
       language: 'ru',
-      parser: (val) => this.markdownService.parse(val.trim())
-    }
+      parser: (val) => {
+        let parsedMarkdown = this.markdownService.parse(val.trim());
+
+        // Поддержка чекбоксов
+        parsedMarkdown = parsedMarkdown.replace(/\[ \]/g, '<input type="checkbox">');
+        parsedMarkdown = parsedMarkdown.replace(/\[x\]/g, '<input type="checkbox" checked>');
+
+        return parsedMarkdown;
+      }
+    };
 
     this.initPage();
+  }
+
+  ngAfterViewChecked(): void {
+    Prism.highlightAll();  // Подсветка синтаксиса после рендеринга
   }
 
   onSave(): void {
@@ -71,7 +92,7 @@ export class EditableContentComponent implements OnInit {
     }).subscribe(_ => {
       this.initPage();
       this.editMode = false;
-    })
+    });
   }
 
   onCancel(): void {
@@ -79,23 +100,27 @@ export class EditableContentComponent implements OnInit {
     this.initPage();
   }
 
-  private initPage() {
+  private initPage(): void {
     this.editableContentService.getPage(this.page).subscribe({
-      next: editableContent => {
-        console.log(editableContent);
-        this.content$.next(editableContent.text);
+      next: (editableContent) => {
+        if (editableContent && editableContent.text) {
+          this.content$.next(editableContent.text);
+        } else {
+          console.error('Контент страницы отсутствует или некорректен');
+        }
       },
-      error: err => {
-        console.error("HTTP ERR ", err.status);
-        if (err.status) {
-          console.error('Такой страницы не существует');
+      error: (err) => {
+        if (err?.status === 404) {
+          console.error('Такой страницы не существует (404)');
+        } else if (err && err.status) {
+          console.error(`HTTP Error: ${err.status}`);
         } else {
           console.error('Непредвиденная ошибка сервера. Не удалось получить контент страницы');
         }
       }
-    })
+    });
   }
-
+  
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
     return this.checkUnsavedChanges();
@@ -104,4 +129,6 @@ export class EditableContentComponent implements OnInit {
   private checkUnsavedChanges(): boolean {
     return this.editMode ? confirm(UNSAVED_WARN_MESSAGE) : true;
   }
-}
+
+  
+  }
