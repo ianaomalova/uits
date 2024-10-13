@@ -39,25 +39,19 @@ class ScheduleLessonAdmin(admin.ModelAdmin):
         teacher_id = request.GET.get('schedule__teacher__id__exact')
         # Если фильтр не установлен, возвращать пустой queryset
         if not teacher_id:
-            return qs.none()
+            return qs.all()
         # Возвращать отфильтрованный queryset
         return qs.filter(schedule__teacher__id__exact=teacher_id)
 
     def changelist_view(self, request, extra_context=None):
         # Получить значение фильтра schedule из GET параметров
         teacher_id = request.GET.get('schedule__teacher__id__exact')
-        if not teacher_id:
-            # Если фильтр не установлен, выбрать первую запись Schedule
-            first_schedule = Teacher.objects.filter(schedule__isnull=False).order_by('-schedule__id').first()
-            if first_schedule:
-                return HttpResponseRedirect(f'{request.path}?schedule__teacher__id__exact={first_schedule.id}')
-            else:
-                self.message_user(request, "Нет доступных расписаний для просмотра.", level='warning')
+        
 
         # Добавление пользовательского контекста
         if extra_context is None:
             extra_context = {}
-        info = f'Сейчас выбран {Teacher.objects.get(pk=teacher_id)}' if teacher_id else 'Пожалуйста, выберите преподавателя для просмотра расписания пар.'
+        info = f'Сейчас выбран {Teacher.objects.get(pk=teacher_id)}' if teacher_id else 'Вы смотрите расписание всех преподавателей'
         extra_context['chosen_color_info'] = '#66ff00' if teacher_id else 'red'
         extra_context['description'] = (
                     'Данные отображаемые на этой странице всегда будут отфильтрованы по преподавателю в меню справа внизу. \n',
