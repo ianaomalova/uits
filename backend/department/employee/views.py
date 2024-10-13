@@ -30,6 +30,13 @@ class TeacherAPIViewSet(ModelViewSet):
         teacher: Teacher = self.get_object()
         serializer = ScheduleSerializer(teacher.schedule)
         return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'], url_path='all-schedule')
+    def retrieve_all_schedule(self, request, *args, **kwargs):
+        teachers = self.get_queryset()
+        schedules = [teacher.schedule for teacher in teachers]
+        serializer = ScheduleSerializer(schedules, many=True)
+        return Response(serializer.data)
 
     @action(detail=True, methods=['patch'], url_path='schedule')
     def update_schedule(self, request, *args, **kwargs):
