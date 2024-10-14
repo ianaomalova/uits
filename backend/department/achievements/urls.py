@@ -1,13 +1,10 @@
-from django.urls import path
-
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from .views import AchievementAPIViewSet
 
+router = DefaultRouter()
+router.register('', AchievementAPIViewSet)
+
 urlpatterns = [
-    path('', AchievementAPIViewSet.as_view({
-        'get': 'list',
-        'post': 'create'
-    })),
-    path('<int:pk>/', AchievementAPIViewSet.as_view({
-        'get': 'retrieve'
-    }))
+    path('', include(router.urls)),
 ]
