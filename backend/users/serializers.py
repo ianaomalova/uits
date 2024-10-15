@@ -1,10 +1,15 @@
+# serializers.py
+
 from dj_rest_auth.serializers import UserDetailsSerializer as DefaultUserDetailsSerializer
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
+from django.db import connection
 
 UserModel = get_user_model()
 
-
 class UserDetailsSerializer(DefaultUserDetailsSerializer):
+    teacher = serializers.ChoiceField(choices=[], required=False)
+
     class Meta:
         extra_fields = []
 
@@ -33,7 +38,11 @@ class UserDetailsSerializer(DefaultUserDetailsSerializer):
         if hasattr(UserModel, 'is_staff'):
             extra_fields.append('is_staff')
         model = UserModel
-        fields = ('pk', *extra_fields)
+        fields = ('pk', *extra_fields, 'teacher')
         read_only_fields = ('email', 'is_moderator', 'is_superuser', 'is_teacher')
 
         depth = 1
+
+
+
+

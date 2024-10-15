@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from department.employee.forms import TeacherForm
 from department.employee.models import Teacher, HelpersEmployee
 
 
@@ -8,7 +8,7 @@ from department.employee.models import Teacher, HelpersEmployee
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    pass
+    form = TeacherForm
 
 
 @admin.register(HelpersEmployee)

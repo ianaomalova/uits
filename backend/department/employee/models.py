@@ -1,12 +1,12 @@
+# department/employee/models.py
+
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.db import models
+from django.db import models, connection
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 
 from department.employee.schedule.models import Schedule
 
-
-# Create your models here.
 class Teacher(models.Model):
     class TeacherRank(models.TextChoices):
         READER = "READER", "Доцент",
@@ -32,6 +32,9 @@ class Teacher(models.Model):
     last_name = models.CharField(max_length=50, verbose_name="Фамилия")
     first_name = models.CharField(max_length=50, verbose_name="Имя")
     patronymic = models.CharField(max_length=50, blank=True, null=True, verbose_name="Отчество")
+
+    # Тестовая инфа(удалить)
+    user_id = models.BigIntegerField(null=True, blank=True)
 
     # Степень, звание, должность
     degree = models.CharField(max_length=100, choices=TeacherDegree.choices, blank=True, null=True,
@@ -61,7 +64,6 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = 'преподаватель'
         verbose_name_plural = 'преподаватели'
-
 
 class HelpersEmployee(models.Model):
     avatar = ProcessedImageField(upload_to='avatars/%Y/%m/%d',

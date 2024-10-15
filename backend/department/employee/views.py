@@ -10,6 +10,21 @@ from .serializers import TeacherSerializer, HelpersEmployeeSerializer
 
 
 # Create your views here.
+def teacher_view(request):
+    print(f"Teacher: 888888888888")
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('success_url')  # Замените на ваш URL
+        else:
+            print(form.errors)
+    else:
+        print(form.errors)
+        form = TeacherForm()
+
+    return render(request, 'teacher_template.html', {'form': form})
+
 
 class TeacherAPIViewSet(ModelViewSet):
     queryset = Teacher.objects.all().order_by('last_name', 'first_name', 'patronymic')
