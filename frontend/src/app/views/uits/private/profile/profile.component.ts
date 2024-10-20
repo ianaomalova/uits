@@ -66,13 +66,7 @@ export class ProfileComponent implements OnInit {
       access: [Permission.TEACHER , Permission.MODERATOR],
       path: '/corp/modular_journals'
     },
-    {
-      title: 'Events',
-      key: 'Календарь событий',
-      icon: 'icon-calendar',
-      access: [Permission.TEACHER, Permission.MODERATOR],
-      path: '/corp/calendar'
-    }
+  
   ];
 
   currentPanel: string = 'Personal';

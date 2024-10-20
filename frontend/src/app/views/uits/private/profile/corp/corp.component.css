@@ -1,0 +1,28 @@
+.corporate-container {
+    padding-top: 20px;
+  }
+  
+  .corporate-sidebar {
+    background-color: #f8f9fa;
+    padding: 20px;
+    height: 100vh;
+  }
+  
+  .corporate-sidebar .nav-link {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .corporate-sidebar .nav-link:hover {
+    background-color: #e9ecef;
+  }
+  
+  .corporate-content {
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
