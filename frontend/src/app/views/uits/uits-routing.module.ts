@@ -1,10 +1,12 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from '@app/views/uits/public/home/home.component';
-import {CustomPageComponent} from "@app/views/uits/public/custom-page/custom-page.component";
-
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CorporateComponent } from './private/profile/corp/corp.component';
+import { HomeComponent } from '@app/views/uits/public/home/home.component';
+import { CustomPageComponent } from '@app/views/uits/public/custom-page/custom-page.component';
+import { PersonalComponent } from './private/profile/personal/personal.component'; // Импорт компонента Personal
 
 const routes: Routes = [
+
   {
     path: 'home', component: HomeComponent
   },
@@ -22,12 +24,21 @@ const routes: Routes = [
       .then(m => m.ScientificActivitiesModule)
   },
   {
-    path: 'profile',
-    loadChildren: () => import('@app/views/uits/private/profile/profile.module').then(m => m.ProfileModule)
+    path: '',
+    component: CorporateComponent, 
+    children: [
+      {
+        path: 'page/:slug',
+        component: CustomPageComponent
+      },
+      {
+        path: 'personal', // Изменяем 'profile' на 'personal'
+        component: PersonalComponent, // Подключаем PersonalComponent напрямую
+      }
+    ]
   },
   {
-    path: 'page/:slug',
-    component: CustomPageComponent
+    path: '**', redirectTo: '' 
   }
 ];
 
@@ -35,5 +46,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UitsRoutingModule {
-}
+export class UitsRoutingModule {}

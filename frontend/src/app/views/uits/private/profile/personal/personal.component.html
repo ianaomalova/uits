@@ -1,14 +1,14 @@
 <div class="mb-4 d-md-flex align-items-center justify-content-between">
   <div>
-    <h4>{{ 'Информация об аккаунте' | translate }}</h4>
-    <p>{{ 'Здесь находится информация об авторизованном пользователе' | translate }}</p>
+    <h4>{{ 'Информация об аккаунте'  }}</h4>
+    <p>{{ 'Здесь находится информация об авторизованном пользователе' }}</p>
   </div>
 </div>
 <div class="row">
   <div class="col" style="max-width: 200px;">
     <div>
       <div class="mb-3">
-        <img class="img-fluid w-100 rounded" [src]="(authService.profile$ | async)?.avatar ?? defaultAvatar"
+        <img class="img-fluid w-100 rounded" [src]="(authService.profile$ ) ?? defaultAvatar"
              alt="avater">
       </div>
 

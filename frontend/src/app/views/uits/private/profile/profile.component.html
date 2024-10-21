@@ -1,47 +1,54 @@
 <div class="card">
   <div class="container-fluid">
     <div class="row content-min-height">
+      <!-- Панель управления -->
       <column-panel [isMobileActive]="isMobile && isMobilePanelOpen" [borderRight]="true" class="p-0">
-        <h4 class="mb-3 ms-3 mt-3">Панель управления</h4>
+        <h4 class="mb-3 ms-3 mt-3">Корпоративная панель</h4>
         <div class="columns-panel-item-group">
           <a
             href="javascript:void(0)"
             class="columns-panel-item columns-panel-item-link"
-            [class.active]="currentPanel === item.title"
-            *ngFor="let item of onlyAccessible() | async"
-            (click)="onPanelChange(item.title)"
+            [class.active]="currentPanel === item.key"
+            *ngFor="let item of panelMenu"
+            (click)="onPanelChange(item.key)"
           >
             <div class="d-flex align-items-center">
               <i class="feather font-size-lg" [ngClass]="item.icon"></i>
-              <span class="ms-3">{{ item.key | translate }}</span>
+              <span class="ms-3">{{ item.title | translate }}</span>
             </div>
           </a>
         </div>
       </column-panel>
+
+      <!-- Основное содержание -->
       <div class="col">
         <div *ngIf="isMobile" style="padding: 0.75rem 1.5rem">
           <div class="nav nav-tabs card-header-tabs">
             <div
               *ngFor="let item of panelMenu"
-              (click)="onPanelChange(item.title)"
-              [class.active]="currentPanel === item.title"
+              (click)="onPanelChange(item.key)"
+              [class.active]="currentPanel === item.key"
               class="nav-link nav-item cursor-pointer">
               <div class="d-flex align-items-center">
                 <i class="feather font-size-lg" [ngClass]="item.icon"></i>
-                <span class="ms-3">{{ item.key | translate }}</span>
+                <span class="ms-3">{{ item.title | translate }}</span>
               </div>
             </div>
           </div>
         </div>
         <div class="card-body" [ngSwitch]="currentPanel">
-          <div *ngSwitchCase="'Personal'" @fadeIn><profile-personal></profile-personal></div>
-          <div *ngSwitchCase="'Events'" @fadeIn><profile-events></profile-events></div>
+          <div *ngSwitchCase="'Profile'" @fadeIn><corp-profile></corp-profile></div>
+          <div *ngSwitchCase="'Reports'" @fadeIn><corp-reports></corp-reports></div>
+          <div *ngSwitchCase="'Journals'" @fadeIn><corp-journals></corp-journals></div>
+          <div *ngSwitchCase="'Settings'" @fadeIn><corp-settings></corp-settings></div>
+          <div *ngSwitchDefault @fadeIn>Выберите раздел для отображения</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Нижняя панель для мобильных устройств -->
 <div class="profile-container">
   <button (click)="navigateToHome()">Вернуться к информационной части</button>
   <div class="panel-menu">

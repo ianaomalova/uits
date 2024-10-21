@@ -1,32 +1,57 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { CorpComponent } from './components/corp/corp.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { PublicationsComponent } from './components/publications/publications.component';
-import { AchievementsComponent } from './components/achievements/achievements.component';
-import { ModularJournalsComponent } from './components/modular-journals/modular-journals.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
-const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent }, // Главная страница сайта
-  {
-    path: 'corp',
-    component: CorpComponent,
-    children: [
-      { path: 'profile', component: ProfileComponent }, // Профиль
-      { path: 'publications', component: PublicationsComponent }, // Публикации
-      { path: 'achievements', component: AchievementsComponent }, // Достижения
-      { path: 'modular_journals', component: ModularJournalsComponent }, // Модульные журналы
-      { path: 'calendar', component: CalendarComponent }, // Календарь событий
-      { path: 'statistics', component: StatisticsComponent } // Статистика
-    ]
-  }
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { AppLayoutComponent } from './layout/app-layout/app-layout-component';
+import { CorporateComponent } from './views/uits/private/profile/corp/corp.component';
+
+import { AUTH_LAYOUT_ROUTES } from './routes/auth-layout.routes';
+import { APP_LAYOUT_ROUTES } from './routes/app-layout.routes';
+
+const appRoutes: Routes = [
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+    },
+    {
+        path: '',
+        component: AppLayoutComponent,
+        children: [
+            ...APP_LAYOUT_ROUTES
+        ]
+    },
+    {
+        path: '',
+        component: AuthLayoutComponent,
+        children: AUTH_LAYOUT_ROUTES
+    },
+    {
+        path: 'corp',
+        component: CorporateComponent, // Корпоративный компонент
+        children: [
+            {
+                path: 'profile',
+                loadChildren: () => import('./views/uits/private/profile/profile.module').then(m => m.ProfileModule),
+            },
+           
+            // Редирект на профиль по умолчанию
+            { path: '', redirectTo: 'profile', pathMatch: 'full' }
+        ]
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(appRoutes, {
+            preloadingStrategy: PreloadAllModules,
+            anchorScrolling: 'enabled',
+            scrollPositionRestoration: 'enabled',
+            relativeLinkResolution: 'legacy'
+        })
+    ],
+    exports: [
+        RouterModule
+    ]
 })
 export class AppRoutingModule {}

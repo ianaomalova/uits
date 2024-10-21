@@ -91,14 +91,7 @@ export class ProfileComponent implements OnInit {
     this.currentPanel = seletedPanel;
   }
 
-  onlyAccessible(): Observable<PanelMenu[]> {
-    return this.authService.profile$.pipe(
-      map(profile => {
-        const userPermissions = getUserPermissions(profile);
-        return this.panelMenu.filter(menu => userPermissions.some(up => menu.access.includes(up)));
-      })
-    );
-  }
+
 
   navigateToHome(): void {
     this.router.navigate(['/home']); 

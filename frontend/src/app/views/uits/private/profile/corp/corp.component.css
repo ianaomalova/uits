@@ -1,28 +1,75 @@
 .corporate-container {
-    padding-top: 20px;
+    display: flex;
+    min-height: 100vh; /* Заполнить весь экран по высоте */
+    font-family: Arial, sans-serif;
   }
   
-  .corporate-sidebar {
-    background-color: #f8f9fa;
+  .corporate-menu {
+    width: 250px; /* Ширина бокового меню */
+    background-color: #f4f4f4; /* Цвет фона бокового меню */
     padding: 20px;
-    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Легкая тень для меню */
+    position: sticky;
+    top: 0;
+    height: 100vh; /* Полная высота экрана */
   }
   
-  .corporate-sidebar .nav-link {
-    font-size: 1.1rem;
+  .corporate-menuч h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
     color: #333;
   }
   
-  .corporate-sidebar .nav-link:hover {
-    background-color: #e9ecef;
+  .corporate-menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .corporate-menu li {
+    margin-bottom: 10px;
+  }
+  
+  .corporate-menu a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1rem;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .corporate-menu a:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .corporate-menu a.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .return-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ffcccc;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .return-button:hover {
+    background-color: #ff9999;
   }
   
   .corporate-content {
+    flex-grow: 1;
     padding: 20px;
-    background-color: #fff;
-  }
-  
-  .btn {
-    width: 100%;
+    background-color: #ffffff;
+    min-height: 100vh;
   }
   
