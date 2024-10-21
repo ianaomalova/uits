@@ -9,18 +9,20 @@ FRONTEND_ROUTE := frontend
 
 MANAGE_FILE = $(PYTHON) $(BACKEND_ROUTE)/manage.py
 
-.PHONY: init-project migrate run-local-backend update create-admin run-local-frontend
+.PHONY: init-project migrate run-local-backend create-admin run-local-frontend
 
 # Подправить потом
 .init-project:
 	pip3.10 install virtualenv
 	cd ${BACKEND_ROUTE} && python3.10 -m virtualenv venv
 	./${VENV}/pip install -r requirements.txt
+	cd ${FRONTEND_ROUTE} && npm ci --legacy-peer-deps
 
 init-project: .init-project
 
 # Миграция в базу на локалхосте по кредсам из db.local.env
 .migrate:
+	${MANAGE_FILE} makemigrations
 	$(MANAGE_FILE) migrate
 
 migrate: .migrate
@@ -38,11 +40,7 @@ run-local-backend: .run-local-backend
 
 run-local-frontend: .run-local-frontend
 
-# Переподъем в докере 
-.update:
-	docker-compose up -d --build --no-deps backend frontend
 
-update: .update
 
 # Создание суперпользователя
 .create-admin:
