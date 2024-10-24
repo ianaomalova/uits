@@ -2,14 +2,37 @@
   <ng-container *ngTemplateOutlet="title;context:{teacher}"></ng-container>
   <div>
     <img [src]="avatar"
-         class="avatar mb-3"
-         style="width: 10rem; height: 10rem"
-         alt="{{fullName}}">
-    <p><b>Полное имя</b>: {{fullName}}</p>
-    <p><b>Должность</b>: {{position}}</p>
-    <p><b>Ученая степень</b>: {{degree}}</p>
-    <p><b>Ученое звание</b>: {{rank}}</p>
-    <p *ngIf="teacher.bio"><b>Биография</b>: {{ teacher.bio }}</p>
+    class="avatar mb-3"
+    style="width: 10rem; height: 10rem"
+    alt="{{fullName}}">
+    <div>
+      <h5>Общая информация</h5>
+      <p><b>Полное имя</b>: {{fullName}}</p>
+      <p><b>Должность</b>: {{position}}</p>
+      <p><b>Ученая степень</b>: {{degree}}</p>
+      <p><b>Ученое звание</b>: {{rank}}</p>
+      <p><b>Общий стаж работы</b>: {{experience}}</p>
+      <p><b>Стаж работы по специальности</b>: {{professional_experience}}</p>  
+    </div>
+    <div>
+      <h5>Контакты</h5>
+      <p><b>Телефон</b>: {{teacher.phone_number}}</p>
+      <p><b>Почта</b>: {{teacher.email}}</p>
+      <p><b>Мессенджер</b>: {{teacher.messenger}}</p>
+    </div>
+    <div>
+      <h5>Образование</h5>
+      <ul *ngIf="teacher.education">{{
+        teacher.education()
+        
+      }}</ul>
+      <h5>Данные о повышении квалификации и (или) профессиональной переподготовке (за последние 5 лет)</h5>
+      <p> {{teacher.qualification}}</p>
+    </div>
+    <div>
+      <h5>Биография</h5>
+      <p *ngIf="teacher.bio"> {{ teacher.bio }}</p>
+    </div>
   </div>
   <app-schedule [teacher]="teacher"></app-schedule>
 </ng-container>
@@ -19,6 +42,6 @@
 
 
 <ng-template #title
-             let-teacher="teacher">
-  <h2 class="mb-3">{{shortName}}</h2>
+let-teacher="teacher">
+<h2 class="mb-3">{{shortName}}</h2>
 </ng-template>
