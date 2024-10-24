@@ -1,6 +1,8 @@
 <ng-container *ngIf="teacher$ | async as teacher; else loading">
   <ng-container *ngTemplateOutlet="title;context:{teacher}"></ng-container>
   <div>
+
+
     <img [src]="avatar"
     class="avatar mb-3"
     style="width: 10rem; height: 10rem"
@@ -33,6 +35,30 @@
       <p *ngIf="teacher.bio"> {{ teacher.bio }}</p>
     </div>
   </div>
+  z<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Общая информация</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Расписание</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Дисциплины</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Руководство</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Публикации</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Достижения</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <app-schedule [teacher]="teacher"></app-schedule>
 </ng-container>
 <ng-template #loading>
