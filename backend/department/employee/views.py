@@ -8,6 +8,8 @@ from .models import Teacher, HelpersEmployee
 from .schedule.serializers import ScheduleSerializer
 from .serializers import TeacherSerializer, HelpersEmployeeSerializer
 
+from .subject.serializers import SubjectSerializer
+
 
 # Create your views here.
 
@@ -25,6 +27,13 @@ class TeacherAPIViewSet(ModelViewSet):
         teacher.import_schedule(file)
         return Response(status=200)
 
+    @action(detail=True, methods=['GET'], url_path='subject')
+    def get_subjects(self, request, *args, **kwargs):
+        teacher: Teacher = self.get_object()
+        serializer = SubjectSerializer(teacher.subjects, many=True)
+        
+        return Response(serializer.data)
+        
     @action(detail=True, methods=['get'], url_path='schedule')
     def retrieve_schedule(self, request, *args, **kwargs):
         teacher: Teacher = self.get_object()

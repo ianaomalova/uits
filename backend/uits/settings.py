@@ -50,6 +50,7 @@ LOCAL_INSTALLED_APPS = [
     'department.news.apps.NewsConfig',
     'department.employee',
     'department.employee.schedule',
+    'department.employee.subject',
     'editable_pages.apps.EditablePagesConfig',
     'events',
     'tg_bot'

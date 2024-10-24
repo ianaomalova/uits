@@ -16,14 +16,27 @@ class TeacherAdmin(admin.ModelAdmin):
                                             ] }
         ),
         (
-            "Контакты", {"fields": ["phone_number", "email", "messenger"] }
+            "Преподаваемые дисциплины", {"fields": ["subjects"]}
         ),
         (
-            "Образование и квалификация", {"fields": ["education", "qualification"] }
+            "Контакты", {
+                "classes": ["collapse"],
+                "fields": ["phone_number", "email", "messenger"]
+                }
         ),
         (
-            "Биография", {"fields": ["bio"]}
+            "Образование и квалификация", {
+                "classes": ["collapse"],
+                "fields": ["education", "qualification"] 
+                }
+        ),
+        (
+            "Биография", {
+                "classes": ["collapse"],
+                "fields": ["bio"]
+            }
         )
+        
     ]
 
 

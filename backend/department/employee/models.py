@@ -5,6 +5,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 
 from department.employee.schedule.models import Schedule
+from department.employee.subject.models import Subject
 
 
 # Create your models here.
@@ -52,13 +53,16 @@ class Teacher(models.Model):
     education = models.TextField(blank=True, null=True, verbose_name="Образование")
     qualification = models.TextField(blank=True, null=True, verbose_name="Повышение квалификации")
 
-
-
     # Общая информация
     bio = models.TextField(blank=True, null=True, verbose_name="Биография")
+    
+    subjects = models.ManyToManyField(Subject, related_name='subjects', verbose_name="Дисциплины")
 
     def __str__(self):
         return self.full_name
+
+    def get_subjects(self):
+        return self.subjects.filter(id = self.id)
 
     def import_schedule(self, file: InMemoryUploadedFile):
         Schedule.objects.import_from_file(self.id, file)

@@ -22,10 +22,9 @@
     </div>
     <div>
       <h5>Образование</h5>
-      <ul *ngIf="teacher.education">{{
-        teacher.education()
-        
-      }}</ul>
+      <p *ngIf="teacher.education">{{
+        teacher.education
+      }}</p>
       <h5>Данные о повышении квалификации и (или) профессиональной переподготовке (за последние 5 лет)</h5>
       <p> {{teacher.qualification}}</p>
     </div>
